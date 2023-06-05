@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 6477179017158723598}
   - component: {fileID: 9194198709324526886}
   - component: {fileID: 3959539743316645435}
-  - component: {fileID: 6541281676864129849}
+  - component: {fileID: 5171276376686469843}
   m_Layer: 0
   m_Name: Basic Projectile
   m_TagString: Untagged
@@ -205,7 +205,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6541281676864129849
+--- !u!114 &5171276376686469843
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,9 +214,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7653591653300589521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0e45fd5f23fefb468c8afa2b07e4de5, type: 3}
+  m_Script: {fileID: 11500000, guid: 14e44907822b53f4ca226eb9e1c87032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootSound: {fileID: 8300000, guid: 8276c6c5769c9c643b0a54d51979c86c, type: 3}
+  projectileSpeed: 10
 --- !u!1 &8219481078844083510
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,19 +11,16 @@ public class PlayerController : MonoBehaviour
     private InputAction lookAction;
 
     [SerializeField]
-    private InputAction shootAction;
-
-    [SerializeField]
     private float rotationSpeed = 10f;
 
     private void OnEnable() {
         moveAction.Enable();
         lookAction.Enable();
-        shootAction.Enable();
     }
 
-    private void Awake() {
-        shootAction.performed += ctx => Shoot(transform.forward.normalized);
+    private void Start() {
+        var shooting = GetComponent<ConstantShooter>().StartShooting();
+        StartCoroutine(shooting);
     }
 
     private void Update() {

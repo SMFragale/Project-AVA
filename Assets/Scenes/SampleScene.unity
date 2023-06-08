@@ -805,6 +805,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeroParent
       objectReference: {fileID: 0}
+    - target: {fileID: 4627769960950794526, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627769960950794526, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: dashTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627769960950794526, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: dashSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627769960950794526, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: dashDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627769960950794526, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: dashAction.m_Id
+      value: 0bcde79b-e852-4bc1-8e92-93cbbee15966
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627769960950794526, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: dashAction.m_Name
+      value: Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627769960950794526, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: dashAction.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627769960950794526, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: dashAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 0e607026-0896-4431-b123-8801637d982e
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627769960950794526, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: dashAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/q
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627769960950794526, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: dashAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Dash
+      objectReference: {fileID: 0}
     - target: {fileID: 4627769960950794527, guid: 4becae070bc34be42b7448c18044c297, type: 3}
       propertyPath: m_RootOrder
       value: 3

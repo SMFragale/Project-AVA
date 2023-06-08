@@ -27,6 +27,5 @@ namespace AVA.Movement
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
-
     }
 }

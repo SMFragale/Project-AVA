@@ -9,13 +9,26 @@ namespace AVA.Control
     [RequireComponent(typeof(ConstantShooter))]
     public class PlayerController : MonoBehaviour
     {
+        [Header("Input actions")]
         [SerializeField]
         private InputAction moveAction;
         [SerializeField]
         private InputAction lookAction;
 
         [SerializeField]
+        private InputAction dashAction;
+
+        [Space(10)]
+        [Header("Movement modifiers")]
+        [SerializeField]
         private float rotationSpeed = 10f;
+
+        [SerializeField]
+        private float speed = 1f;
+        [SerializeField]
+        private float dashSpeed = 100f;
+        [SerializeField]
+        private float dashDistance = 5f;
 
         private ConstantShooter constantShooter;
 
@@ -23,25 +36,31 @@ namespace AVA.Control
         {
             moveAction.Enable();
             lookAction.Enable();
+            dashAction.Enable();
         }
 
         private void Start()
         {
             constantShooter = GetComponent<ConstantShooter>();
-            Debug.Log(constantShooter);
             StartCoroutine(constantShooter.StartShooting());
+            dashAction.performed += ctx => DashTowardsMoveDirection();
+            GetComponent<NavMeshMover>().SetNavSpeed(speed);
+        }
+
+        private Vector2 ReadLookInput() {
+            return lookAction.ReadValue<Vector2>();
+        }
+
+        private Vector2 ReadMoveInput() {
+            return moveAction.ReadValue<Vector2>();
         }
 
         private void Update()
         {
-            var movement = moveAction.ReadValue<Vector2>();
-            var look = lookAction.ReadValue<Vector2>();
+            LookTowards(ReadLookInput());
+            if (!GetComponent<NavMeshMover>().IsDashing)
+                MoveTowards(ReadMoveInput());
 
-            LookTowards(look);
-            MoveTowards(movement);
-
-            Debug.DrawLine(transform.position, transform.position + new Vector3(movement.x, 0, movement.y), Color.red);
-            Debug.DrawLine(transform.position, transform.position + new Vector3(look.x, 0, look.y), Color.blue);
         }
 
         private void LookTowards(Vector2 look)
@@ -60,6 +79,13 @@ namespace AVA.Control
             direction = Vector3.ProjectOnPlane(direction, Vector3.up);
 
             GetComponent<NavMeshMover>().MoveTo(transform.position + direction.normalized);
+        }
+
+        private void DashTowardsMoveDirection()
+        {
+            var direction = new Vector3(ReadMoveInput().x, 0, ReadMoveInput().y).normalized;
+
+            GetComponent<NavMeshMover>().DashTowards(direction, dashDistance, dashSpeed);
         }
 
     }

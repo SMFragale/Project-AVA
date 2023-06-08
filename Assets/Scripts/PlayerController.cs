@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(NavMeshMover))]
-[RequireComponent(typeof(Shooter))]
+[RequireComponent(typeof(ConstantShooter))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
@@ -13,14 +13,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 10f;
 
+    private ConstantShooter constantShooter;
+
     private void OnEnable() {
         moveAction.Enable();
         lookAction.Enable();
     }
 
     private void Start() {
-        var shooting = GetComponent<ConstantShooter>().StartShooting();
-        StartCoroutine(shooting);
+        constantShooter = GetComponent<ConstantShooter>();
+        Debug.Log(constantShooter);
+        StartCoroutine(constantShooter.StartShooting());
     }
 
     private void Update() {
@@ -52,7 +55,4 @@ public class PlayerController : MonoBehaviour
         GetComponent<NavMeshMover>().MoveTo(transform.position + direction.normalized);
     }
 
-    private void Shoot(Vector3 direction) {
-        GetComponent<Shooter>().Shoot(direction);
-    }
 }

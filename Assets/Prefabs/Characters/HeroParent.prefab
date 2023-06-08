@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 4627769960950794512}
   - component: {fileID: 4627769960950794513}
   - component: {fileID: 5438964366453889286}
+  - component: {fileID: 617854278}
   m_Layer: 0
   m_Name: HeroParent
   m_TagString: Untagged
@@ -179,6 +180,86 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move
       m_Flags: 0
+    - m_Name: WASD
+      m_Id: dc20ac36-b593-47ff-86e3-cacc9f1cb597
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: b1074613-c2ce-4553-9212-eeff348ff9fc
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: de802c36-fbb7-4af1-b4b0-60f7be4ebeb9
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 61065cf4-430a-48d4-aa48-aa39341acad3
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 6b4b0a37-9010-4c00-b4b9-64a26673257f
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: Arrow
+      m_Id: f98395c8-a726-41f2-97fa-7532e720abe9
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 48afe8a4-05f5-4ab2-be7d-c7eb2e5089ff
+      m_Path: <Keyboard>/upArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 0ab790a5-c2b1-402d-a0d4-004398029748
+      m_Path: <Keyboard>/downArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: e813f33d-c384-488a-978c-bb06d0dfb52b
+      m_Path: <Keyboard>/leftArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 499a9567-a6c1-42ba-a2e2-486d406d8d67
+      m_Path: <Keyboard>/rightArrow
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
     m_Flags: 0
   lookAction:
     m_Name: Look
@@ -197,24 +278,7 @@ MonoBehaviour:
       m_Action: Look
       m_Flags: 0
     m_Flags: 0
-  shootAction:
-    m_Name: Shoot
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 625f74e7-119c-41ec-9b6b-27adf4422da9
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 04fd39d3-d68f-40d5-bb19-a81056cba950
-      m_Path: <Gamepad>/rightTrigger
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Shoot
-      m_Flags: 0
-    m_Flags: 0
-  rotationSpeed: 10
+  rotationSpeed: 15
 --- !u!195 &4627769960950794512
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -263,7 +327,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   origin: {fileID: 4627769960503287577}
   projectilePrefab: {fileID: 7653591653300589521, guid: 72388d1042e5a2841be06821d7884261, type: 3}
-  shootSound: {fileID: 8300000, guid: 8276c6c5769c9c643b0a54d51979c86c, type: 3}
+--- !u!114 &617854278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4627769960950794524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375664c7883263441b41d1708a054bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireRate: 0.5
 --- !u!1 &4627769961172555984
 GameObject:
   m_ObjectHideFlags: 0

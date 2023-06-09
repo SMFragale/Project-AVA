@@ -6,7 +6,7 @@ using AVA.Movement;
 namespace AVA.Control
 {
     [RequireComponent(typeof(NavMeshMover))]
-    [RequireComponent(typeof(ConstantShooter))]
+    [RequireComponent(typeof(IWeapon))]
     public class PlayerController : MonoBehaviour
     {
         [Header("Input actions")]
@@ -30,7 +30,7 @@ namespace AVA.Control
         [SerializeField]
         private float dashDistance = 5f;
 
-        private ConstantShooter constantShooter;
+        private IWeapon weapon;
 
         private void OnEnable()
         {
@@ -41,8 +41,8 @@ namespace AVA.Control
 
         private void Start()
         {
-            constantShooter = GetComponent<ConstantShooter>();
-            StartCoroutine(constantShooter.StartShooting());
+            weapon = GetComponent<IWeapon>();
+            StartCoroutine(weapon.StartAttacking());
             dashAction.performed += ctx => DashTowardsMoveDirection();
             GetComponent<NavMeshMover>().SetNavSpeed(speed);
         }

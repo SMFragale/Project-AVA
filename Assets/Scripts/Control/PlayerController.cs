@@ -96,6 +96,5 @@ namespace AVA.Control
 
             GetComponent<NavMeshMover>().DashTowards(direction, dashDistance, dashSpeed);
         }
-
     }
 }

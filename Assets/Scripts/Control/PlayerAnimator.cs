@@ -1,12 +1,17 @@
 using UnityEngine;
 
-public class PlayerAnimator : MonoBehaviour
+namespace AVA.Control
 {
-    [SerializeField]
-    private Animator animator;
+    public class PlayerAnimator : MonoBehaviour
+    {
+        [SerializeField]
+        private Animator animator;
 
-    public void UpdateAnimation(Vector2 direction) {
-        animator.SetFloat("InputX", direction.x);
-        animator.SetFloat("InputY", direction.y);
+        public void UpdateAnimation(Vector2 direction)
+        {
+            animator.SetFloat("InputX", direction.x);
+            animator.SetFloat("InputY", direction.y);
+        }
     }
+
 }

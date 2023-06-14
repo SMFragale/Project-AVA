@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AVA.Combat
 {
-    public class RangeWeapon : MonoBehaviour, IWeapon
+    public class RangeWeapon : Weapon
     {
         [SerializeField]
         Transform origin;
@@ -22,7 +22,7 @@ namespace AVA.Combat
         }
 
         //Make a method that is a couroutine that will shoot every attackRate seconds (use WaitForSeconds) use the shooter.Shoot
-        public IEnumerator StartAttacking()
+        public override IEnumerator StartAttacking()
         {
             isAttacking = true;
             while (isAttacking)
@@ -32,12 +32,12 @@ namespace AVA.Combat
             }
         }
 
-        public void StopAttacking()
+        public override void StopAttacking()
         {
             isAttacking = false;
         }
 
-        public void Attack(Vector3 direction)
+        public override void Attack(Vector3 direction)
         {
             //In the future this should be done within a pool
             var projectile = Instantiate(projectilePrefab, origin.position, Quaternion.identity);

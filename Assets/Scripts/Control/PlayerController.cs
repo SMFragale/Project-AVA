@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using AVA.Combat;
 using AVA.Movement;
 
@@ -7,16 +6,12 @@ namespace AVA.Control
 {
     [RequireComponent(typeof(NavMeshMover))]
     [RequireComponent(typeof(IWeapon))]
+    [RequireComponent(typeof(PlayerInput))]
+    [RequireComponent(typeof(PlayerAnimator))]
     public class PlayerController : MonoBehaviour
     {
-        [Header("Input actions")]
-        [SerializeField]
-        private InputAction moveAction;
-        [SerializeField]
-        private InputAction lookAction;
-
-        [SerializeField]
-        private InputAction dashAction;
+        [Header("Input")]
+        PlayerInput playerInput;
 
         [Space(10)]
         [Header("Movement modifiers")]
@@ -32,34 +27,38 @@ namespace AVA.Control
 
         private IWeapon weapon;
 
-        private void OnEnable()
-        {
-            moveAction.Enable();
-            lookAction.Enable();
-            dashAction.Enable();
-        }
+        [Space(10)]
+        [Header("Animation")]
+        [SerializeField]
+        private PlayerAnimator animator;
+
 
         private void Start()
         {
             weapon = GetComponent<IWeapon>();
             StartCoroutine(weapon.StartAttacking());
-            dashAction.performed += ctx => DashTowardsMoveDirection();
+            playerInput = GetComponent<PlayerInput>();
+            playerInput.SubscribeToDashEvent(DashTowardsMoveDirection);
             GetComponent<NavMeshMover>().SetNavSpeed(speed);
-        }
-
-        private Vector2 ReadLookInput() {
-            return lookAction.ReadValue<Vector2>();
-        }
-
-        private Vector2 ReadMoveInput() {
-            return moveAction.ReadValue<Vector2>();
+            animator = GetComponent<PlayerAnimator>();
         }
 
         private void Update()
         {
-            LookTowards(ReadLookInput());
-            if (!GetComponent<NavMeshMover>().IsDashing)
-                MoveTowards(ReadMoveInput());
+            var lookDirection = playerInput.ReadLookInput();
+            LookTowards(lookDirection);
+
+            var moveInput = playerInput.ReadMoveInput();
+
+            Debug.DrawLine(transform.position, transform.position + transform.forward, Color.red);
+            //if (!GetComponent<NavMeshMover>().IsDashing)
+            //    MoveTowards(moveInput);
+
+
+            var animationVector = transform.forward * moveInput.y + transform.right * moveInput.x;
+            animationVector = Vector3.ProjectOnPlane(animationVector, Vector3.up);
+            Debug.DrawLine(transform.position, transform.position + animationVector.normalized, Color.blue);
+            animator.UpdateAnimation(new Vector2(animationVector.x, animationVector.z));
 
         }
 
@@ -83,7 +82,8 @@ namespace AVA.Control
 
         private void DashTowardsMoveDirection()
         {
-            var direction = new Vector3(ReadMoveInput().x, 0, ReadMoveInput().y).normalized;
+            var input = playerInput.ReadMoveInput();
+            var direction = new Vector3(input.x, 0, input.y).normalized;
 
             GetComponent<NavMeshMover>().DashTowards(direction, dashDistance, dashSpeed);
         }

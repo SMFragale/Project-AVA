@@ -6,7 +6,6 @@ public class PlayerAnimator : MonoBehaviour
     private Animator animator;
 
     public void UpdateAnimation(Vector2 direction) {
-        Debug.Log(direction);
         animator.SetFloat("InputX", direction.x);
         animator.SetFloat("InputY", direction.y);
     }

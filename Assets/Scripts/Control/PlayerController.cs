@@ -50,16 +50,25 @@ namespace AVA.Control
 
             var moveInput = playerInput.ReadMoveInput();
 
-            Debug.DrawLine(transform.position, transform.position + transform.forward, Color.red);
-            //if (!GetComponent<NavMeshMover>().IsDashing)
-            //    MoveTowards(moveInput);
+            animator.UpdateAnimation(CalculateAnimationVector(moveInput));
+            if (!GetComponent<NavMeshMover>().IsDashing)
+                MoveTowards(moveInput);
+        }
 
+        private Vector2 CalculateAnimationVector(Vector2 moveInput)
+        {
+            if(moveInput.magnitude < 0.1f)
+                return new Vector2(0, 0);
 
-            var animationVector = transform.forward * moveInput.y + transform.right * moveInput.x;
-            animationVector = Vector3.ProjectOnPlane(animationVector, Vector3.up);
-            Debug.DrawLine(transform.position, transform.position + animationVector.normalized, Color.blue);
-            animator.UpdateAnimation(new Vector2(animationVector.x, animationVector.z));
+            float angle = Vector3.SignedAngle(transform.forward, new Vector3(moveInput.x, 0, moveInput.y), Vector3.up);
+            if (angle < -180f)
+                angle += 360f;
+            else if (angle > 180f)
+                angle -= 360f;
 
+            float posX = Mathf.Cos(angle * Mathf.Deg2Rad);
+            float posY = Mathf.Sin(angle * Mathf.Deg2Rad);
+            return new Vector2(posY, posX);
         }
 
         private void LookTowards(Vector2 look)

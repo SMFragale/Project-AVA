@@ -957,7 +957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
       propertyPath: moveAction.m_ExpectedControlType
-      value: Axis
+      value: Vector2
       objectReference: {fileID: 0}
     - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
       propertyPath: dashAction.m_SingletonActionBindings.Array.size
@@ -989,7 +989,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
       propertyPath: moveAction.m_SingletonActionBindings.Array.data[1].m_Id
-      value: 42f6244e-fe8e-4a8a-a039-907b3f847afb
+      value: b05a8dc7-cd4c-42d3-89fe-20aa3f22d40b
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[2].m_Id
+      value: 72027d6e-059e-4f70-84a6-77ffbe418c59
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[3].m_Id
+      value: 3c87bc6b-8ce5-42d0-9653-4437f3b3ce22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[4].m_Id
+      value: d8c889ea-6f48-4d0c-82df-93c3ee9c3c17
       objectReference: {fileID: 0}
     - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
       propertyPath: dashAction.m_SingletonActionBindings.Array.data[0].m_Path
@@ -1006,6 +1018,42 @@ PrefabInstance:
     - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
       propertyPath: moveAction.m_SingletonActionBindings.Array.data[0].m_Path
       value: <Gamepad>/leftStick
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[1].m_Name
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[1].m_Path
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[2].m_Name
+      value: modifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[3].m_Name
+      value: binding
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[4].m_Name
+      value: binding
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[1].m_Flags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[2].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[3].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[4].m_Flags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
       propertyPath: dashAction.m_SingletonActionBindings.Array.data[0].m_Action
@@ -1025,6 +1073,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
       propertyPath: moveAction.m_SingletonActionBindings.Array.data[1].m_Action
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[2].m_Action
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[3].m_Action
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 5440395020747382900, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[4].m_Action
       value: Move
       objectReference: {fileID: 0}
     - target: {fileID: 5546268236961775854, guid: 4becae070bc34be42b7448c18044c297, type: 3}

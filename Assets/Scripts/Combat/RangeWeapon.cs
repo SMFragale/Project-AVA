@@ -9,6 +9,9 @@ namespace AVA.Combat
         Transform origin;
 
         [SerializeField]
+        Transform parent;
+
+        [SerializeField]
         GameObject projectilePrefab;
 
         [SerializeField]
@@ -27,7 +30,8 @@ namespace AVA.Combat
             isAttacking = true;
             while (isAttacking)
             {
-                Attack(transform.forward.normalized);
+                //this may not always work
+                Attack(parent.transform.forward.normalized);
                 yield return new WaitForSeconds(attackRate);
             }
         }

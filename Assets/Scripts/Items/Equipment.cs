@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using AVA.Combat;
+using AVA.Stats;
 
 namespace AVA.Item{
     
     [CreateAssetMenu(fileName = "New Equipment", menuName = "Inventory/Equipment")]
     public class Equipment : Item
     {
-        public List<StatModifier> modifiers;
+        public List<Modifier> modifiers;
 
         public EquipSlot equipSlot;
 

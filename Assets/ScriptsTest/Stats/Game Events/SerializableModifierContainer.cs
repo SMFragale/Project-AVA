@@ -9,7 +9,7 @@ public class SerializableModifierContainer
     public Dictionary<StatType, Modifier> GenerateModifiers() {
         Dictionary<StatType, Modifier> result = new Dictionary<StatType, Modifier>();
         foreach (SerializableModifier modifier in serializableModifiers) {
-            result.Add(modifier.type, modifier);
+            result.Add(modifier.type, new Modifier(modifier.type, modifier.modifier, modifier.isPercentual));
         }
         return result;
     }

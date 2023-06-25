@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 
-namespace AVA.Stats {
+namespace AVA.Stats
+{
     public class StatService
     {
         private List<ModifierContainer> modifierContainers;
 
         private BaseStats baseStats;
 
-        public StatService(Dictionary<StatType, float> stats)
+        public StatService(BaseStatsSO baseStats)
         {
-            this.baseStats = new BaseStats(stats);
+            this.baseStats = new BaseStats(baseStats);
             this.modifierContainers = new List<ModifierContainer>();
         }
 
@@ -21,7 +22,9 @@ namespace AVA.Stats {
             foreach (ModifierContainer mc in modifierContainers)
             {
                 Modifier mod = mc.GetModifierByType(type);
-                if(mod.isPercentual)
+                if (mod == null)
+                    continue;
+                if (mod.isPercentual)
                 {
                     finalValue += baseValue * mod.modifier;
                 }
@@ -37,7 +40,12 @@ namespace AVA.Stats {
         {
             return baseStats.GetStat(type);
         }
-        
+
+        public List<StatType> GetStatTypes()
+        {
+            return baseStats.GetStatTypes();
+        }
+
         public void AddModifiable(ModifierContainer mod)
         {
             modifierContainers.Add(mod);

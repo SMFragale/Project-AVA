@@ -1,16 +1,13 @@
-using UnityEngine;
-
-namespace AVA.Stats {
-    public class CharacterModifiers : MonoBehaviour
+namespace AVA.Stats
+{
+    public class CharacterModifiers : StatOutput
     {
-        private StatService statServiceInstance;
-
-        void AddModifiable(ModifierContainer mods)
+        public void AddModifiable(ModifierContainer mods)
         {
             statServiceInstance.AddModifiable(mods);
         }
 
-        void RemoveModifiable(ModifierContainer mod)            
+        public void RemoveModifiable(ModifierContainer mod)
         {
             statServiceInstance.RemoveModifiable(mod);
         }

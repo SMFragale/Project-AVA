@@ -12,7 +12,10 @@ namespace AVA.Stats {
 
         public Modifier GetModifierByType(StatType type)
         {
-            return modifiers[type];
+            if(modifiers.ContainsKey(type))
+                return modifiers[type];
+            else
+                return null;
         }
     }
 }

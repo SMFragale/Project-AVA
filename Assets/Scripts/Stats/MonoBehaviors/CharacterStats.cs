@@ -1,12 +1,8 @@
-using UnityEngine;
-
+using System.Collections.Generic;
 namespace AVA.Stats
 {
-    public class CharacterStats : MonoBehaviour
+    public class CharacterStats : StatOutput
     {
-        [SerializeField]
-        private StatService statServiceInstance;
-
         public float GetStat(StatType type)
         {
             return statServiceInstance.CalculateStat(type);
@@ -15,6 +11,11 @@ namespace AVA.Stats
         public float GetBaseStat(StatType type)
         {
             return statServiceInstance.GetBaseStat(type);
+        }
+
+        public List<StatType> GetStatTypes()
+        {
+            return statServiceInstance.GetStatTypes();
         }
 
         public void UpdateBaseStat(StatType type, float newStat)

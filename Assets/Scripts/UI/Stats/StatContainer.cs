@@ -19,7 +19,7 @@ namespace AVA.UI.Stats {
         }
 
         private IEnumerator SetStatBars() {
-            yield return new WaitUntil(() => characterStats.isReady);
+            yield return new WaitUntil(() => characterStats.isReady());
             statBars = new List<StatBar>();
             foreach (StatType type in characterStats.GetStatTypes()) {
                 var statBar = Instantiate(statBarPrefab, gameObject.transform).GetComponent<StatBar>();

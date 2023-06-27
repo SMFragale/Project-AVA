@@ -1,8 +1,8 @@
-using UnityEngine;
 using UnityEngine.Events;
 
 namespace AVA.Core
 {
+    [System.Serializable]
     public class ObservableValue<T>
     {
         public UnityEvent OnValueChanged;

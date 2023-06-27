@@ -1,6 +1,7 @@
 using UnityEngine;
 using AVA.Stats;
 using System.Collections;
+using AVA.Core;
 
 namespace AVA.State {
 
@@ -18,7 +19,7 @@ namespace AVA.State {
         void Start()
         {
             characterStats = GetComponent<CharacterStats>();
-            StartCoroutine(SetInitialState());
+            StartCoroutine(Init());
             //Get max health from stats
         }
 
@@ -27,7 +28,7 @@ namespace AVA.State {
             return ready;
         }
 
-        private IEnumerator SetInitialState() {
+        private IEnumerator Init() {
             Debug.Log("Waiting for character stats");
             yield return new WaitUntil(() => characterStats.isReady());
             health = new HitPoints(characterStats.GetStat(StatType.MaxHealth));
@@ -50,6 +51,16 @@ namespace AVA.State {
         public float GetHealth()
         {
             return health.Value;
+        }
+
+        public ObservableValue<float> GetObservableHealth()
+        {
+            return health;
+        }
+
+        public ObservableValue<float> GetObservableShield()
+        {
+            return shield;
         }
 
         public float GetShield()

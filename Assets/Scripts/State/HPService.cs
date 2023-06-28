@@ -2,6 +2,7 @@ using UnityEngine;
 using AVA.Stats;
 using System.Collections;
 using AVA.Core;
+using UnityEngine.Events;
 
 namespace AVA.State {
 
@@ -12,6 +13,8 @@ namespace AVA.State {
         private HitPoints shield;
 
         private CharacterStats characterStats;
+
+        public UnityEvent OnHealthZero { get; private set;} = new UnityEvent();
 
         bool ready = false;
 
@@ -87,6 +90,10 @@ namespace AVA.State {
                 health.Value = 0;
             else
                 health.Value -= remaining;
+
+            // ---
+            if(health.Value <= 0)
+                OnHealthZero?.Invoke();
         }
 
         public void HealDamage(float value)

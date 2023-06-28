@@ -4,7 +4,8 @@ using AVA.Stats;
 using System.Collections;
 using AVA.UI.Core;
 
-namespace AVA.Tests.State {
+namespace AVA.Tests.State
+{
     public class HealthTest : MonoBehaviour
     {
         [SerializeField]
@@ -19,16 +20,19 @@ namespace AVA.Tests.State {
         [SerializeField]
         private GameObject healthBarPrefab;
 
-        private void Start() {
+        private void Start()
+        {
             StartCoroutine(Init());
         }
 
-        private IEnumerator Init() {
+        private IEnumerator Init()
+        {
             yield return new WaitUntil(() => healthService.isReady());
             var healthBar = Instantiate(healthBarPrefab, statContainer);
             var observableValueBar = healthBar.GetComponent<ObservableFloatBar>();
             observableValueBar.SetObservableValue(healthService.GetObservableHealth());
             observableValueBar.SetMaxValue(characterStats.GetStat(StatType.MaxHealth));
+            healthService.OnHealthZero.AddListener(HealthZero);
             Debug.Log("Set observable value");
         }
 
@@ -42,7 +46,10 @@ namespace AVA.Tests.State {
             healthService.AddShield(value);
         }
 
-
+        public void HealthZero()
+        {
+            Debug.Log("Health zero");
+        }
 
     }
 }

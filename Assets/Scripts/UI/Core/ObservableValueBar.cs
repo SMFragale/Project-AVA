@@ -18,7 +18,7 @@ namespace AVA.UI.Core {
         public void SetObservableValue(ObservableValue<T> observableValue)
         {
             this.observableValue = observableValue;
-            this.observableValue.OnValueChanged.AddListener(UpdateBar);
+            this.observableValue.AddOnChangedListener(UpdateBar);
         }
 
         public void SetMaxValue(T maxValue)

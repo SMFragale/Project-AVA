@@ -38,6 +38,7 @@ namespace AVA.UI.Stats {
         
 
         public void SetFillAmount(float fillAmount) {
+            Debug.Log("StatBar: " + _type + " fill amount set from " + bar.fillAmount + " to " + fillAmount);
             bar.fillAmount = fillAmount;
         }
     }

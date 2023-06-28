@@ -1,21 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
+using AVA.Core;
 
 namespace AVA.Stats
 {
     public class BaseStats
     {
-        public Dictionary<StatType, float> stats { get; private set; } = new Dictionary<StatType, float>();
+        public Dictionary<StatType, ObservableValue<float>> stats { get; private set; } = new Dictionary<StatType, ObservableValue<float>>();
 
         public BaseStats(float maxHealth, float attack, float speed, float defense, float attackSpeed)
         {
-            stats = new Dictionary<StatType, float>
+            stats = new Dictionary<StatType, ObservableValue<float>>
             {
-                { StatType.MaxHealth, maxHealth },
-                { StatType.Attack, attack },
-                { StatType.Speed, speed },
-                { StatType.Defense, defense },
-                { StatType.AttackSpeed, attackSpeed }
+                { StatType.MaxHealth, new ObservableValue<float>(maxHealth) },
+                { StatType.Attack, new ObservableValue<float>(attack) },
+                { StatType.Speed, new ObservableValue<float>(speed) },
+                { StatType.Defense, new ObservableValue<float>(defense) },
+                { StatType.AttackSpeed, new ObservableValue<float>(attackSpeed) }
             };
         }
 
@@ -24,18 +25,19 @@ namespace AVA.Stats
             Debug.Log("Creating base stats from an SO");
             if(so == null)
                 Debug.LogError("BaseStatsSO is null");
+            stats = new Dictionary<StatType, ObservableValue<float>>();
             var baseStats = so.GetBaseStats();
             Debug.Log("Creating base stats from " + baseStats.Length + " stats");
             foreach (var stat in baseStats)
             {
                 if (!stats.ContainsKey(stat.type))
-                    stats.Add(stat.type, stat.baseValue);
+                    stats.Add(stat.type, new ObservableValue<float>(stat.baseValue));
             }
         }
 
-        public float GetStat(StatType type)
+        public ObservableValue<float> GetStat(StatType type)
         {
-            float value;
+            ObservableValue<float> value;
             if (stats.TryGetValue(type, out value))
                 return value;
             else
@@ -46,7 +48,7 @@ namespace AVA.Stats
         {
             if (stats.ContainsKey(type))
             {
-                stats[type] = newStat;
+                stats[type].Value = newStat;
             }
         }
 

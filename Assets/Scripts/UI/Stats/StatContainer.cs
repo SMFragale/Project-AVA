@@ -3,8 +3,10 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
+using AVA.Core;
 
-namespace AVA.UI.Stats {
+namespace AVA.UI.Stats
+{
 
     [RequireComponent(typeof(LayoutGroup))]
     public class StatContainer : MonoBehaviour
@@ -14,31 +16,27 @@ namespace AVA.UI.Stats {
         private List<StatBar> statBars;
         [SerializeField] private GameObject statBarPrefab;
 
-        private void Start() {
-            StartCoroutine(SetStatBars());
+        private void Start()
+        {
+            StartCoroutine(Init());
         }
 
-        private IEnumerator SetStatBars() {
+        private IEnumerator Init()
+        {
             yield return new WaitUntil(() => characterStats.isReady());
-            statBars = new List<StatBar>();
-            foreach (StatType type in characterStats.GetStatTypes()) {
+            Dictionary<StatType, StatBar> statBars = new Dictionary<StatType, StatBar>();
+
+            foreach (var type in characterStats.GetStatTypes())
+            {
                 var statBar = Instantiate(statBarPrefab, gameObject.transform).GetComponent<StatBar>();
                 statBar.SetType(type);
-
-                statBars.Add(statBar);
-            }
-        }
-
-        private void Update() {
-            if(statBars != null) {
-                foreach (StatBar statBar in statBars)
-                {
-                    // The hardcoded 3 is a multiplier that will make it so the bar is not filled by itself. 
-                    statBar.SetFillAmount(characterStats.GetStat(statBar.GetStatType()) /
-                        (characterStats.GetBaseStat(statBar.GetStatType()) * 3)
-                    );
-                }
-            }
+                statBars.Add(type, statBar);
+                characterStats.AddStatListener(type, () => {
+                    statBar.SetFillAmount(characterStats.GetStat(type) / ((characterStats.GetBaseStat(type)) * 3));
+                });
+                characterStats.AddBaseStatListener(type, () => statBar.SetFillAmount(characterStats.GetStat(type) / (characterStats.GetBaseStat(type)) * 3));
+                statBar.SetFillAmount(characterStats.GetStat(type) / ((characterStats.GetBaseStat(type)) * 3));
+            } 
         }
     }
 }

@@ -329,7 +329,7 @@ MonoBehaviour:
   healthService: {fileID: 1652803713}
   characterStats: {fileID: 1652803714}
   statContainer: {fileID: 119485651}
-  healthBarPrefab: {fileID: 978486320993660702, guid: 1f278241c6959de4aa0aa5a97d34e9f6, type: 3}
+  healthBarPrefab: {fileID: 1424192123017031882, guid: b3592b91fdea6c64186eceff2fd1e298, type: 3}
 --- !u!114 &926449534
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using UnityEngine;
 using AVA.State;
 using AVA.Stats;
 using System.Collections;
-using AVA.UI.Core;
+using AVA.UI.Stats;
 
 namespace AVA.Tests.State
 {
@@ -29,9 +29,24 @@ namespace AVA.Tests.State
         {
             yield return new WaitUntil(() => healthService.isReady());
             var healthBar = Instantiate(healthBarPrefab, statContainer);
-            var observableValueBar = healthBar.GetComponent<ObservableFloatBar>();
-            observableValueBar.SetObservableValue(healthService.GetObservableHealth());
-            observableValueBar.SetMaxValue(characterStats.GetStat(StatType.MaxHealth));
+            var healthStatBar = healthBar.GetComponent<StatBar>();
+            healthStatBar.SetType(StatType.MaxHealth);
+
+            var shieldBar = Instantiate(healthBarPrefab, statContainer);
+            var shieldStatBar = shieldBar.GetComponent<StatBar>();
+            shieldStatBar.SetType(StatType.Defense);
+
+            healthService.AddHealthListener(() => {
+                healthStatBar.SetFillAmount(healthService.GetHealth() / (characterStats.GetStat(StatType.MaxHealth)));
+            });
+
+            healthService.AddShieldListener(() => {
+                shieldStatBar.SetFillAmount(healthService.GetShield() / (characterStats.GetStat(StatType.MaxHealth)));
+            });
+
+            healthStatBar.SetFillAmount(healthService.GetHealth() / (characterStats.GetStat(StatType.MaxHealth)));
+            shieldStatBar.SetFillAmount(healthService.GetShield() / (characterStats.GetStat(StatType.MaxHealth)));
+
             healthService.OnHealthZero.AddListener(HealthZero);
             Debug.Log("Set observable value");
         }

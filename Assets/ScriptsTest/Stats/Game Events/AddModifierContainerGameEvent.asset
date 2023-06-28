@@ -15,5 +15,5 @@ MonoBehaviour:
   _debugValue:
     serializableModifiers:
     - type: 0
-      modifier: 100
+      modifier: 20
       isPercentual: 0

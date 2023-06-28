@@ -1,7 +1,6 @@
 using UnityEngine;
 using AVA.Stats;
 using System.Collections;
-using AVA.Core;
 using UnityEngine.Events;
 
 namespace AVA.State {
@@ -56,14 +55,24 @@ namespace AVA.State {
             return health.Value;
         }
 
-        public ObservableValue<float> GetObservableHealth()
+        public void AddHealthListener(UnityAction listener)
         {
-            return health;
+            health.AddOnChangedListener(listener);
         }
 
-        public ObservableValue<float> GetObservableShield()
+        public void RemoveHealthListener(UnityAction listener)
         {
-            return shield;
+            health.RemoveOnChangedListener(listener);
+        }
+
+        public void AddShieldListener(UnityAction listener)
+        {
+            shield.AddOnChangedListener(listener);
+        }
+
+        public void RemoveShieldListener(UnityAction listener)
+        {
+            shield.RemoveOnChangedListener(listener);
         }
 
         public float GetShield()

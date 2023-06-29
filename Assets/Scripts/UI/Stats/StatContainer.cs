@@ -3,7 +3,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
-using AVA.Core;
 
 namespace AVA.UI.Stats
 {
@@ -32,10 +31,9 @@ namespace AVA.UI.Stats
                 statBar.SetType(type);
                 statBars.Add(type, statBar);
                 characterStats.AddStatListener(type, () => {
-                    statBar.SetFillAmount(characterStats.GetStat(type) / ((characterStats.GetBaseStat(type)) * 3));
+                    statBar.SetFillAmount(characterStats.GetStat(type) / type.maxValue);
                 });
-                characterStats.AddBaseStatListener(type, () => statBar.SetFillAmount(characterStats.GetStat(type) / (characterStats.GetBaseStat(type)) * 3));
-                statBar.SetFillAmount(characterStats.GetStat(type) / ((characterStats.GetBaseStat(type)) * 3));
+                statBar.SetFillAmount(characterStats.GetStat(type) / type.maxValue);
             } 
         }
     }

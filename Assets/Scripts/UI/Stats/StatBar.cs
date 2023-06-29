@@ -32,7 +32,9 @@ namespace AVA.UI.Stats {
             {StatType.Attack, Color.red},
             {StatType.Defense, Color.blue},
             {StatType.Speed, Color.gray},
-            {StatType.AttackSpeed, Color.yellow}
+            {StatType.AttackSpeed, Color.yellow},
+            {StatType.CritChance, Color.magenta},
+            {StatType.CritDamage, Color.cyan}
         };
 
         

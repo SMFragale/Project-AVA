@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using AVA.Core;
 using UnityEngine.Events;
 
 namespace AVA.Stats
@@ -21,17 +20,12 @@ namespace AVA.Stats
             return statServiceInstance.GetStatTypes();
         }
 
-        public void UpdateBaseStat(StatType type, float newStat)
-        {
-            statServiceInstance.UpdateBaseStat(type, newStat);
-        }
-
-        public Dictionary<StatType, ObservableValue<float>> GetAllCalculatedStats()
+        public Dictionary<StatType, float> GetAllCalculatedStats()
         {
             return statServiceInstance.GetAllCalculatedStats();
         }
 
-        public Dictionary<StatType, ObservableValue<float>> GetAllBaseStats() {
+        public Dictionary<StatType, float> GetAllBaseStats() {
             return statServiceInstance.GetAllBaseStats();
         }
 
@@ -43,16 +37,6 @@ namespace AVA.Stats
         public void RemoveStatListener(StatType type, UnityAction listener)
         {
             statServiceInstance.RemoveStatListener(type, listener);
-        }
-
-        public void AddBaseStatListener(StatType type, UnityAction listener)
-        {
-            statServiceInstance.AddBaseStatListener(type, listener);
-        }
-
-        public void RemoveBaseStatListener(StatType type, UnityAction listener)
-        {
-            statServiceInstance.RemoveBaseStatListener(type, listener);
         }
         
     }

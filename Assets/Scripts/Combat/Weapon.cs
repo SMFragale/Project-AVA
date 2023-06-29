@@ -11,4 +11,3 @@ namespace AVA.Combat {
         public abstract void StopAttacking();
     }
 }
-

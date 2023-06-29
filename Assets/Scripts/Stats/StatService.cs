@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using AVA.Core;
 using UnityEngine;
@@ -21,7 +20,7 @@ namespace AVA.Stats
             //Initialize calculated stats as a copy of baseStats.stats
             this.calculatedStats = new Dictionary<StatType, ObservableValue<float>>();
             foreach(var keyVal in this.baseStats.stats) {
-                calculatedStats.Add(keyVal.Key, new ObservableValue<float>(keyVal.Value.Value));
+                calculatedStats.Add(keyVal.Key, new ObservableValue<float>(keyVal.Value));
             }
         }
 
@@ -39,17 +38,14 @@ namespace AVA.Stats
                 if (mod == null)
                     continue;
                 if (mod.isPercentual)
-                {
                     finalValue += baseValue * mod.modifier;
-                }
                 else
-                {
-                    finalValue += mod.modifier;
-                }
+                    finalValue += mod.modifier;                
             }
-            //**
+            finalValue = Mathf.Clamp(finalValue, type.minValue, type.maxValue);
             calculatedStats[type].Value = finalValue;
-            Debug.Log("StatService: " + type + " calculated with " + finalValue);
+
+            Debug.Log("Type " + type.type + " limits: " + type.minValue + " " + type.maxValue);
         }
 
         // Queries ----
@@ -61,45 +57,27 @@ namespace AVA.Stats
 
         public float GetBaseStat(StatType type)
         {
-            return baseStats.GetStat(type).Value;
+            return baseStats.GetStat(type);
         }
 
         public List<StatType> GetStatTypes()
         {
             return baseStats.GetStatTypes();
         }
+        
+        public Dictionary<StatType, float> GetAllCalculatedStats()
+        {
+            Dictionary<StatType, float> calculatedStats = new Dictionary<StatType, float>();
+            foreach (var keyVal in this.calculatedStats)
+            {
+                calculatedStats.Add(keyVal.Key, keyVal.Value.Value);
+            }
+            return calculatedStats;
+        }
 
-        public void AddStatListener(StatType type, UnityAction listener)
+        public Dictionary<StatType, float> GetAllBaseStats()
         {
-            if(calculatedStats.ContainsKey(type))
-                calculatedStats[type].AddOnChangedListener(listener);
-            else 
-                Debug.LogError("StatService: stat " + type + " not found");
-        }
-        
-        public void RemoveStatListener(StatType type, UnityAction listener)
-        {
-            if(calculatedStats.ContainsKey(type))
-                calculatedStats[type].RemoveOnChangedListener(listener);
-            else
-                Debug.LogError("StatService: base stat " + type + " not found");
-        }
-        
-        public void AddBaseStatListener(StatType type, UnityAction listener)
-        {
-            
-            if(baseStats.stats.ContainsKey(type))
-                baseStats.stats[type].AddOnChangedListener(listener);
-            else 
-                Debug.LogError("StatService: base stat" + type + " not found");
-        }
-        
-        public void RemoveBaseStatListener(StatType type, UnityAction listener)
-        {
-            if(baseStats.stats.ContainsKey(type))
-                baseStats.stats[type].RemoveOnChangedListener(listener);
-            else
-                Debug.LogError("StatService: base stat " + type + " not found");
+            return baseStats.stats;
         }
 
         // Commands ----
@@ -122,18 +100,20 @@ namespace AVA.Stats
             }
         }
 
-        public void UpdateBaseStat(StatType type, float value)
+        public void AddStatListener(StatType type, UnityAction listener)
         {
-            baseStats.SetStat(type, value);
+            if (calculatedStats.ContainsKey(type))
+                calculatedStats[type].AddOnChangedListener(listener);
+            else
+                Debug.LogError("StatService: stat " + type + " not found");
         }
 
-        public Dictionary<StatType, ObservableValue<float>> GetAllCalculatedStats()
+        public void RemoveStatListener(StatType type, UnityAction listener)
         {
-            return calculatedStats;
-        }
-
-        public Dictionary<StatType, ObservableValue<float>> GetAllBaseStats() {
-            return baseStats.stats;
+            if (calculatedStats.ContainsKey(type))
+                calculatedStats[type].RemoveOnChangedListener(listener);
+            else
+                Debug.LogError("StatService: base stat " + type + " not found");
         }
     }
 }

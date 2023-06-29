@@ -9,12 +9,14 @@ namespace AVA.Stats
         [Space(10)]
         [Header("WARNING Type must be unique for each stat")]
 
-        [SerializeField] private BaseStatModel[] baseStats = new BaseStatModel[] { 
-            new BaseStatModel { type = StatType.MaxHealth, baseValue = 100 },
-            new BaseStatModel { type = StatType.Attack, baseValue = 100 },
-            new BaseStatModel { type = StatType.Speed, baseValue = 100 },
-            new BaseStatModel { type = StatType.Defense, baseValue = 100 },
-            new BaseStatModel { type = StatType.AttackSpeed, baseValue = 100 }
+        [SerializeField] private BaseStatModel[] baseStats = new BaseStatModel[] {
+            new BaseStatModel { type = StatType.Enum.MaxHealth, baseValue = 100 },
+            new BaseStatModel { type = StatType.Enum.Attack, baseValue = 100 },
+            new BaseStatModel { type = StatType.Enum.Speed, baseValue = 100 },
+            new BaseStatModel { type = StatType.Enum.Defense, baseValue = 100 },
+            new BaseStatModel { type = StatType.Enum.AttackSpeed, baseValue = 100 },
+            new BaseStatModel { type = StatType.Enum.CritChance, baseValue = 100 },
+            new BaseStatModel { type = StatType.Enum.CritDamage, baseValue = 100 }
         };
 
         public BaseStatModel[] GetBaseStats()
@@ -27,10 +29,10 @@ namespace AVA.Stats
     public class BaseStatModel
     {
         [Tooltip("WARNING Stat Type must be unique for each stat, duplicates will be ignored")]
-        [SerializeField] public StatType type;
+        [SerializeField] public StatType.Enum type;
         [SerializeField] public float baseValue;
 
-        public StatType GetStatType()
+        public StatType.Enum GetStatType()
         {
             return type;
         }

@@ -12,7 +12,6 @@ namespace AVA.UI.Stats
     {
         [SerializeField]
         private CharacterStats characterStats;
-        private List<StatBar> statBars;
         [SerializeField] private GameObject statBarPrefab;
 
         private void Start()
@@ -31,10 +30,10 @@ namespace AVA.UI.Stats
                 statBar.SetType(type);
                 statBars.Add(type, statBar);
                 characterStats.AddStatListener(type, () => {
-                    statBar.SetFillAmount(characterStats.GetStat(type) / type.maxValue);
+                    statBar.SetFillAmount(characterStats.GetStat(type), type.maxValue);
                 });
-                statBar.SetFillAmount(characterStats.GetStat(type) / type.maxValue);
-            } 
+                statBar.SetFillAmount(characterStats.GetStat(type), type.maxValue);
+            }
         }
     }
 }

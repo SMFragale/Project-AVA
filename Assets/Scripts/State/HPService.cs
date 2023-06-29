@@ -22,12 +22,21 @@ namespace AVA.State {
         {
             characterStats = GetComponent<CharacterStats>();
             StartCoroutine(Init());
-            //Get max health from stats
         }
 
         public bool isReady()
         {
             return ready;
+        }
+
+        public void OnMaxHealthUpdated(float maxValue) {
+            if(health.Value > maxValue)
+                health.Value = maxValue;
+        }
+
+        public void OnMaxDefenseUpdated(float maxValue) {
+            if(shield.Value > maxValue)
+                shield.Value = maxValue;
         }
 
         private IEnumerator Init() {
@@ -39,6 +48,17 @@ namespace AVA.State {
             health.AddOnChangedListener(CheckHealthAmount);
             shield.AddOnChangedListener(CheckShieldAmount);
             ready = true;
+
+            characterStats.AddStatListener(StatType.MaxHealth, () =>
+            {
+                OnMaxHealthUpdated(characterStats.GetStat(StatType.MaxHealth));
+            });
+            characterStats.AddStatListener(StatType.Defense, () => 
+            {
+                OnMaxDefenseUpdated(characterStats.GetStat(StatType.Defense));
+            });
+            //Get max health from stats
+
             Debug.Log("Ready");
         }
 
@@ -107,13 +127,18 @@ namespace AVA.State {
 
         public void HealDamage(float value)
         {
-            //TODO check si queda > maxHealth, si si dejarlo = maxHealth
-            health.Value += value;
+            if (characterStats.GetStat(StatType.MaxHealth) < health.Value + value)
+                health.Value = characterStats.GetStat(StatType.MaxHealth);
+            else
+                health.Value += value;
         }
 
         public void AddShield(float value)
         {
-            shield.Value += value;
+            if (characterStats.GetStat(StatType.Defense) < shield.Value + value)
+                shield.Value = characterStats.GetStat(StatType.Defense);
+            else
+                shield.Value += value;
         }
 
         

@@ -38,6 +38,16 @@ namespace AVA.Stats
         {
             statServiceInstance.RemoveStatListener(type, listener);
         }
-        
+
+        public void AddOnStatsChangedListener(UnityAction listener)
+        {
+            statServiceInstance.AddOnStatsChangedListener(listener);
+        }
+
+        public void RemoveOnStatsChangedListener(UnityAction listener)
+        {
+            statServiceInstance.RemoveOnStatsChangedListener(listener);
+        }
+
     }
 }

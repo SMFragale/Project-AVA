@@ -13,6 +13,8 @@ namespace AVA.Stats
 
         private Dictionary<StatType, ObservableValue<float>> calculatedStats;
 
+        private UnityEvent onStatChanged = new UnityEvent();
+
         public StatService(BaseStatsSO baseStats)
         {
             this.baseStats = new BaseStats(baseStats);
@@ -46,6 +48,18 @@ namespace AVA.Stats
             calculatedStats[type].Value = finalValue;
 
             Debug.Log("Type " + type.type + " limits: " + type.minValue + " " + type.maxValue);
+            onStatChanged?.Invoke();
+        }
+
+        // Events ----
+        public void AddOnStatsChangedListener(UnityAction listener)
+        {
+            onStatChanged.AddListener(listener);
+        }
+
+        public void RemoveOnStatsChangedListener(UnityAction listener)
+        {
+            onStatChanged.RemoveListener(listener);
         }
 
         // Queries ----
@@ -97,6 +111,15 @@ namespace AVA.Stats
             foreach(StatType key in mod.modifiers.Keys)
             {
                 CalculateStat(key);
+            }
+        }
+
+        public void RemoveAllModifiables()
+        {
+            modifierContainers.Clear();
+            foreach (var keyVal in calculatedStats)
+            {
+                CalculateStat(keyVal.Key);
             }
         }
 

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using AVA.Stats;
 using System.Collections.Generic;
+using TMPro;
 
 namespace AVA.UI.Stats {
 
@@ -13,6 +14,12 @@ namespace AVA.UI.Stats {
 
         private StatType _type;
 
+        [SerializeField]
+        private TMP_Text statValue;
+
+        [SerializeField]
+        private Image maxBar;
+
         private void Awake() {
             bar = GetComponent<Image>();
         }
@@ -20,6 +27,7 @@ namespace AVA.UI.Stats {
         public void SetType(StatType type) {
             _type = type;
             bar.color = colors[type];
+            maxBar.color = Color.cyan;
         }
 
         public StatType GetStatType() {
@@ -38,10 +46,11 @@ namespace AVA.UI.Stats {
         };
 
         
+        public void SetFillAmount(float currentValue, float maxValue) {
+            bar.fillAmount = currentValue / maxValue;   
+            statValue.text = currentValue.ToString() + " / " + maxValue.ToString();
 
-        public void SetFillAmount(float fillAmount) {
-            Debug.Log("StatBar: " + _type + " fill amount set from " + bar.fillAmount + " to " + fillAmount);
-            bar.fillAmount = fillAmount;
+            maxBar.fillAmount = maxValue / _type.maxValue;
         }
     }
 }

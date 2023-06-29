@@ -17,9 +17,13 @@ MonoBehaviour:
     baseValue: 100
   - type: 1
     baseValue: 100
-  - type: 2
-    baseValue: 100
   - type: 3
     baseValue: 100
+  - type: 2
+    baseValue: 100
   - type: 4
+    baseValue: 100
+  - type: 5
+    baseValue: 100
+  - type: 6
     baseValue: 100

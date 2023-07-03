@@ -93,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statValue: {fileID: 7800080723653857397}
   maxBar: {fileID: 460012025091958604}
+  minWidth: 100
 --- !u!1 &3201072894477293836
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,10 +262,10 @@ RectTransform:
   m_Father: {fileID: 1424192123017031883}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 2}
-  m_SizeDelta: {x: 100, y: 3}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4960707019792974517
 CanvasRenderer:

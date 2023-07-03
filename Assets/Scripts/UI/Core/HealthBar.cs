@@ -18,7 +18,7 @@ namespace AVA.UI.Core
         private Transform statContainer;
 
         [SerializeField]
-        private GameObject healthBarPrefab;
+        private GameObject statBarPrefab;
 
         private void Start()
         {
@@ -28,11 +28,11 @@ namespace AVA.UI.Core
         private IEnumerator Init()
         {
             yield return new WaitUntil(() => healthService.isReady());
-            var healthBar = Instantiate(healthBarPrefab, statContainer);
+            var healthBar = Instantiate(statBarPrefab, statContainer);
             var healthStatBar = healthBar.GetComponent<StatBar>();
             healthStatBar.SetType(StatType.MaxHealth);
 
-            var shieldBar = Instantiate(healthBarPrefab, statContainer);
+            var shieldBar = Instantiate(statBarPrefab, statContainer);
             var shieldStatBar = shieldBar.GetComponent<StatBar>();
             shieldStatBar.SetType(StatType.Defense);
 

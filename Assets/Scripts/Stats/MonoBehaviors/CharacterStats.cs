@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using UnityEngine.Events;
+
 namespace AVA.Stats
 {
     public class CharacterStats : StatOutput
     {
         public float GetStat(StatType type)
         {
-            return statServiceInstance.CalculateStat(type);
+            return statServiceInstance.GetCalculatedStat(type);
         }
 
         public float GetBaseStat(StatType type)
@@ -18,9 +20,34 @@ namespace AVA.Stats
             return statServiceInstance.GetStatTypes();
         }
 
-        public void UpdateBaseStat(StatType type, float newStat)
+        public Dictionary<StatType, float> GetAllCalculatedStats()
         {
-            statServiceInstance.UpdateBaseStat(type, newStat);
+            return statServiceInstance.GetAllCalculatedStats();
         }
+
+        public Dictionary<StatType, float> GetAllBaseStats() {
+            return statServiceInstance.GetAllBaseStats();
+        }
+
+        public void AddStatListener(StatType type, UnityAction listener)
+        {
+            statServiceInstance.AddStatListener(type, listener);
+        }
+
+        public void RemoveStatListener(StatType type, UnityAction listener)
+        {
+            statServiceInstance.RemoveStatListener(type, listener);
+        }
+
+        public void AddOnStatsChangedListener(UnityAction listener)
+        {
+            statServiceInstance.AddOnStatsChangedListener(listener);
+        }
+
+        public void RemoveOnStatsChangedListener(UnityAction listener)
+        {
+            statServiceInstance.RemoveOnStatsChangedListener(listener);
+        }
+
     }
 }

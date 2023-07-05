@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001ce7190bfda8a4d9ca56a17f8fdd0b, type: 3}
-  m_Name: AddShield
+  m_Script: {fileID: 11500000, guid: ffc0dce3ed3e7a54fb3d441d73e2f060, type: 3}
+  m_Name: AddModifierContainer
   m_EditorClassIdentifier: 
-  _debugValue: 10
+  _debugValue:
+    serializableModifiers:
+    - type: 2
+      modifier: 100
+      isPercentual: 0

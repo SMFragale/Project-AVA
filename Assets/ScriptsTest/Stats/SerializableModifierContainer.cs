@@ -9,16 +9,21 @@ public class SerializableModifierContainer
     public Dictionary<StatType, Modifier> GenerateModifiers() {
         Dictionary<StatType, Modifier> result = new Dictionary<StatType, Modifier>();
         foreach (SerializableModifier modifier in serializableModifiers) {
-            result.Add(modifier.type, new Modifier(modifier.type, modifier.modifier, modifier.isPercentual));
+
+            StatType type = StatType.enumToType[modifier.type];
+
+            result.Add(type, new Modifier(type, modifier.modifier, modifier.isPercentual));
         }
         return result;
     }
 }
 
 [System.Serializable]
-public class SerializableModifier : Modifier
+public class SerializableModifier
 {
-    public SerializableModifier(StatType type, float modifier, bool isPercentual) : base(type, modifier, isPercentual)
-    {
-    }
+    public StatType.Enum type;
+    public float modifier;
+    public bool isPercentual;
+    
+
 }

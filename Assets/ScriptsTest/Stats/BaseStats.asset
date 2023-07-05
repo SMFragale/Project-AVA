@@ -12,3 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 202f67577df017c43a8fe5a700b45a23, type: 3}
   m_Name: BaseStats
   m_EditorClassIdentifier: 
+  baseStats:
+  - type: 0
+    baseValue: 100
+  - type: 1
+    baseValue: 100
+  - type: 3
+    baseValue: 100
+  - type: 2
+    baseValue: 100
+  - type: 4
+    baseValue: 100
+  - type: 5
+    baseValue: 100
+  - type: 6
+    baseValue: 100

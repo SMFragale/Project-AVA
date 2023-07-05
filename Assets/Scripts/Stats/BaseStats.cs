@@ -7,29 +7,19 @@ namespace AVA.Stats
     {
         public Dictionary<StatType, float> stats { get; private set; } = new Dictionary<StatType, float>();
 
-        public BaseStats(float maxHealth, float attack, float speed, float defense, float attackSpeed)
-        {
-            stats = new Dictionary<StatType, float>
-            {
-                { StatType.MaxHealth, maxHealth },
-                { StatType.Attack, attack },
-                { StatType.Speed, speed },
-                { StatType.Defense, defense },
-                { StatType.AttackSpeed, attackSpeed }
-            };
-        }
-
         public BaseStats(BaseStatsSO so)
         {
             Debug.Log("Creating base stats from an SO");
             if(so == null)
                 Debug.LogError("BaseStatsSO is null");
+            stats = new Dictionary<StatType, float>();
             var baseStats = so.GetBaseStats();
             Debug.Log("Creating base stats from " + baseStats.Length + " stats");
             foreach (var stat in baseStats)
             {
-                if (!stats.ContainsKey(stat.type))
-                    stats.Add(stat.type, stat.baseValue);
+                StatType type = StatType.enumToType[stat.type];
+                if (!stats.ContainsKey(type))
+                    stats.Add(type, stat.baseValue);
             }
         }
 

@@ -1,8 +1,9 @@
 using UnityEngine;
 using AVA.Stats;
 using System.Collections;
+using UnityEngine.Events;
 
-namespace AVA.State {
+namespace AVA.Combat {
 
     [RequireComponent(typeof(CharacterStats))]
     public class HPService : MonoBehaviour, IReadyCheck
@@ -12,14 +13,15 @@ namespace AVA.State {
 
         private CharacterStats characterStats;
 
+        public UnityEvent OnHealthZero { get; private set;} = new UnityEvent();
+
         bool ready = false;
 
         // Start is called before the first frame update
         void Start()
         {
             characterStats = GetComponent<CharacterStats>();
-            StartCoroutine(SetInitialState());
-            //Get max health from stats
+            StartCoroutine(Init());
         }
 
         public bool isReady()
@@ -27,7 +29,17 @@ namespace AVA.State {
             return ready;
         }
 
-        private IEnumerator SetInitialState() {
+        public void OnMaxHealthUpdated(float maxValue) {
+            if(health.Value > maxValue)
+                health.Value = maxValue;
+        }
+
+        public void OnMaxDefenseUpdated(float maxValue) {
+            if(shield.Value > maxValue)
+                shield.Value = maxValue;
+        }
+
+        private IEnumerator Init() {
             Debug.Log("Waiting for character stats");
             yield return new WaitUntil(() => characterStats.isReady());
             health = new HitPoints(characterStats.GetStat(StatType.MaxHealth));
@@ -36,6 +48,17 @@ namespace AVA.State {
             health.AddOnChangedListener(CheckHealthAmount);
             shield.AddOnChangedListener(CheckShieldAmount);
             ready = true;
+
+            characterStats.AddStatListener(StatType.MaxHealth, () =>
+            {
+                OnMaxHealthUpdated(characterStats.GetStat(StatType.MaxHealth));
+            });
+            characterStats.AddStatListener(StatType.Defense, () => 
+            {
+                OnMaxDefenseUpdated(characterStats.GetStat(StatType.Defense));
+            });
+            //Get max health from stats
+
             Debug.Log("Ready");
         }
 
@@ -50,6 +73,26 @@ namespace AVA.State {
         public float GetHealth()
         {
             return health.Value;
+        }
+
+        public void AddHealthListener(UnityAction listener)
+        {
+            health.AddOnChangedListener(listener);
+        }
+
+        public void RemoveHealthListener(UnityAction listener)
+        {
+            health.RemoveOnChangedListener(listener);
+        }
+
+        public void AddShieldListener(UnityAction listener)
+        {
+            shield.AddOnChangedListener(listener);
+        }
+
+        public void RemoveShieldListener(UnityAction listener)
+        {
+            shield.RemoveOnChangedListener(listener);
         }
 
         public float GetShield()
@@ -76,17 +119,26 @@ namespace AVA.State {
                 health.Value = 0;
             else
                 health.Value -= remaining;
+
+            // ---
+            if(health.Value <= 0)
+                OnHealthZero?.Invoke();
         }
 
         public void HealDamage(float value)
         {
-            //TODO check si queda > maxHealth, si si dejarlo = maxHealth
-            health.Value += value;
+            if (characterStats.GetStat(StatType.MaxHealth) < health.Value + value)
+                health.Value = characterStats.GetStat(StatType.MaxHealth);
+            else
+                health.Value += value;
         }
 
         public void AddShield(float value)
         {
-            shield.Value += value;
+            if (characterStats.GetStat(StatType.Defense) < shield.Value + value)
+                shield.Value = characterStats.GetStat(StatType.Defense);
+            else
+                shield.Value += value;
         }
 
         

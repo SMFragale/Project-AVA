@@ -1,3 +1,5 @@
+using UnityEngine.Events;
+
 namespace AVA.Stats
 {
     public class CharacterModifiers : StatOutput
@@ -11,6 +13,12 @@ namespace AVA.Stats
         {
             statServiceInstance.RemoveModifiable(mod);
         }
+
+        public void RemoveAllModifiables()
+        {
+            statServiceInstance.RemoveAllModifiables();
+        }
+
     }
 }
 

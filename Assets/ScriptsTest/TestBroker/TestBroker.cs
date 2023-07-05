@@ -1,6 +1,6 @@
 using UnityEngine;
 using AVA.Stats;
-using AVA.State;
+using AVA.Combat;
 using System.Collections;
 using System.Collections.Generic;
 

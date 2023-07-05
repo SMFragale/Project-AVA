@@ -1,5 +1,5 @@
 using UnityEngine;
-using AVA.State;
+using AVA.Combat;
 using AVA.Stats;
 using System.Collections;
 using AVA.UI.Stats;

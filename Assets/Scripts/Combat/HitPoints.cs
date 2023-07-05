@@ -1,7 +1,7 @@
 using AVA.Core;
 using UnityEngine;
 
-namespace AVA.State {
+namespace AVA.Combat {
     public class HitPoints : ObservableValue<float>
     {
         public HitPoints(float initialValue) : base(initialValue)

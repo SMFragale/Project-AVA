@@ -3,8 +3,6 @@ using UnityEngine.UI;
 using AVA.Stats;
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine.Rendering;
-using System;
 
 namespace AVA.UI.Stats {
 

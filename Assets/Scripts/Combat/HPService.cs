@@ -3,7 +3,7 @@ using AVA.Stats;
 using System.Collections;
 using UnityEngine.Events;
 
-namespace AVA.State {
+namespace AVA.Combat {
 
     [RequireComponent(typeof(CharacterStats))]
     public class HPService : MonoBehaviour, IReadyCheck

@@ -8,8 +8,13 @@ namespace AVA.State
 {
     [RequireComponent(typeof(CharacterStats))]
     [RequireComponent(typeof(HPService))]
-    public class CharacterState : MonoBehaviour, IReadyCheck
+    public class CharacterState : MonoWaiter
     {
+        private void Awake()
+        {
+            dependencies = new List<IReadyCheck> { CharacterStatsInstance(), HPServiceInstance() };
+        }
+
         public Dictionary<StatType, float> GetCurrentStats()
         {
             return CharacterStatsInstance().GetAllCalculatedStats();
@@ -30,11 +35,6 @@ namespace AVA.State
             return new CharacterStateInstance(GetCurrentStats(), GetCurrentHealth(), GetCurrentShield());
         }
 
-        public bool isReady()
-        {
-            return CharacterStatsInstance().isReady() && HPServiceInstance().isReady();
-        }
-
         private CharacterStats CharacterStatsInstance()
         {
             return GetComponent<CharacterStats>();
@@ -45,6 +45,10 @@ namespace AVA.State
             return GetComponent<HPService>();
         }
 
+        protected override void OnDependenciesReady()
+        {
+            Debug.Log("CharacterState dependencies ready");
+        }
         //TODO Effects
     }
 }

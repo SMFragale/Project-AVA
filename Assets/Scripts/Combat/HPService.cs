@@ -3,7 +3,8 @@ using AVA.Stats;
 using System.Collections;
 using UnityEngine.Events;
 
-namespace AVA.Combat {
+namespace AVA.Combat
+{
 
     [RequireComponent(typeof(CharacterStats))]
     public class HPService : MonoBehaviour, IReadyCheck
@@ -11,16 +12,21 @@ namespace AVA.Combat {
         private HitPoints health;
         private HitPoints shield;
 
-        private CharacterStats characterStats;
+        private CharacterStats characterStats
+        {
+            get
+            {
+                return GetComponent<CharacterStats>();
+            }
+        }
 
-        public UnityEvent OnHealthZero { get; private set;} = new UnityEvent();
+        public UnityEvent OnHealthZero { get; private set; } = new UnityEvent();
 
         bool ready = false;
 
         // Start is called before the first frame update
         void Start()
         {
-            characterStats = GetComponent<CharacterStats>();
             StartCoroutine(Init());
         }
 
@@ -29,17 +35,20 @@ namespace AVA.Combat {
             return ready;
         }
 
-        public void OnMaxHealthUpdated(float maxValue) {
-            if(health.Value > maxValue)
+        public void OnMaxHealthUpdated(float maxValue)
+        {
+            if (health.Value > maxValue)
                 health.Value = maxValue;
         }
 
-        public void OnMaxDefenseUpdated(float maxValue) {
-            if(shield.Value > maxValue)
+        public void OnMaxDefenseUpdated(float maxValue)
+        {
+            if (shield.Value > maxValue)
                 shield.Value = maxValue;
         }
 
-        private IEnumerator Init() {
+        private IEnumerator Init()
+        {
             Debug.Log("Waiting for character stats");
             yield return new WaitUntil(() => characterStats.isReady());
             health = new HitPoints(characterStats.GetStat(StatType.MaxHealth));
@@ -53,7 +62,7 @@ namespace AVA.Combat {
             {
                 OnMaxHealthUpdated(characterStats.GetStat(StatType.MaxHealth));
             });
-            characterStats.AddStatListener(StatType.Defense, () => 
+            characterStats.AddStatListener(StatType.Defense, () =>
             {
                 OnMaxDefenseUpdated(characterStats.GetStat(StatType.Defense));
             });
@@ -62,11 +71,13 @@ namespace AVA.Combat {
             Debug.Log("Ready");
         }
 
-        public void CheckHealthAmount() {
+        public void CheckHealthAmount()
+        {
             Debug.Log("Health amount: " + health.Value);
         }
 
-        public void CheckShieldAmount() {
+        public void CheckShieldAmount()
+        {
             Debug.Log("Shield amount: " + shield.Value);
         }
 
@@ -104,24 +115,24 @@ namespace AVA.Combat {
         {
             float remaining = value;
 
-            if(shield.Value > 0)
+            if (shield.Value > 0)
             {
-                if(shield.Value >= remaining)
+                if (shield.Value >= remaining)
                 {
                     shield.Value -= remaining;
                     return;
                 }
                 remaining -= shield.Value;
                 shield.Value = 0;
-            }   
+            }
 
-            if(health.Value < remaining)
+            if (health.Value < remaining)
                 health.Value = 0;
             else
                 health.Value -= remaining;
 
             // ---
-            if(health.Value <= 0)
+            if (health.Value <= 0)
                 OnHealthZero?.Invoke();
         }
 
@@ -141,6 +152,6 @@ namespace AVA.Combat {
                 shield.Value += value;
         }
 
-        
+
     }
 }

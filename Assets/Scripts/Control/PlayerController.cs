@@ -1,12 +1,14 @@
 using UnityEngine;
 using AVA.Combat;
 using AVA.Movement;
+using AVA.State;
 
 namespace AVA.Control
 {
     [RequireComponent(typeof(NavMeshMover))]
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerAnimator))]
+    [RequireComponent(typeof(CharacterState))]
     public class PlayerController : MonoBehaviour
     {
         [Header("Input")]
@@ -56,7 +58,7 @@ namespace AVA.Control
 
         private Vector2 CalculateAnimationVector(Vector2 moveInput)
         {
-            if(moveInput.magnitude < 0.1f)
+            if (moveInput.magnitude < 0.1f)
                 return new Vector2(0, 0);
 
             float angle = Vector3.SignedAngle(transform.forward, new Vector3(moveInput.x, 0, moveInput.y), Vector3.up);

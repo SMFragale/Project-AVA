@@ -1,13 +1,14 @@
 using UnityEngine;
 using AVA.Stats;
-using System.Collections;
 using UnityEngine.Events;
+using AVA.Core;
+using System.Collections.Generic;
 
 namespace AVA.Combat
 {
 
     [RequireComponent(typeof(CharacterStats))]
-    public class HPService : MonoBehaviour, IReadyCheck
+    public class HPService : MonoWaiter
     {
         private HitPoints health;
         private HitPoints shield;
@@ -22,41 +23,18 @@ namespace AVA.Combat
 
         public UnityEvent OnHealthZero { get; private set; } = new UnityEvent();
 
-        bool ready = false;
-
-        // Start is called before the first frame update
-        void Start()
+        private void Awake()
         {
-            StartCoroutine(Init());
+            dependencies = new List<IReadyCheck>() { characterStats };
         }
 
-        public bool isReady()
+        protected override void OnDependenciesReady()
         {
-            return ready;
-        }
-
-        public void OnMaxHealthUpdated(float maxValue)
-        {
-            if (health.Value > maxValue)
-                health.Value = maxValue;
-        }
-
-        public void OnMaxDefenseUpdated(float maxValue)
-        {
-            if (shield.Value > maxValue)
-                shield.Value = maxValue;
-        }
-
-        private IEnumerator Init()
-        {
-            Debug.Log("Waiting for character stats");
-            yield return new WaitUntil(() => characterStats.isReady());
             health = new HitPoints(characterStats.GetStat(StatType.MaxHealth));
             shield = new HitPoints(0);
 
             health.AddOnChangedListener(CheckHealthAmount);
             shield.AddOnChangedListener(CheckShieldAmount);
-            ready = true;
 
             characterStats.AddStatListener(StatType.MaxHealth, () =>
             {
@@ -69,6 +47,18 @@ namespace AVA.Combat
             //Get max health from stats
 
             Debug.Log("Ready");
+        }
+
+        public void OnMaxHealthUpdated(float maxValue)
+        {
+            if (health.Value > maxValue)
+                health.Value = maxValue;
+        }
+
+        public void OnMaxDefenseUpdated(float maxValue)
+        {
+            if (shield.Value > maxValue)
+                shield.Value = maxValue;
         }
 
         public void CheckHealthAmount()
@@ -151,7 +141,5 @@ namespace AVA.Combat
             else
                 shield.Value += value;
         }
-
-
     }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using AVA.Combat;
 using AVA.Stats;
 using UnityEngine;
+using AVA.Core;
 
 namespace AVA.State
 {

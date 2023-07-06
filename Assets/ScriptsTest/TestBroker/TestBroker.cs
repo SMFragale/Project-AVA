@@ -1,6 +1,7 @@
 using UnityEngine;
 using AVA.Stats;
 using AVA.Combat;
+using AVA.Core;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,7 +13,7 @@ public class TestBroker : MonoBehaviour, IReadyCheck
     private HPService hpService;
     [SerializeField]
     private CharacterModifiers characterModifiers;
-    [SerializeField] 
+    [SerializeField]
     private int modifierCounter;
 
     private List<ModifierContainer> modifiers;
@@ -66,10 +67,10 @@ public class TestBroker : MonoBehaviour, IReadyCheck
 
     public void RemoveModifierContainer(int index)
     {
-        if( index >= modifierCounter || index < 0) return;
+        if (index >= modifierCounter || index < 0) return;
         characterModifiers.RemoveModifiable(modifiers[index]);
         modifiers.RemoveAt(index);
-        modifierCounter --;
+        modifierCounter--;
     }
 
     public void RemoveAllModifiers()

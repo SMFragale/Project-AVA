@@ -1,3 +1,4 @@
+using AVA.Core;
 using UnityEngine;
 
 namespace AVA.Stats

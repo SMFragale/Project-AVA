@@ -1,4 +1,8 @@
-public interface IReadyCheck 
+namespace AVA.Core
 {
-    public bool isReady();
+    public interface IReadyCheck
+    {
+        public bool isReady();
+    }
+
 }

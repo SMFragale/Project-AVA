@@ -1,18 +1,54 @@
-using System.Collections;
 using System.Collections.Generic;
+using AVA.Combat;
+using AVA.Stats;
 using UnityEngine;
+using AVA.Core;
 
-public class CharacterState : MonoBehaviour
+namespace AVA.State
 {
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(CharacterStats))]
+    [RequireComponent(typeof(HPService))]
+    public class CharacterState : MonoWaiter
     {
-        
-    }
+        private void Awake()
+        {
+            dependencies = new List<IReadyCheck> { CharacterStatsInstance(), HPServiceInstance() };
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public Dictionary<StatType, float> GetCurrentStats()
+        {
+            return CharacterStatsInstance().GetAllCalculatedStats();
+        }
+
+        public float GetCurrentHealth()
+        {
+            return HPServiceInstance().GetHealth();
+        }
+
+        public float GetCurrentShield()
+        {
+            return HPServiceInstance().GetShield();
+        }
+
+        public CharacterStateInstance GetStateInstance()
+        {
+            return new CharacterStateInstance(GetCurrentStats(), GetCurrentHealth(), GetCurrentShield());
+        }
+
+        private CharacterStats CharacterStatsInstance()
+        {
+            return GetComponent<CharacterStats>();
+        }
+
+        private HPService HPServiceInstance()
+        {
+            return GetComponent<HPService>();
+        }
+
+        protected override void OnDependenciesReady()
+        {
+            Debug.Log("CharacterState dependencies ready");
+        }
+        //TODO Effects
     }
 }

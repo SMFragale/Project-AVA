@@ -1,12 +1,13 @@
 using UnityEngine;
 using AVA.Combat;
 using AVA.Stats;
-using System.Collections;
 using AVA.UI.Stats;
+using System.Collections.Generic;
+using AVA.Core;
 
 namespace AVA.UI.Core
 {
-    public class HealthBar : MonoBehaviour
+    public class HealthBar : MonoWaiter
     {
         [SerializeField]
         private HPService healthService;
@@ -20,14 +21,13 @@ namespace AVA.UI.Core
         [SerializeField]
         private GameObject statBarPrefab;
 
-        private void Start()
+        private void Awake()
         {
-            StartCoroutine(Init());
+            dependencies = new List<IReadyCheck> { healthService, characterStats };
         }
 
-        private IEnumerator Init()
+        protected override void OnDependenciesReady()
         {
-            yield return new WaitUntil(() => healthService.isReady());
             var healthBar = Instantiate(statBarPrefab, statContainer);
             var healthStatBar = healthBar.GetComponent<StatBar>();
             healthStatBar.SetType(StatType.MaxHealth);
@@ -51,16 +51,16 @@ namespace AVA.UI.Core
             {
                 UpdateFillAmount(healthService.GetShield(), characterStats.GetStat(StatType.Defense), shieldStatBar);
             });
-            
+
             UpdateFillAmount(healthService.GetHealth(), characterStats.GetStat(StatType.MaxHealth), healthStatBar);
             UpdateFillAmount(healthService.GetShield(), characterStats.GetStat(StatType.Defense), shieldStatBar);
 
             Debug.Log("Set observable value");
         }
 
-        private void UpdateFillAmount(float current, float max, StatBar statBar) {
+        private void UpdateFillAmount(float current, float max, StatBar statBar)
+        {
             statBar.SetFillAmount(current, max);
         }
-
     }
 }

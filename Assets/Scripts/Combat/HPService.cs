@@ -1,59 +1,46 @@
 using UnityEngine;
 using AVA.Stats;
-using System.Collections;
 using UnityEngine.Events;
+using AVA.Core;
+using System.Collections.Generic;
 
-namespace AVA.Combat {
+namespace AVA.Combat
+{
 
     [RequireComponent(typeof(CharacterStats))]
-    public class HPService : MonoBehaviour, IReadyCheck
+    public class HPService : MonoWaiter
     {
         private HitPoints health;
         private HitPoints shield;
 
-        private CharacterStats characterStats;
-
-        public UnityEvent OnHealthZero { get; private set;} = new UnityEvent();
-
-        bool ready = false;
-
-        // Start is called before the first frame update
-        void Start()
+        private CharacterStats characterStats
         {
-            characterStats = GetComponent<CharacterStats>();
-            StartCoroutine(Init());
+            get
+            {
+                return GetComponent<CharacterStats>();
+            }
         }
 
-        public bool isReady()
+        public UnityEvent OnHealthZero { get; private set; } = new UnityEvent();
+
+        private void Awake()
         {
-            return ready;
+            dependencies = new List<IReadyCheck>() { characterStats };
         }
 
-        public void OnMaxHealthUpdated(float maxValue) {
-            if(health.Value > maxValue)
-                health.Value = maxValue;
-        }
-
-        public void OnMaxDefenseUpdated(float maxValue) {
-            if(shield.Value > maxValue)
-                shield.Value = maxValue;
-        }
-
-        private IEnumerator Init() {
-            Debug.Log("Waiting for character stats");
-            yield return new WaitUntil(() => characterStats.isReady());
+        protected override void OnDependenciesReady()
+        {
             health = new HitPoints(characterStats.GetStat(StatType.MaxHealth));
             shield = new HitPoints(0);
 
             health.AddOnChangedListener(CheckHealthAmount);
             shield.AddOnChangedListener(CheckShieldAmount);
-            ready = true;
 
             characterStats.AddStatListener(StatType.MaxHealth, () =>
             {
                 OnMaxHealthUpdated(characterStats.GetStat(StatType.MaxHealth));
             });
-            characterStats.AddStatListener(StatType.Defense, () => 
+            characterStats.AddStatListener(StatType.Defense, () =>
             {
                 OnMaxDefenseUpdated(characterStats.GetStat(StatType.Defense));
             });
@@ -62,11 +49,25 @@ namespace AVA.Combat {
             Debug.Log("Ready");
         }
 
-        public void CheckHealthAmount() {
+        public void OnMaxHealthUpdated(float maxValue)
+        {
+            if (health.Value > maxValue)
+                health.Value = maxValue;
+        }
+
+        public void OnMaxDefenseUpdated(float maxValue)
+        {
+            if (shield.Value > maxValue)
+                shield.Value = maxValue;
+        }
+
+        public void CheckHealthAmount()
+        {
             Debug.Log("Health amount: " + health.Value);
         }
 
-        public void CheckShieldAmount() {
+        public void CheckShieldAmount()
+        {
             Debug.Log("Shield amount: " + shield.Value);
         }
 
@@ -104,24 +105,24 @@ namespace AVA.Combat {
         {
             float remaining = value;
 
-            if(shield.Value > 0)
+            if (shield.Value > 0)
             {
-                if(shield.Value >= remaining)
+                if (shield.Value >= remaining)
                 {
                     shield.Value -= remaining;
                     return;
                 }
                 remaining -= shield.Value;
                 shield.Value = 0;
-            }   
+            }
 
-            if(health.Value < remaining)
+            if (health.Value < remaining)
                 health.Value = 0;
             else
                 health.Value -= remaining;
 
             // ---
-            if(health.Value <= 0)
+            if (health.Value <= 0)
                 OnHealthZero?.Invoke();
         }
 
@@ -140,7 +141,5 @@ namespace AVA.Combat {
             else
                 shield.Value += value;
         }
-
-        
     }
 }

@@ -126,7 +126,6 @@ GameObject:
   - component: {fileID: 4627769960950794526}
   - component: {fileID: 4627769960950794512}
   - component: {fileID: 4627769960950794513}
-  - component: {fileID: 617854278}
   - component: {fileID: 5440395020747382900}
   - component: {fileID: 4424603696441130202}
   - component: {fileID: 4627769960796841090}
@@ -175,7 +174,7 @@ MonoBehaviour:
   dashSpeed: 100
   dashDistance: 2
   animator: {fileID: 4424603696441130202}
-  weapon: {fileID: 617854278}
+  weapon: {fileID: 0}
 --- !u!195 &4627769960950794512
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -210,21 +209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8753e3cd13c4de94a853b1fb08399986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &617854278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4627769960950794524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375664c7883263441b41d1708a054bab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  origin: {fileID: 4627769960503287577}
-  projectilePrefab: {fileID: 7653591653300589521, guid: 72388d1042e5a2841be06821d7884261, type: 3}
-  attackRate: 10
 --- !u!114 &5440395020747382900
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System.Collections;
+using AVA.State;
 using UnityEngine;
 
 namespace AVA.Combat
@@ -10,16 +11,6 @@ namespace AVA.Combat
 
         [SerializeField]
         GameObject projectilePrefab;
-
-        [SerializeField]
-        [Range(0, 10)]
-        private float attackRate = 0.5f;
-        private bool isAttacking = false;
-
-        private void Awake()
-        {
-            isAttacking = true;
-        }
 
         //Make a method that is a couroutine that will shoot every attackRate seconds (use WaitForSeconds) use the shooter.Shoot
         public override IEnumerator StartAttacking()
@@ -39,9 +30,12 @@ namespace AVA.Combat
 
         public override void Attack(Vector3 direction)
         {
+            if (!GetComponentInParent<CharacterState>().isReady()) return;
             //In the future this should be done within a pool
-            var projectile = Instantiate(projectilePrefab, origin.position, Quaternion.identity);
-            projectile.GetComponent<Projectile>().ShootProjectile(direction);
+            var projectileInstance = Instantiate(projectilePrefab, origin.position, Quaternion.identity);
+            var projectile = projectileInstance.GetComponent<Projectile>();
+            projectile.attackInstance = new AttackInstance(GetComponentInParent<CharacterState>().GetStateInstance(), 20f, new DefaultMultiplier());
+            projectile.ShootProjectile(direction);
             Destroy(projectile, 5f);
         }
     }

@@ -1,3 +1,4 @@
+using AVA.Core;
 using UnityEngine;
 
 namespace AVA.Stats
@@ -5,16 +6,17 @@ namespace AVA.Stats
     [RequireComponent(typeof(StatsController))]
     public class StatOutput : MonoBehaviour, IReadyCheck
     {
-        protected StatService statServiceInstance;
+        protected StatService statServiceInstance
+        {
+            get
+            {
+                return GetComponent<StatsController>().statServiceInstance;
+            }
+        }
 
         public bool isReady()
         {
             return statServiceInstance != null;
-        }
-
-        public void Start()
-        {
-            statServiceInstance = GetComponent<StatsController>().statServiceInstance;
         }
     }
 }

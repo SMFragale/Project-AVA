@@ -3,10 +3,11 @@ using UnityEngine;
 
 namespace AVA.Combat
 {
-
-
     public abstract class Weapon : MonoBehaviour
     {
+        [SerializeField]
+        protected Transform characterTransform;
+
         [SerializeField]
         [Range(0, 10)]
         protected float attackRate = 0.5f;
@@ -14,8 +15,19 @@ namespace AVA.Combat
 
         public abstract void Attack(Vector3 direction);
 
-        public abstract IEnumerator StartAttacking();
+        public IEnumerator StartAttacking()
+        {
+            isAttacking = true;
+            while (isAttacking)
+            {
+                Attack(characterTransform.forward.normalized);
+                yield return new WaitForSeconds(attackRate);
+            }
+        }
 
-        public abstract void StopAttacking();
+        public void StopAttacking()
+        {
+            isAttacking = false;
+        }
     }
 }

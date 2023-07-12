@@ -63,12 +63,12 @@ namespace AVA.Combat
 
         public void CheckHealthAmount()
         {
-            Debug.Log("Health amount: " + health.Value);
+            Debug.Log(gameObject.name + "health amount: " + health.Value);
         }
 
         public void CheckShieldAmount()
         {
-            Debug.Log("Shield amount: " + shield.Value);
+            Debug.Log(gameObject.name + "shield amount: " + shield.Value);
         }
 
         public float GetHealth()

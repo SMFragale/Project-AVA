@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.008072731, g: 0.0055891727, b: 0.01886791, a: 1}
   m_AmbientIntensity: 1.44
   m_AmbientMode: 1
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.41304737, g: 0.46969643, b: 0.6132076, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: ad86622afc08f1547848dd04cce04d1a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -596,7 +596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 48.19995, y: 45.299988}
+  m_AnchoredPosition: {x: 48.19995, y: 45.30005}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &940596963
@@ -751,14 +751,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.3007058, y: 0, z: 0, w: 0.95371693}
-  m_LocalPosition: {x: 0, y: 10, z: -10}
+  m_LocalRotation: {x: 0.01921463, y: -0.0008246964, z: -0.00979485, w: 0.99976707}
+  m_LocalPosition: {x: 4.0337615, y: 1.5055997, z: 3.1218758}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 270.01978, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 2.200937, y: 359.88388, z: 358.87512}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,7 +1066,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1099,13 +1099,13 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 4.5e-43, y: -3.6519504e-36, z: 4.5e-43, w: -6.6078115e-37}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -1118,13 +1118,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1665112710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.15, z: 0}
+  m_LocalPosition: {x: 0, y: 7.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: -0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2116858172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,6 +1347,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2663420851227646988, guid: 31d48c4b2765bfa40bdf96552dfd1d15, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.033
+      objectReference: {fileID: 0}
     - target: {fileID: 2897845318601638218, guid: 31d48c4b2765bfa40bdf96552dfd1d15, type: 3}
       propertyPath: m_Name
       value: Target
@@ -1407,6 +1411,18 @@ PrefabInstance:
     - target: {fileID: 4627769960950794527, guid: 4becae070bc34be42b7448c18044c297, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882756811351723928, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882756811351723928, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882756811351723928, guid: 4becae070bc34be42b7448c18044c297, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 271.00275
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4becae070bc34be42b7448c18044c297, type: 3}

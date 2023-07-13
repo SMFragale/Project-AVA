@@ -1,34 +1,14 @@
 fileFormatVersion: 2
-guid: 8649e48676e34bc4a925559c1885532e
+guid: 0437f3851fb8b2443918eda09d3a5e21
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: blackBody_mtl
-    second: {fileID: 2100000, guid: 1b7392bf41b14094d9416ebddb481830, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: eyeRim_mtl
-    second: {fileID: 2100000, guid: b19c25e8ddaa5304c9318e5846cb0052, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: eye_mtl
-    second: {fileID: 2100000, guid: 806591d05aa95874c9f01dd0ba987c77, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: redArms_mtl
-    second: {fileID: 2100000, guid: 623a185aca1f5e94682f44700d735c9a, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

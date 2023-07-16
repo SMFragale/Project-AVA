@@ -76,7 +76,6 @@ namespace AVA.Control
         {
             var targetDirection = new Vector3(look.x, 0, look.y);
             var rotationAngle = Vector3.SignedAngle(transform.forward, targetDirection, Vector3.up);
-
             transform.Rotate(Vector3.up, rotationAngle * Time.deltaTime * rotationSpeed);
         }
 

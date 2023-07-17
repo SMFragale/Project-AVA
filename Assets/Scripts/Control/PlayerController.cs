@@ -59,7 +59,7 @@ namespace AVA.Control
 
         private Vector2 CalculateAnimationVector(Vector2 moveInput)
         {
-            
+
             return moveInput;
         }
 
@@ -85,7 +85,10 @@ namespace AVA.Control
             var input = playerInput.ReadMoveInput();
             var direction = new Vector3(input.x, 0, input.y).normalized;
 
-            GetComponent<NavMeshMover>().DashTowards(direction, dashDistance, dashSpeed);
+            //make this direction relative to the camera
+            var relativeDirection = Camera.main.transform.TransformDirection(direction);
+
+            GetComponent<NavMeshMover>().DashTowards(relativeDirection, dashDistance, dashSpeed);
         }
 
         internal void AddLookDelta(Vector2 deltaPosition)

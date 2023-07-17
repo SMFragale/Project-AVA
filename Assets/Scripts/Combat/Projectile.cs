@@ -20,7 +20,6 @@ namespace AVA.Combat
         private void OnTriggerEnter(Collider other)
         {
             OnProjectileCollision(other);
-            Destroy(gameObject);
         }
 
         private void OnDestroy()

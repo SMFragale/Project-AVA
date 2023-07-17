@@ -20,7 +20,7 @@ namespace AVA.Combat
 
         private void OnTriggerEnter(Collider other)
         {
-            AttackInstance instance = other.gameObject.GetComponent<Projectile>().attackInstance;
+            AttackInstance instance = other.gameObject.GetComponent<Projectile>()?.attackInstance;
             if (instance != null)
             {
                 Debug.Log($"{gameObject.name} collided with {other.gameObject.name}");
@@ -41,3 +41,4 @@ namespace AVA.Combat
         }
     }
 }
+

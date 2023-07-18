@@ -11,7 +11,7 @@ namespace AVA.Movement
 
         public bool IsDashing { get; private set; }
 
-        private void Start()
+        private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
         }

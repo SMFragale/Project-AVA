@@ -10,13 +10,14 @@ namespace AVA.Combat
         [SerializeField]
         protected float projectileSpeed = 10f;
 
+        public AttackInstance attackInstance;
+
         public void ShootProjectile(Vector3 direction)
         {
             OnShootProjectile(direction);
         }
 
-        // Maybe add an explosion effect here
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             OnProjectileCollision(other);
         }
@@ -26,7 +27,7 @@ namespace AVA.Combat
             OnDestroyProjectile();
         }
 
-        protected abstract void OnProjectileCollision(Collision other);
+        protected abstract void OnProjectileCollision(Collider other);
 
         protected abstract void OnDestroyProjectile();
 

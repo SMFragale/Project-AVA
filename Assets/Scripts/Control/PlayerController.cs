@@ -2,6 +2,7 @@ using UnityEngine;
 using AVA.Combat;
 using AVA.Movement;
 using AVA.State;
+using System;
 
 namespace AVA.Control
 {
@@ -46,37 +47,26 @@ namespace AVA.Control
 
         private void Update()
         {
-            var lookDirection = playerInput.ReadLookInput();
-            LookTowards(lookDirection);
+            var lookDelta = playerInput.ReadLookInput();
+            AddLookDelta(lookDelta);
 
             var moveInput = playerInput.ReadMoveInput();
 
-            animator.UpdateAnimation(CalculateAnimationVector(moveInput));
+            animator.UpdateAnimation(moveInput);
             if (!GetComponent<NavMeshMover>().IsDashing)
                 MoveTowards(moveInput);
         }
 
         private Vector2 CalculateAnimationVector(Vector2 moveInput)
         {
-            if (moveInput.magnitude < 0.1f)
-                return new Vector2(0, 0);
 
-            float angle = Vector3.SignedAngle(transform.forward, new Vector3(moveInput.x, 0, moveInput.y), Vector3.up);
-            if (angle < -180f)
-                angle += 360f;
-            else if (angle > 180f)
-                angle -= 360f;
-
-            float posX = Mathf.Cos(angle * Mathf.Deg2Rad);
-            float posY = Mathf.Sin(angle * Mathf.Deg2Rad);
-            return new Vector2(posY, posX);
+            return moveInput;
         }
 
         private void LookTowards(Vector2 look)
         {
             var targetDirection = new Vector3(look.x, 0, look.y);
             var rotationAngle = Vector3.SignedAngle(transform.forward, targetDirection, Vector3.up);
-
             transform.Rotate(Vector3.up, rotationAngle * Time.deltaTime * rotationSpeed);
         }
 
@@ -95,7 +85,15 @@ namespace AVA.Control
             var input = playerInput.ReadMoveInput();
             var direction = new Vector3(input.x, 0, input.y).normalized;
 
-            GetComponent<NavMeshMover>().DashTowards(direction, dashDistance, dashSpeed);
+            //make this direction relative to the camera
+            var relativeDirection = Camera.main.transform.TransformDirection(direction);
+
+            GetComponent<NavMeshMover>().DashTowards(relativeDirection, dashDistance, dashSpeed);
+        }
+
+        internal void AddLookDelta(Vector2 deltaPosition)
+        {
+            transform.Rotate(Vector3.up, deltaPosition.x);
         }
     }
 }

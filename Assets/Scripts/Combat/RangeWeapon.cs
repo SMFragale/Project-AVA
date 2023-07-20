@@ -21,8 +21,7 @@ namespace AVA.Combat
             var projectile = projectileInstance.GetComponent<Projectile>();
             projectile.attackInstance = new AttackInstance(characterTransform.GetComponent<CharacterState>().GetStateInstance(), 20f, new DefaultMultiplier());
             projectile.ShootProjectile(direction);
-            Destroy(projectile, 5f);
+            Destroy(projectile, 2f);
         }
     }
-
 }

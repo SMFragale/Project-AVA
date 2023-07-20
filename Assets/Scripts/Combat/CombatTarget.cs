@@ -20,7 +20,7 @@ namespace AVA.Combat
 
         private void OnTriggerEnter(Collider other)
         {
-            AttackInstance instance = other.gameObject.GetComponent<Projectile>().attackInstance;
+            AttackInstance instance = other.gameObject.GetComponent<Projectile>()?.attackInstance;
             if (instance != null)
             {
                 Debug.Log($"{gameObject.name} collided with {other.gameObject.name}");
@@ -36,8 +36,9 @@ namespace AVA.Combat
             attackInstance.sourceDamage
             * (attackInstance.attackerState.stats[StatType.Attack] / defenderState.stats[StatType.Defense])
             * attackInstance.multiplier.Calculate(attackInstance.attackerState, defenderState);
+            Debug.Log($"Damage calculated: {damage}");
             return damage;
         }
     }
-
 }
+

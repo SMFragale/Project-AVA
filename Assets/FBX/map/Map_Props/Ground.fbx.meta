@@ -1,9 +1,29 @@
 fileFormatVersion: 2
-guid: b0e5ad551273537488104dd65ae91fb4
+guid: a0e84009d2597bc429a9cc3c571ddc15
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: boder_mtl
+    second: {fileID: 2100000, guid: ba7415a15985e51478cc800c1e109dda, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: earth_mtl
+    second: {fileID: 2100000, guid: 5c92e45af4bbe674e96ff5d3257c3e6f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metalGround_mtl
+    second: {fileID: 2100000, guid: 9d0bf76f22f4a5a4c83c06806e7a85f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: park_greenGround_mtl
+    second: {fileID: 2100000, guid: 1b328933c08588a4dbbc0c23a42a71a0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -3,7 +3,72 @@ guid: 5168e431f66a89648bcdcd28a0e873c0
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackMetal_mtl
+    second: {fileID: 2100000, guid: 92c744324740f544484e8b33781c8081, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blueBar_mtl
+    second: {fileID: 2100000, guid: 084f5cf06cd7e894590d6c54ae0ec07e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: business_Building_mtl
+    second: {fileID: 2100000, guid: c14f2f09b9f526a418790951c14d1198, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grayMetal_mtl.002
+    second: {fileID: 2100000, guid: 562cb65b80535474086bdcf097be740c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: greenBar_mtl
+    second: {fileID: 2100000, guid: e4f3a996769130640b0f77e0e1df6017, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ironDoor_mtl
+    second: {fileID: 2100000, guid: b03d32b9b2211174a84ca735dd8b4185, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metroRail_blueEnergy_mtl
+    second: {fileID: 2100000, guid: f58d93371ecb82c42a9ed48f2bfd50ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metroTopGlass_mtl
+    second: {fileID: 2100000, guid: 4ed3c85a17a490e42a500f80899ef049, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redBar_mtl
+    second: {fileID: 2100000, guid: 8adb57d583c338746ac7bbfdeafe85c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: whitePlaster_mtl
+    second: {fileID: 2100000, guid: bbfd1ce699c73b146bd529d72fff374f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellowBar
+    second: {fileID: 2100000, guid: f3fcc232188f99645811ca44c9b05199, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellowLight
+    second: {fileID: 2100000, guid: 2d84854186fd4564986c35bf7d585d8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellowLight_mtl
+    second: {fileID: 2100000, guid: e296f0917f97ec64cb93545faa8fc269, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

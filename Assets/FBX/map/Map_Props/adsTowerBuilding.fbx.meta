@@ -1,9 +1,89 @@
 fileFormatVersion: 2
-guid: 970a76a5cbb99544ea532e9ee681cc17
+guid: 5117b233977a231499cf4adecf0b59fa
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: building_black_mtl.001
+    second: {fileID: 2100000, guid: 6ccf171edfb2a454388b544b8faecfc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cyberBuilding_mtl.001
+    second: {fileID: 2100000, guid: 2d08f413f6c57f44b8f82d3d3dbb0873, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cyberBuilding_top2_mtl.001
+    second: {fileID: 2100000, guid: 552e1e76d4cba0e48803e89fc982a4ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cyberBuilding_top_mtl.001
+    second: {fileID: 2100000, guid: d0e21f9a3bf5e654381bddd23ef3d353, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ledPanel_01_mtl.001
+    second: {fileID: 2100000, guid: 9cb2773d284bdda4bb17a0fd6f8d8902, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ledPanel_03_mtl.001
+    second: {fileID: 2100000, guid: 7b88978e0af650344a2a1028b3db4d75, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ledPanel_04_mtl.001
+    second: {fileID: 2100000, guid: 80f9fe8d707263249b48e78040029f6a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ledPanel_05_mtl.001
+    second: {fileID: 2100000, guid: 1f7d235a14b472848be2500d09086f65, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ledPanel_06_mtl.001
+    second: {fileID: 2100000, guid: 80b50144d999ce84b9ff21cc2618886c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ledPanel_08_mtl.001
+    second: {fileID: 2100000, guid: 22ad30330275134479014373206eecb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ledPanel_09_mtl.001
+    second: {fileID: 2100000, guid: 4e90649a8a421e84cabf3a4d5388a26f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ledPanel_10_mtl.001
+    second: {fileID: 2100000, guid: 6b7d32f2d12be1746b1bd481234e3b61, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ledPanel_11_mtl.001
+    second: {fileID: 2100000, guid: 30b869835aa96474c831db0d31e00019, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ledPanel_12_mtl.001
+    second: {fileID: 2100000, guid: a40f174e168247f4abd8e84163218e3d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ledPanel_back_mtl.001
+    second: {fileID: 2100000, guid: a476ce6fd4be6bd409f445c41b1067fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: woodPlank_mtl.001
+    second: {fileID: 2100000, guid: abb7ad8a1ee96974aa80cf93169e725d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

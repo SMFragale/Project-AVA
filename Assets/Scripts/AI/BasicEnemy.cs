@@ -2,12 +2,10 @@ using System.Collections.Generic;
 using AVA.Combat;
 using AVA.Core;
 using AVA.Movement;
-using AVA.State;
 using UnityEngine;
 
 namespace AVA.AI
 {
-
     [RequireComponent(typeof(NavMeshMover))]
     [RequireComponent(typeof(HPService))]
     public class BasicEnemy : MonoWaiter
@@ -19,8 +17,6 @@ namespace AVA.AI
         public Transform player;
 
         public LayerMask whatIsGround, whatIsPlayer;
-
-        public float health;
 
         public Weapon weapon;
 
@@ -80,6 +76,7 @@ namespace AVA.AI
             if (distanceToWalkPoint.magnitude < 1f)
                 walkPointSet = false;
         }
+
         private void SearchWalkPoint()
         {
             //Calculate random point in range
@@ -111,17 +108,12 @@ namespace AVA.AI
                 Invoke(nameof(ResetAttack), timeBetweenAttacks);
             }
         }
+
         private void ResetAttack()
         {
             alreadyAttacked = false;
         }
 
-        public void TakeDamage(int damage)
-        {
-            health -= damage;
-
-            if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
-        }
         private void DestroyEnemy()
         {
             Destroy(gameObject);
@@ -134,7 +126,6 @@ namespace AVA.AI
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, sightRange);
         }
-
 
     }
 

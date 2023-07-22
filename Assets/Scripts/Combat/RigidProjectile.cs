@@ -14,11 +14,6 @@ namespace AVA.Combat
 
         protected override void OnProjectileCollision(Collider other)
         {
-            if (other.gameObject.tag == "Entity")
-            {
-                Debug.Log("Projectile collided with " + other.gameObject.name);
-                Destroy(gameObject);
-            }
         }
 
         protected override void OnShootProjectile(Vector3 direction)

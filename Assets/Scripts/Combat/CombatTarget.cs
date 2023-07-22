@@ -23,9 +23,10 @@ namespace AVA.Combat
             AttackInstance instance = other.gameObject.GetComponent<Projectile>()?.attackInstance;
             if (instance != null)
             {
+                Debug.Log($"My layer: {gameObject.layer}, other layer: {other.gameObject.layer}");
                 Debug.Log($"{gameObject.name} collided with {other.gameObject.name}");
-                Debug.Log("AttackInstance found");
                 TakeDamage(instance);
+                Destroy(other.gameObject);
             }
         }
 

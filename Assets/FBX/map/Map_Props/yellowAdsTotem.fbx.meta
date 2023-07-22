@@ -3,7 +3,22 @@ guid: 3468d19eaed3b64488c60949d8bf04bb
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cinemaAds_BuildingFooter_mtl
+    second: {fileID: 2100000, guid: 7e8a212168a60c349a93a06e68b587ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cinemaAds_Building_mtl
+    second: {fileID: 2100000, guid: 6da7394c58e90fa42840ec14dcf5e533, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellow_CinemaAds_mtl
+    second: {fileID: 2100000, guid: 197a6050583a070479cc0fed89f10304, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

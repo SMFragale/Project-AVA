@@ -3,7 +3,47 @@ guid: 8cfece5873f87df44b7c006e703cff57
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ArrowsLED_mtl
+    second: {fileID: 2100000, guid: 651cd3ad73826ef4d8f071020dd1e949, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RightSign_green_mtl
+    second: {fileID: 2100000, guid: 1b8eb404a1871344abf90efb31d83c80, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Right_mtl
+    second: {fileID: 2100000, guid: 32f2e27e7a1e46543b5bd7b171204f70, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: conventionBuilding_darkColor_mtl
+    second: {fileID: 2100000, guid: 7295ff0e6b81b474e9845ee7cabc33c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: conventionBuilding_mtl
+    second: {fileID: 2100000, guid: e04109b79d098de4c9f5488b0be5a961, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: grayMetal_mtl.001
+    second: {fileID: 2100000, guid: 49b501ceff562d84aa2f2426038b3e92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: woodSupport_mtl
+    second: {fileID: 2100000, guid: 7868bbfd5ff1ae040b197c51fd477821, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ArrowsTex_ref
+    second: {fileID: 2800000, guid: 42e96a818c115d74d9996e2ea62a23e9, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

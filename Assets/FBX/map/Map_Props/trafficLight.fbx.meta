@@ -3,7 +3,32 @@ guid: de051cf21f890a442b7010869ffd6f5d
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: greenLight_mtl
+    second: {fileID: 2100000, guid: 6a2e09ff6013c254688d41d6eaea5d04, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_mtl
+    second: {fileID: 2100000, guid: 8fa89bd30f659d1459bc2a2c4a3fb570, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: neonEnergy_mtl
+    second: {fileID: 2100000, guid: 10c286a69ef321d46866b6095bf05f26, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redLight_mtl
+    second: {fileID: 2100000, guid: 67265c929e9cdea418ea69d0c9eb508f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellowLight_mtl
+    second: {fileID: 2100000, guid: 2d6e67cbdb560fc469c2ad563435425d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

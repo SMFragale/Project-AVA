@@ -3,7 +3,27 @@ guid: e5f696e1c709fc04db556cfc1aa4a879
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackMetal_mtl
+    second: {fileID: 2100000, guid: 73344f6f0f54f46468da51e3d5f9b772, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: enemyBuiding_mtl
+    second: {fileID: 2100000, guid: 4a1b758aadedc814286322347a81ac49, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redGlass_Emission_mtl
+    second: {fileID: 2100000, guid: 8d7154e588a83dc44bfd22b4593b1694, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellowLines_mtl
+    second: {fileID: 2100000, guid: b0f7aaf01f730544ea88065399af45f0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

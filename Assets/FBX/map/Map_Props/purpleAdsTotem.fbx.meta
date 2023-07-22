@@ -3,7 +3,32 @@ guid: b33ef30f1cd8c0b4d879bbb50714a74b
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cinemaAds_BuildingFooter_mtl
+    second: {fileID: 2100000, guid: 709e0a338104ff94a81964840f17cadf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cinemaAds_Building_mtl
+    second: {fileID: 2100000, guid: c372a05951ff93c40819c8142d55f67a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cinemaAds_TopBuilding_mtl
+    second: {fileID: 2100000, guid: 592982c5a91bd414d9dd8aca224c4862, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lightPurple_CinemaAds_mtl
+    second: {fileID: 2100000, guid: 67a90ae6529899d4a8185c7607c54cb3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellowLight
+    second: {fileID: 2100000, guid: 978e2fb44ad9bd44ca81a7b6378a50d2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

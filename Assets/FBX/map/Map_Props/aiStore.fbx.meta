@@ -3,7 +3,57 @@ guid: 8d66b0bc781972243b2b7c6f988a32a1
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HologramLight_2_mtl
+    second: {fileID: 2100000, guid: efd1e676581d2d34686a5f4bb62c4a0e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HologramLight_2_mtl.001
+    second: {fileID: 2100000, guid: b0acdc46e6e74d94893eace40d02af67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackLeather_mtl
+    second: {fileID: 2100000, guid: 68f5e6192f34d0f4a822b4d85ff79c8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackMetal_mtl
+    second: {fileID: 2100000, guid: 0db8cd42148b46345804d9a826dfb407, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackMetal_mtl.002
+    second: {fileID: 2100000, guid: a39f589b6f015b94f9a0439e0cfc9e7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bleckMetal_mtl
+    second: {fileID: 2100000, guid: 2b09ed5eff43d49418ec8c5b0408dc16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bugHologram_mtl
+    second: {fileID: 2100000, guid: 6dd1dc5e9abdf0b499e97d69f070abde, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: door_mtl
+    second: {fileID: 2100000, guid: bcde03176a79c894fb1264d2565c0fe8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: whitePlaster_mtl
+    second: {fileID: 2100000, guid: b226fc55a8f6b444e8723ee56fe79bb6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellowLight
+    second: {fileID: 2100000, guid: a75212dbb03985a458766e54e860bb96, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

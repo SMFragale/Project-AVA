@@ -38,7 +38,7 @@ namespace AVA.Core
 
     public class NoDependenciesException : System.Exception
     {
-        public NoDependenciesException() : base("No dependencies set, dependencies must be set in Awake()")
+        public NoDependenciesException() : base("No dependencies set, dependencies for a MonoWaiter must be set in Awake()")
         {
         }
     }

@@ -46,7 +46,7 @@ namespace AVA.Combat
             });
             //Get max health from stats
 
-            Debug.Log("Ready");
+            Debug.Log("HP Service Ready");
         }
 
         public void OnMaxHealthUpdated(float maxValue)

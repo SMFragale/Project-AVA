@@ -3,7 +3,17 @@ guid: 3c8fd9a1570f1eb488a7f5750548defe
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bleckMetal_mtl
+    second: {fileID: 2100000, guid: 9f8cea70ed872f141b53ffd70223dc57, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellowLight
+    second: {fileID: 2100000, guid: 6d0af66b28598424e9dddfc45831648e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

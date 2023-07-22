@@ -3,7 +3,22 @@ guid: 516d1f90d5dc3494baa4e1f3ee1180b5
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 6b045fecee8656d4b9a93ed76bc247ac, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: concreteBlock_tex_01_Diffuse
+    second: {fileID: 2800000, guid: 71d8049c6405946449073f03864f78f3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: concreteBlock_tex_01_Roughness
+    second: {fileID: 2800000, guid: a2e51a45a16570c4ab1582281e0cb102, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

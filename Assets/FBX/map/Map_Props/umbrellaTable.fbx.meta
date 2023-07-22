@@ -3,7 +3,27 @@ guid: 478a077c3ee8c3d4f9531ccb7e5309cb
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tableBase_mtl
+    second: {fileID: 2100000, guid: a6a544722d2190b4cba846c6ce5a0368, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: umbrellaHolder_mtl
+    second: {fileID: 2100000, guid: 9401700d5f1adbf45af6fbb2b4ee5a39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: woodTable_mtl
+    second: {fileID: 2100000, guid: 114e062274a3f4f4fbde5af819d848c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yelowUmbrella_mtl
+    second: {fileID: 2100000, guid: 7c542c635646685439934039a880a616, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

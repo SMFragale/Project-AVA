@@ -3,7 +3,72 @@ guid: 44684e3c189d96448bc00dae711602fe
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BuildingMall_mtl
+    second: {fileID: 2100000, guid: 86efd857b264d4d43998bc50cfd99b13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackMetal_mtl
+    second: {fileID: 2100000, guid: 605f9044fa43a2a42878d4eb80cc8141, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: enemyBuiding_mtl
+    second: {fileID: 2100000, guid: 74be35294fc2eba44bdc55a83657ff5c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lightblue_FashionAds_mtl
+    second: {fileID: 2100000, guid: cda98f416e8d64749a2282a2fbd6fcdc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lightgreen_sprayAds_mtl
+    second: {fileID: 2100000, guid: 62195bdd20706954fb91e8cd19df31c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lightorange_CyberGlassesAds_mtl
+    second: {fileID: 2100000, guid: d8c1729567230ad41b5d6f4e1d791eac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lightyellow_PremiereAds_mtl
+    second: {fileID: 2100000, guid: 6baa8c23fa9cccd43aeb0716e49fc9d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redGlass_Emission_mtl
+    second: {fileID: 2100000, guid: c340a9fdbe6206e43916622830a78f49, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redGlass_mtl
+    second: {fileID: 2100000, guid: 1ae11c09765f10b43a36897a6b08a4f3, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: lightblue_FasionAds_tex
+    second: {fileID: 2800000, guid: 20332a45fc18c9147a8a9e35c0aa22a1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: lightgreen_sprayAds_tex
+    second: {fileID: 2800000, guid: 6fc10f68fc578be43ac82f4dca9ef7e8, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: lightorange_CyberGlassesAds_tex
+    second: {fileID: 2800000, guid: f9056ca85fcb20648b2c293c938de97d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: lightyellow_PremiereAds_tex
+    second: {fileID: 2800000, guid: 431aecbc14d63654196374784f3a2a2f, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

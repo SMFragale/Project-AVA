@@ -3,7 +3,22 @@ guid: 3751335dab51fb24ea12b57726feec0a
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: store_blueCeiling_mtl
+    second: {fileID: 2100000, guid: cf2b4b522eee7f24a8b14a6575dbb192, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stores_colorBase_mtl
+    second: {fileID: 2100000, guid: 48c5d76611249cc4d8380231aabcef16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: yellowLight
+    second: {fileID: 2100000, guid: 158928aac2fab6a46abe1280ddd8e69f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -15,6 +15,9 @@ namespace AVA.AI
 
         private HPService HPServiceInstance;
 
+        [SerializeField]
+        private SphereRobotAnimControl animControl;
+
         private StateMachine stateMachine;
 
         public LayerMask whatIsGround, whatIsPlayer;
@@ -24,17 +27,21 @@ namespace AVA.AI
         public bool playerInSightRange, playerInAttackRange;
 
         //States
+
+        //Idle
+        private IdleState idleState;
         private PatrolState patrolState;
         //Patroling
         public float walkPointRange;
-
+        //Chase
         private ChaseState chaseState;
-
+        //Attack
         private AttackState attackState;
         public float timeBetweenAttacks;
         public Weapon weapon;
 
         private GameObject player;
+
 
         private void Awake()
         {
@@ -42,8 +49,9 @@ namespace AVA.AI
             dependencies = new List<IReadyCheck>() { HPServiceInstance };
             player = GameObject.FindGameObjectWithTag("Player");
             agent = GetComponent<NavMeshMover>();
+            idleState = new IdleState();
             patrolState = new PatrolState(agent, walkPointRange, transform, whatIsGround);
-            attackState = new AttackState(transform, agent, player.transform, timeBetweenAttacks, weapon);
+            attackState = new AttackState(transform, agent, player.transform, timeBetweenAttacks, weapon);  
             chaseState = new ChaseState(agent, player.transform);
         }
 
@@ -71,12 +79,28 @@ namespace AVA.AI
             //Requires player to exist
             if (player == null) return;
 
+            AnimatorStateInfo animStateInfo = animControl.GetCurrentStateInfo();
+            if(animStateInfo.IsName("anim_open") || animStateInfo.IsName("anim_close"))
+            {
+                stateMachine.UpdateState(idleState);
+                return;
+            }
+
             playerInSightRange = Vector3.Distance(transform.position, player.transform.position) < sightRange;
             playerInAttackRange = Vector3.Distance(transform.position, player.transform.position) < attackRange;
 
-            if (!playerInSightRange && !playerInAttackRange) stateMachine.UpdateState(patrolState);
-            else if (playerInSightRange && !playerInAttackRange) stateMachine.UpdateState(chaseState);
-            else if (playerInAttackRange && playerInSightRange) stateMachine.UpdateState(attackState);
+            if (!playerInSightRange && !playerInAttackRange){ 
+                stateMachine.UpdateState(patrolState);
+                animControl.Walk_Anim = true;
+            }
+            else if (playerInSightRange && !playerInAttackRange) {
+                stateMachine.UpdateState(chaseState);
+                animControl.Walk_Anim = true;
+            }
+            else if (playerInAttackRange && playerInSightRange) {
+                stateMachine.UpdateState(attackState);
+                animControl.Walk_Anim = false;
+            }
 
             stateMachine.OnUpdate();
         }
@@ -87,6 +111,7 @@ namespace AVA.AI
             Gizmos.DrawWireSphere(transform.position, attackRange);
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, sightRange);
+
         }
     }
 

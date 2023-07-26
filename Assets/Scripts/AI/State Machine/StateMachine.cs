@@ -12,7 +12,7 @@ namespace AVA.AI
 
         public void UpdateState(State newState)
         {
-            if (currentState == newState) return;
+            if ( currentState == newState) return;
             currentState.OnExit();
             currentState = newState;
             currentState.OnStart();

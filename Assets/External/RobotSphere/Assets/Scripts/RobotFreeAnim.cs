@@ -20,6 +20,15 @@ public class RobotFreeAnim : MonoBehaviour {
 	{
 		CheckKey();
 		gameObject.transform.eulerAngles = rot;
+		AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+		if(stateInfo.IsName("Base Layer.anim_open"))
+		{
+			Debug.Log("ANIM TIME_OPEN:"+ stateInfo.normalizedTime.ToString());
+			if(stateInfo.normalizedTime >= 0.996)
+				Debug.Log("ANIMATION OVER");
+		}
+		
 	}
 
 	void CheckKey()
@@ -65,6 +74,7 @@ public class RobotFreeAnim : MonoBehaviour {
 			if (!anim.GetBool("Open_Anim"))
 			{
 				anim.SetBool("Open_Anim", true);
+		
 			}
 			else
 			{

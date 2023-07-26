@@ -848,6 +848,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveModel: {fileID: 11400000, guid: 065798642bbca6f46ba956c4a26e3b5e, type: 2}
+  spawnAreas:
+  - {fileID: 1704120493}
 --- !u!4 &2083790943
 Transform:
   m_ObjectHideFlags: 0

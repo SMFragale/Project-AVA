@@ -1,12 +1,13 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace AVA.Spawning
 {
-
     //TODO Add more spawning methods
-    public interface SpawnArea
+    [System.Serializable]
+    public abstract class SpawnArea : MonoBehaviour
     {
-        void SpawnMultipleRandom(List<SpawnEntity> spawnEntities);
+        public abstract void SpawnMultipleRandom(List<SpawnEntity> spawnEntities);
     }
 
 }

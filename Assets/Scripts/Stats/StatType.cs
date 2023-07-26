@@ -22,7 +22,7 @@ namespace AVA.Stats
         
         public static readonly StatType MaxHealth = new StatType("MaxHealth", 10, 1000);
         public static readonly StatType Attack = new StatType("Attack", 0, 1000);
-        public static readonly StatType Speed = new StatType("Speed", 10, 1000);
+        public static readonly StatType Speed = new StatType("Speed", 1, 1000);
         public static readonly StatType Defense = new StatType("Defense", 10, 1000);
         public static readonly StatType AttackSpeed = new StatType("AttackSpeed", 10, 500);
         public static readonly StatType CritChance = new StatType("CritChance", 0, 100);

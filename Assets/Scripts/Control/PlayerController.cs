@@ -3,6 +3,8 @@ using AVA.Combat;
 using AVA.Movement;
 using AVA.State;
 using System;
+using AVA.Core;
+using System.Collections.Generic;
 
 namespace AVA.Control
 {
@@ -10,7 +12,7 @@ namespace AVA.Control
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerAnimator))]
     [RequireComponent(typeof(CharacterState))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoWaiter
     {
         [Header("Input")]
         PlayerInput playerInput;
@@ -20,8 +22,6 @@ namespace AVA.Control
         [SerializeField]
         private float rotationSpeed = 10f;
 
-        [SerializeField]
-        private float speed = 1f;
         [SerializeField]
         private float dashSpeed = 100f;
         [SerializeField]
@@ -36,17 +36,25 @@ namespace AVA.Control
         [SerializeField]
         public Weapon weapon;
 
-        private void Start()
+        private CharacterState characterState;
+
+        private void Awake()
+        {
+            characterState = GetComponent<CharacterState>();
+            dependencies = new List<IReadyCheck> { characterState };
+
+        }
+        protected override void OnDependenciesReady()
         {
             StartCoroutine(weapon.StartAttacking());
             playerInput = GetComponent<PlayerInput>();
             playerInput.SubscribeToDashEvent(DashTowardsMoveDirection);
-            GetComponent<NavMeshMover>().SetNavSpeed(speed);
             animator = GetComponent<PlayerAnimator>();
         }
 
-        private void Update()
+        protected override void OnUpdate()
         {
+            GetComponent<NavMeshMover>().SetNavSpeed(characterState.GetStateInstance().stats[Stats.StatType.Speed]);
             RotateView(playerInput.ReadLookInput());
 
             var moveInput = playerInput.ReadMoveInput();

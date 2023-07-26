@@ -16,8 +16,8 @@ public class TargetedRangeWeapon : RangeWeapon
 
     public float AttackRate
     {
-        get => attackRate;
-        set => attackRate = value;
+        get => baseAttackRate;
+        set => baseAttackRate = value;
     }
 
 
@@ -33,7 +33,7 @@ public class TargetedRangeWeapon : RangeWeapon
         while (isAttacking)
         {
             Attack(Vector3.ProjectOnPlane((target.position - transform.position).normalized * 0.5f, Vector3.up));
-            yield return new WaitForSeconds(attackRate);
+            yield return new WaitForSeconds(baseAttackRate);
         }
     }
 }

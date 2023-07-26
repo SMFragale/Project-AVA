@@ -1,7 +1,8 @@
 using AVA.Core;
 using UnityEngine;
 
-namespace AVA.Combat {
+namespace AVA.Combat
+{
     public class HitPoints : ObservableValue<float>
     {
         public HitPoints(float initialValue) : base(initialValue)
@@ -10,7 +11,6 @@ namespace AVA.Combat {
 
         protected override void OnChanged()
         {
-            Debug.Log("HitPoints changed");
             base.OnChanged();
         }
     }

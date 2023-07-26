@@ -54,8 +54,6 @@ namespace AVA.UI.Core
 
             UpdateFillAmount(healthService.GetHealth(), characterStats.GetStat(StatType.MaxHealth), healthStatBar);
             UpdateFillAmount(healthService.GetShield(), characterStats.GetStat(StatType.Defense), shieldStatBar);
-
-            Debug.Log("Set observable value");
         }
 
         private void UpdateFillAmount(float current, float max, StatBar statBar)

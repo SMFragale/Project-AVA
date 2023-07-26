@@ -476,6 +476,51 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5887792879581026016, guid: 3f11c31e5479f564d9e334285fc51e61, type: 3}
   m_PrefabInstance: {fileID: 760314103}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &813242183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 813242185}
+  - component: {fileID: 813242184}
+  m_Layer: 0
+  m_Name: SpawnArea 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &813242184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813242183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b9824f6a49ff54a86e5f7fb2a7954f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRadius: 10
+--- !u!4 &813242185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813242183}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2083790943}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1700870359
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,7 +641,7 @@ Transform:
   m_GameObject: {fileID: 1704120491}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.43, y: 0, z: 0}
+  m_LocalPosition: {x: -14, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -614,7 +659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b9824f6a49ff54a86e5f7fb2a7954f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRadius: 5
+  spawnRadius: 10
 --- !u!1001 &1717586048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -847,9 +892,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2026aa5f3b112f749a0cac098ef732d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveModel: {fileID: 11400000, guid: 065798642bbca6f46ba956c4a26e3b5e, type: 2}
+  waveModel: {fileID: 11400000, guid: 883347380732d75429e9a9954272171f, type: 2}
   spawnAreas:
   - {fileID: 1704120493}
+  - {fileID: 813242184}
 --- !u!4 &2083790943
 Transform:
   m_ObjectHideFlags: 0
@@ -864,6 +910,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1704120492}
+  - {fileID: 813242185}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2105214970

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using AVA.AI;
 using UnityEngine;
@@ -20,7 +21,9 @@ namespace AVA.Spawning
         private float minSpawnEntityCost = 10000;
         private float maxSpawnEntityCost = 0;
 
-        //TODO Connect to SpawnArea, implement spawning logic based on currency, restrict spawning to a maximum number of entities at a time and pool entities, also make it so enemies can only spawn at a certain distance from the player.
+        private int maxIterationsPerTick = 1000;
+
+        //TODO Restrict spawning to a maximum number of entities at a time and pool entities, also make it so enemies can only spawn at a certain distance from the player.
 
         private void Awake()
         {
@@ -31,29 +34,45 @@ namespace AVA.Spawning
             remainingCurrency = waveModel.WaveCurrency;
         }
 
-        public void SpawnUntilCurrencyDepleted()
+        private void Start()
+        {
+            StartCoroutine(SpawnUntilCurrencyDepleted());
+        }
+
+        public IEnumerator SpawnUntilCurrencyDepleted()
         {
             while (remainingCurrency > 0)
             {
+                yield return new WaitForSeconds(Random.Range(waveModel.SpawnTimeRange.Min, waveModel.SpawnTimeRange.Max));
                 SpawnTick();
             }
+            Debug.Log("Wave currency depleted, stopping spawning");
         }
 
         private void SpawnTick()
         {
             var currencyToSpend = waveModel.CurrencyPerTimeRange;
-
+            var currencySpent = 0;
+            var iterations = 0;
 
             List<SpawnEntity> spawnEntities = new();
             SpawnEntity newEntity = GetRandomSpawnEntity();
-            //Fill the list until no newEntity can be added which means there is no more currency left to spend or the amount of currency left is less than the minimum cost of any entity in this model.
-            while (newEntity != null && remainingCurrency >= minSpawnEntityCost)
+
+            Debug.Log("Creating new entities for this tick");
+            do
             {
+                currencySpent += newEntity.CurrencyCost;
+                if (currencySpent > currencyToSpend)
+                    break;
+
                 spawnEntities.Add(newEntity);
-                currencyToSpend += newEntity.CurrencyCost;
                 remainingCurrency -= newEntity.CurrencyCost;
                 newEntity = GetRandomSpawnEntity();
+                iterations++;
             }
+            while (newEntity != null && currencySpent <= currencyToSpend && iterations < maxIterationsPerTick);
+
+            Debug.Log($"Spawning {spawnEntities.Count} entities for this tick for a cost of {currencySpent}, {currencySpent * 100.0f / currencyToSpend}% efficiency");
 
             if (spawnEntities.Count > 0)
             {
@@ -103,6 +122,9 @@ namespace AVA.Spawning
                 minSpawnEntityCost = entity.CurrencyCost;
             if (entity.CurrencyCost > maxSpawnEntityCost)
                 maxSpawnEntityCost = entity.CurrencyCost;
+
+            if (maxSpawnEntityCost > waveModel.WaveCurrency || maxSpawnEntityCost > waveModel.CurrencyPerTimeRange)
+                Debug.LogError($"Wave Model {waveModel.name} has a Spawn Entity with a cost greater than the Wave Currency or the currency per time range, this entity can never spawn");
         }
 
         private void ValidateSelf()

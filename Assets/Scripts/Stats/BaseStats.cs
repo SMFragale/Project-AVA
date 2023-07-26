@@ -9,12 +9,10 @@ namespace AVA.Stats
 
         public BaseStats(BaseStatsSO so)
         {
-            Debug.Log("Creating base stats from an SO");
-            if(so == null)
+            if (so == null)
                 Debug.LogError("BaseStatsSO is null");
             stats = new Dictionary<StatType, float>();
             var baseStats = so.GetBaseStats();
-            Debug.Log("Creating base stats from " + baseStats.Length + " stats");
             foreach (var stat in baseStats)
             {
                 StatType type = StatType.enumToType[stat.type];

@@ -1,5 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< Updated upstream
 --- !u!1 &358545188853288903
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +32,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8462577722562942766}
   m_LocalEulerAnglesHint: {x: 270, y: 0, z: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!1 &9095808031518608788
 GameObject:
   m_ObjectHideFlags: 0
@@ -49,9 +52,11 @@ GameObject:
   - component: {fileID: 8285397253196280012}
   - component: {fileID: 8285397253196280015}
   - component: {fileID: 8285397253196280014}
+  - component: {fileID: 5633711226524163917}
+  - component: {fileID: 4500903554176232340}
   m_Layer: 8
   m_Name: PrismBoss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,9 +74,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 2986257424157770128}
   - {fileID: 4261109969730268467}
   - {fileID: 6828552412892147102}
+=======
+  - {fileID: 4261109969730268467}
+  - {fileID: 3315431078961080793}
+>>>>>>> Stashed changes
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &8285397253196280003
@@ -136,7 +146,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9095808031518608788}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49f1d8b9a9204ff419ff0530ddfa7dd8, type: 3}
   m_Name: 
@@ -149,7 +159,11 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
+<<<<<<< Updated upstream
   weapon: {fileID: 0}
+=======
+  weapon: {fileID: 5633711226524163917}
+>>>>>>> Stashed changes
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 10
   timeBetweenAttacks: 3
@@ -219,7 +233,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3d652bd02eb294cba33068d11a82a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
 --- !u!1001 &6433776076332190325
+=======
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5633711226524163917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095808031518608788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375664c7883263441b41d1708a054bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterTransform: {fileID: 8462577722562942766}
+  attackRate: 3
+  origin: {fileID: 6028581795207970552}
+  projectilePrefab: {fileID: 7653591653300589521, guid: a36c3cbdba1927a4b8d3f88e1317c259, type: 3}
+--- !u!114 &4500903554176232340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9095808031518608788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72e83e7579e44054d9d9e772650bfd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 128
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 64
+  sightRange: 20
+  attackRange: 10
+  playerInSightRange: 0
+  playerInAttackRange: 0
+  walkPointRange: 5
+  timeBetweenAttacks: 3
+  weapon: {fileID: 5633711226524163917}
+--- !u!1001 &2992781029409721906
+>>>>>>> Stashed changes
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -283,10 +345,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrimsBoss
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
+=======
+    - target: {fileID: 3611028121608000686, guid: e7f0455a67a4d0140a92763f59d2a913, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 270.01978
+      objectReference: {fileID: 0}
+    - target: {fileID: 4167280743394806330, guid: e7f0455a67a4d0140a92763f59d2a913, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 270.01978
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570456002536969217, guid: e7f0455a67a4d0140a92763f59d2a913, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 270.01978
+      objectReference: {fileID: 0}
+>>>>>>> Stashed changes
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+<<<<<<< Updated upstream
     - targetCorrespondingSourceObject: {fileID: 1326151034499216958, guid: e7f0455a67a4d0140a92763f59d2a913, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2667322148146814978}
@@ -302,11 +380,24 @@ GameObject:
   m_PrefabInstance: {fileID: 6433776076332190325}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2667322148146814978
+=======
+    - targetCorrespondingSourceObject: {fileID: 635547659545568360, guid: e7f0455a67a4d0140a92763f59d2a913, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3734837211576541095}
+  m_SourcePrefab: {fileID: 100100000, guid: e7f0455a67a4d0140a92763f59d2a913, type: 3}
+--- !u!1 &2403116011599817306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 635547659545568360, guid: e7f0455a67a4d0140a92763f59d2a913, type: 3}
+  m_PrefabInstance: {fileID: 2992781029409721906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3734837211576541095
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 5417322472044788811}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -321,6 +412,26 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e7f0455a67a4d0140a92763f59d2a913, type: 3}
   m_PrefabInstance: {fileID: 6433776076332190325}
+=======
+  m_GameObject: {fileID: 2403116011599817306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62acca0602c4a704b95ccdf76ddde4c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatTarget: {fileID: 8285397253196280014}
+  damageColor: {r: 1, g: 0, b: 0.036886215, a: 1}
+  colorChangeDuration: 0.1
+--- !u!4 &3315431078961080793 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e7f0455a67a4d0140a92763f59d2a913, type: 3}
+  m_PrefabInstance: {fileID: 2992781029409721906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6028581795207970552 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -422866335874191158, guid: e7f0455a67a4d0140a92763f59d2a913, type: 3}
+  m_PrefabInstance: {fileID: 2992781029409721906}
+>>>>>>> Stashed changes
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8285397252187382797
 PrefabInstance:

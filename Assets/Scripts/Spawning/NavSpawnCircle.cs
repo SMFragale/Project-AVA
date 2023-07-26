@@ -10,6 +10,8 @@ namespace AVA.Spawning
         [SerializeField]
         private float spawnRadius;
 
+        public float Radius => spawnRadius;
+
         private List<Vector3> spawnPositions = new();
 
         public override void SpawnMultipleRandom(List<SpawnEntity> spawnEntities)

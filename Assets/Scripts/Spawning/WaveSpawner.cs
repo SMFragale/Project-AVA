@@ -84,7 +84,16 @@ namespace AVA.Spawning
 
         private SpawnArea GetRandomSpawnArea()
         {
-            return spawnAreas[Random.Range(0, spawnAreas.Count)];
+            var player = GameObject.FindGameObjectWithTag("Player");
+            var spawnArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
+            for (int i = 0; i < maxIterationsPerTick; i++)
+            {
+                if (Vector3.Distance(spawnArea.transform.position, player.transform.position) > spawnArea.PlayerDistanceToSpawn)
+                    return spawnArea;
+                else
+                    spawnArea = spawnAreas[Random.Range(0, spawnAreas.Count)];
+            }
+            return spawnArea;
         }
 
         private SpawnEntity GetRandomSpawnEntity()
@@ -131,6 +140,8 @@ namespace AVA.Spawning
         {
             if (spawnAreas == null || spawnAreas.Count == 0)
                 throw new System.Exception($"Wave Spawner {name} has no Spawn Areas");
+            if (spawnAreas.Count <= 1)
+                Debug.LogWarning("Warning only one spawner has been set, enemies could potentially spawn very close to the player");
         }
 
         private void ValidateWaveModel()

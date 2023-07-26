@@ -4,7 +4,8 @@ using AVA.Stats;
 using System.Collections.Generic;
 using TMPro;
 
-namespace AVA.UI.Stats {
+namespace AVA.UI.Stats
+{
 
     [RequireComponent(typeof(Image))]
     public class StatBar : MonoBehaviour
@@ -25,19 +26,22 @@ namespace AVA.UI.Stats {
 
         private RectTransform rect;
 
-        private void Awake() {
+        private void Awake()
+        {
             bar = GetComponent<Image>();
             rect = GetComponent<RectTransform>();
         }
 
-        public void SetType(StatType type) {
+        public void SetType(StatType type)
+        {
             _type = type;
             bar.color = colors[type];
             maxBar.color = bar.color;
             maxBar.color = new Color(maxBar.color.r, maxBar.color.g, maxBar.color.b, 0.3f);
         }
 
-        public StatType GetStatType() {
+        public StatType GetStatType()
+        {
             return _type;
         }
 
@@ -52,8 +56,9 @@ namespace AVA.UI.Stats {
             {StatType.CritDamage, Color.cyan}
         };
 
-        
-        public void SetFillAmount(float currentValue, float maxValue) {
+
+        public void SetFillAmount(float currentValue, float maxValue)
+        {
             bar.fillAmount = currentValue / maxValue;
             statValue.text = currentValue.ToString() + " / " + maxValue.ToString();
 

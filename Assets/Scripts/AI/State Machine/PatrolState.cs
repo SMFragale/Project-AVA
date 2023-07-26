@@ -34,7 +34,6 @@ namespace AVA.AI
 
         public void OnUpdate()
         {
-            Debug.Log("Patrolling");
             if (!walkPointSet) SearchWalkPoint();
 
             if (walkPointSet)

@@ -1,6 +1,7 @@
 using UnityEngine;
 using AVA.State;
 using AVA.Stats;
+using UnityEngine.Events;
 
 namespace AVA.Combat
 {
@@ -10,16 +11,20 @@ namespace AVA.Combat
     [RequireComponent(typeof(CharacterState))]
     public class CombatTarget : MonoBehaviour
     {
+        public UnityEvent<float> OnTakeDamage;
+
         public void TakeDamage(AttackInstance attackInstance)
         {
             var damage = CalculateDamage(attackInstance);
             var hPService = GetComponent<HPService>();
             hPService.TakeDamage(damage);
             Debug.Log($"{gameObject.name} took {damage} damage");
+            OnTakeDamage.Invoke(damage);
         }
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("Combat target entered");
             AttackInstance instance = other.gameObject.GetComponent<Projectile>()?.attackInstance;
             if (instance != null)
             {

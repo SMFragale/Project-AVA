@@ -45,7 +45,7 @@ public class PlayerInput : MonoBehaviour
 
     public Vector2 ReadLookInput()
     {
-        return lookAction.ReadValue<Vector2>().normalized;
+        return lookAction.ReadValue<Vector2>();
     }
 
     public Vector2 ReadMoveInput()

@@ -47,8 +47,7 @@ namespace AVA.Control
 
         private void Update()
         {
-            var lookDelta = playerInput.ReadLookInput();
-            AddLookDelta(lookDelta);
+            RotateView(playerInput.ReadLookInput());
 
             var moveInput = playerInput.ReadMoveInput();
 
@@ -91,9 +90,9 @@ namespace AVA.Control
             GetComponent<NavMeshMover>().DashTowards(relativeDirection, dashDistance, dashSpeed);
         }
 
-        internal void AddLookDelta(Vector2 deltaPosition)
+        internal void RotateView(Vector2 distance)
         {
-            transform.Rotate(Vector3.up, deltaPosition.x);
+            transform.Rotate(Vector3.up, distance.x * rotationSpeed);
         }
     }
 }

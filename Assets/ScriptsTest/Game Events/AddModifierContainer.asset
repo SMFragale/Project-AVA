@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _debugValue:
     serializableModifiers:
-    - type: 3
-      modifier: 0.5
+    - type: 4
+      modifier: -20
       isPercentual: 0

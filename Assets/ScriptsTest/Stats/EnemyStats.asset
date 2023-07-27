@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseStats:
   - type: 0
-    baseValue: 200
+    baseValue: 30
   - type: 1
     baseValue: 100
   - type: 3
     baseValue: 100
   - type: 2
-    baseValue: 100
+    baseValue: 500
   - type: 4
-    baseValue: 100
+    baseValue: 1
   - type: 5
     baseValue: 100
   - type: 6

@@ -17,7 +17,7 @@ MonoBehaviour:
     priority: 100
     currencyCost: 1
   spawnTimeRange:
-    min: 5
-    max: 5
-  waveCurrency: 50
+    min: 2
+    max: 4
+  waveCurrency: 100
   currencyPerTimeRange: 2

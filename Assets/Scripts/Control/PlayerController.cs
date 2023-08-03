@@ -5,6 +5,7 @@ using AVA.State;
 using System;
 using AVA.Core;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace AVA.Control
 {
@@ -35,6 +36,7 @@ namespace AVA.Control
         [Header("Combat")]
         [SerializeField]
         public Weapon weapon;
+        protected bool isAttacking = true;
 
         private CharacterState characterState { get => GetComponent<CharacterState>(); }
 
@@ -45,10 +47,20 @@ namespace AVA.Control
 
         protected override void OnDependenciesReady()
         {
-            StartCoroutine(weapon.StartAttacking());
+            StartCoroutine(StartAttacking());
             playerInput = GetComponent<PlayerInput>();
             playerInput.SubscribeToDashEvent(DashTowardsMoveDirection);
             animator = GetComponent<PlayerAnimator>();
+        }
+
+        public IEnumerator StartAttacking()
+        {
+            isAttacking = true;
+            while (isAttacking)
+            {
+                weapon.Attack(transform.forward.normalized, characterState);
+                yield return new WaitForSeconds(weapon.BaseAttackRate / characterState.GetCurrentStats()[Stats.StatType.AttackSpeed]);
+            }
         }
 
         protected override void OnUpdate()

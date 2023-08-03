@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using AVA.Combat;
 using AVA.Core;
 using AVA.Movement;
+using AVA.State;
 using UnityEngine;
 
 namespace AVA.AI
 {
     [RequireComponent(typeof(NavMeshMover))]
     [RequireComponent(typeof(HPService))]
+    [RequireComponent(typeof(CharacterState))]
     public class BasicEnemySM : MonoWaiter
     {
         private NavMeshMover agent
@@ -18,6 +20,11 @@ namespace AVA.AI
         private HPService HPServiceInstance
         {
             get => GetComponent<HPService>();
+        }
+
+        private CharacterState characterState
+        {
+            get => GetComponent<CharacterState>();
         }
 
         [SerializeField]
@@ -54,7 +61,7 @@ namespace AVA.AI
             player = GameObject.FindGameObjectWithTag("Player");
             idleState = new IdleState();
             patrolState = new PatrolState(agent, walkPointRange, transform, whatIsGround);
-            attackState = new AttackState(transform, agent, player.transform, timeBetweenAttacks, weapon);
+            attackState = new AttackState(transform, characterState, agent, player.transform, timeBetweenAttacks, weapon);
             chaseState = new ChaseState(agent, player.transform);
         }
 

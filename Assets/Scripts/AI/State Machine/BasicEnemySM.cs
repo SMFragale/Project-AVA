@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using AVA.Combat;
 using AVA.Core;
@@ -51,7 +50,7 @@ namespace AVA.AI
             agent = GetComponent<NavMeshMover>();
             idleState = new IdleState();
             patrolState = new PatrolState(agent, walkPointRange, transform, whatIsGround);
-            attackState = new AttackState(transform, agent, player.transform, timeBetweenAttacks, weapon);  
+            attackState = new AttackState(transform, agent, player.transform, timeBetweenAttacks, weapon);
             chaseState = new ChaseState(agent, player.transform);
         }
 
@@ -80,7 +79,7 @@ namespace AVA.AI
             if (player == null) return;
 
             AnimatorStateInfo animStateInfo = animControl.GetCurrentStateInfo();
-            if(animStateInfo.IsName("anim_open") || animStateInfo.IsName("anim_close"))
+            if (animStateInfo.IsName("anim_open") || animStateInfo.IsName("anim_close"))
             {
                 stateMachine.UpdateState(idleState);
                 return;
@@ -89,15 +88,18 @@ namespace AVA.AI
             playerInSightRange = Vector3.Distance(transform.position, player.transform.position) < sightRange;
             playerInAttackRange = Vector3.Distance(transform.position, player.transform.position) < attackRange;
 
-            if (!playerInSightRange && !playerInAttackRange){ 
+            if (!playerInSightRange && !playerInAttackRange)
+            {
                 stateMachine.UpdateState(patrolState);
                 animControl.Walk_Anim = true;
             }
-            else if (playerInSightRange && !playerInAttackRange) {
+            else if (playerInSightRange && !playerInAttackRange)
+            {
                 stateMachine.UpdateState(chaseState);
                 animControl.Walk_Anim = true;
             }
-            else if (playerInAttackRange && playerInSightRange) {
+            else if (playerInAttackRange && playerInSightRange)
+            {
                 stateMachine.UpdateState(attackState);
                 animControl.Walk_Anim = false;
             }

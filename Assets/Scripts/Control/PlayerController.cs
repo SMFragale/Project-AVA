@@ -36,14 +36,13 @@ namespace AVA.Control
         [SerializeField]
         public Weapon weapon;
 
-        private CharacterState characterState;
+        private CharacterState characterState { get => GetComponent<CharacterState>(); }
 
         private void Awake()
         {
-            characterState = GetComponent<CharacterState>();
             dependencies = new List<IReadyCheck> { characterState };
-
         }
+
         protected override void OnDependenciesReady()
         {
             StartCoroutine(weapon.StartAttacking());

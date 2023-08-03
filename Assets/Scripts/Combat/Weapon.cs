@@ -10,7 +10,7 @@ namespace AVA.Combat
         [SerializeField]
         protected Transform characterTransform;
 
-        CharacterStats statsController;
+        private CharacterStats statsController { get => GetComponentInParent<CharacterStats>(); }
 
 
         [SerializeField]
@@ -22,17 +22,16 @@ namespace AVA.Combat
 
         void Awake()
         {
-            statsController = GetComponentInParent<CharacterStats>();
             dependencies = new System.Collections.Generic.List<IReadyCheck> { statsController };
         }
         protected override void OnDependenciesReady()
         {
-            
+
         }
 
         public IEnumerator StartAttacking()
         {
-            if(!isReady()) 
+            if (!isReady())
             {
                 Debug.Log("Weapon in object" + gameObject.name + " is not ready to attack, waiting for dependencies");
                 yield return null;
@@ -41,7 +40,7 @@ namespace AVA.Combat
             while (isAttacking)
             {
                 Attack(characterTransform.forward.normalized);
-                yield return new WaitForSeconds(baseAttackRate/statsController.GetStat(Stats.StatType.AttackSpeed));
+                yield return new WaitForSeconds(baseAttackRate / statsController.GetStat(Stats.StatType.AttackSpeed));
             }
         }
 

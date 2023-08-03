@@ -15,10 +15,7 @@ namespace AVA.Combat
 
         private CharacterStats characterStats
         {
-            get
-            {
-                return GetComponent<CharacterStats>();
-            }
+            get => GetComponent<CharacterStats>();
         }
 
         public UnityEvent OnHealthZero { get; private set; } = new UnityEvent();

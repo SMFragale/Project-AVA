@@ -10,9 +10,12 @@ namespace AVA.AI
     [RequireComponent(typeof(HPService))]
     public class BasicEnemy : MonoWaiter
     {
-        public NavMeshMover agent;
+        public NavMeshMover agent { get => GetComponent<NavMeshMover>(); }
 
-        private HPService HPServiceInstance;
+        private HPService HPServiceInstance
+        {
+            get => GetComponent<HPService>();
+        }
 
         public Transform player;
 
@@ -36,20 +39,17 @@ namespace AVA.AI
 
         private void Awake()
         {
-            HPServiceInstance = GetComponent<HPService>();
             dependencies = new List<IReadyCheck>() { HPServiceInstance };
-            agent = GetComponent<NavMeshMover>();
         }
-
 
         protected override void OnDependenciesReady()
         {
-            GetComponent<HPService>().AddHealthListener(DestroyOnDeath);
+            HPServiceInstance.AddHealthListener(DestroyOnDeath);
         }
 
         private void DestroyOnDeath()
         {
-            if (GetComponent<HPService>().GetHealth() <= 0) { Destroy(gameObject); }
+            if (HPServiceInstance.GetHealth() <= 0) { Destroy(gameObject); }
         }
 
         private void Update()

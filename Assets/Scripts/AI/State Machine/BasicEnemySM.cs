@@ -10,9 +10,15 @@ namespace AVA.AI
     [RequireComponent(typeof(HPService))]
     public class BasicEnemySM : MonoWaiter
     {
-        private NavMeshMover agent;
+        private NavMeshMover agent
+        {
+            get => GetComponent<NavMeshMover>();
+        }
 
-        private HPService HPServiceInstance;
+        private HPService HPServiceInstance
+        {
+            get => GetComponent<HPService>();
+        }
 
         [SerializeField]
         private SphereRobotAnimControl animControl;
@@ -44,10 +50,8 @@ namespace AVA.AI
 
         private void Awake()
         {
-            HPServiceInstance = GetComponent<HPService>();
             dependencies = new List<IReadyCheck>() { HPServiceInstance };
             player = GameObject.FindGameObjectWithTag("Player");
-            agent = GetComponent<NavMeshMover>();
             idleState = new IdleState();
             patrolState = new PatrolState(agent, walkPointRange, transform, whatIsGround);
             attackState = new AttackState(transform, agent, player.transform, timeBetweenAttacks, weapon);
@@ -63,8 +67,8 @@ namespace AVA.AI
 
         private void DestroyOnDeath()
         {
-            Debug.Log("Health listened :" + GetComponent<HPService>().GetHealth());
-            if (GetComponent<HPService>().GetHealth() <= 0)
+            Debug.Log("Health listened :" + HPServiceInstance.GetHealth());
+            if (HPServiceInstance.GetHealth() <= 0)
             {
                 Destroy(gameObject);
             }

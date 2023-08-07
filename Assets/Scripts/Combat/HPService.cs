@@ -30,9 +30,6 @@ namespace AVA.Combat
             health = new HitPoints(characterStats.GetStat(StatType.MaxHealth));
             shield = new HitPoints(0);
 
-            health.AddOnChangedListener(CheckHealthAmount);
-            shield.AddOnChangedListener(CheckShieldAmount);
-
             characterStats.AddStatListener(StatType.MaxHealth, () =>
             {
                 OnMaxHealthUpdated(characterStats.GetStat(StatType.MaxHealth));
@@ -55,17 +52,6 @@ namespace AVA.Combat
             if (shield.Value > maxValue)
                 shield.Value = maxValue;
         }
-
-        public void CheckHealthAmount()
-        {
-            Debug.Log(gameObject.name + "health amount: " + health.Value);
-        }
-
-        public void CheckShieldAmount()
-        {
-            Debug.Log(gameObject.name + "shield amount: " + shield.Value);
-        }
-
         public float GetHealth()
         {
             return health.Value;

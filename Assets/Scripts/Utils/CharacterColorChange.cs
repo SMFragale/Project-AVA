@@ -28,7 +28,6 @@ public class CharacterColorChange : MonoBehaviour
     // Method to trigger the color change externally.
     public void TakeDamage(float damage)
     {
-        Debug.Log($"Received {damage} damage changing color");
         StartCoroutine(ChangeColorOnDamage());
     }
 

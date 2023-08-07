@@ -11,6 +11,9 @@ namespace AVA.Combat
         [SerializeField]
         GameObject projectilePrefab;
 
+        [SerializeField]
+        AudioClip defaultShootSound;
+
         public override void Attack(Vector3 direction, CharacterState characterState)
         {
             var projectileInstance = Instantiate(projectilePrefab, origin.position, Quaternion.identity);
@@ -18,7 +21,6 @@ namespace AVA.Combat
             var projectile = projectileInstance.GetComponent<Projectile>();
             projectile.attackInstance = new AttackInstance(characterState.GetStateInstance(), 20f, new DefaultMultiplier());
             projectile.ShootProjectile(direction);
-            Destroy(projectileInstance, 4f);
         }
     }
 }

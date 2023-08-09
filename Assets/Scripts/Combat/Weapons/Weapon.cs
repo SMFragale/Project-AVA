@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace AVA.Combat
 {
+    /// <summary>
+    /// Esto es un summary de esta clase weapon :v
+    /// </summary>
+
     public abstract class Weapon : MonoBehaviour
     {
         [SerializeField]
@@ -11,6 +15,11 @@ namespace AVA.Combat
 
         public float BaseAttackRate { get => baseAttackRate; }
 
+        /// <summary>
+        /// Este metodo ataca jajaj 
+        /// </summary>
+        /// <param name="direction">the direction in which to attack</param>
+        /// <param name="characterState"> The reference to get the state of the character in the moment of attack</param>
         public abstract void Attack(Vector3 direction, CharacterState characterState);
 
     }

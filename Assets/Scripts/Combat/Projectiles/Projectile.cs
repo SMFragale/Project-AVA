@@ -16,15 +16,21 @@ namespace AVA.Combat
 
         [SerializeField]
         [Range(0, 100)]
+        protected int initialPierce = 0;
         protected int pierceCount = 0;
 
-        public AttackInstance attackInstance;
+        private void OnEnable()
+        {
+            pierceCount = initialPierce;
+        }
 
         private void Start()
         {
-            //TODO Handle with object pool
-            Destroy(gameObject, destroyTimer);
+            pierceCount = initialPierce;
         }
+
+        public AttackInstance attackInstance;
+
 
         public void ShootProjectile(Vector3 direction)
         {
@@ -36,7 +42,7 @@ namespace AVA.Combat
 
             if (LayerManager.IsInLayerMask(LayerManager.environmentLayer, other.gameObject.layer))
             {
-                Destroy(gameObject); // TODO Manage con object pooling
+                ReturnToPool();
                 Debug.Log("Projectile collided with environment");
                 return;
             }
@@ -44,19 +50,24 @@ namespace AVA.Combat
             {
                 if (pierceCount > 0)
                 {
+                    Debug.Log("Projectile pierced through object: " + other.gameObject.name + " Pierce left: " + pierceCount);
                     pierceCount--;
                     OnProjectilePierce(other);
-                    Debug.Log("Projectile pierced " + other.name + " : " + pierceCount);
                 }
                 else
-                    Destroy(gameObject); // TODO Manage con object pooling
+                {
+                    Debug.Log("Projectile ran out of pierce ");
+                    ReturnToPool();
+                }
             }
         }
 
-        private void OnDestroy()
+        private void ReturnToPool()
         {
+            this.gameObject.SetActive(false);
             OnDestroyProjectile();
         }
+
 
         protected abstract void OnProjectilePierce(Collider other);
 

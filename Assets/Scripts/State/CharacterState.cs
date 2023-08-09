@@ -47,7 +47,7 @@ namespace AVA.State
 
         protected override void OnDependenciesReady()
         {
-            Debug.Log("CharacterState dependencies ready");
+            //Debug.Log("CharacterState dependencies ready");
         }
         //TODO Effects
     }

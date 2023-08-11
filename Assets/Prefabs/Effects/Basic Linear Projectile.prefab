@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 6477179017158723598}
   - component: {fileID: 9194198709324526886}
   - component: {fileID: -4944156148685763549}
+  - component: {fileID: -1303160714614845850}
   - component: {fileID: 2929117683328689975}
   m_Layer: 0
   m_Name: Basic Linear Projectile
@@ -217,7 +218,19 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: 1e7a587164fcbef45b40536469e6c432, type: 3}
   projectileSpeed: 10
   destroyTimer: 5
-  pierceCount: 1
+  initialPierce: 2
+--- !u!114 &-1303160714614845850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7653591653300589521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e3f8faaa21b784e9cfa590aea27983, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &2929117683328689975
 Rigidbody:
   m_ObjectHideFlags: 0

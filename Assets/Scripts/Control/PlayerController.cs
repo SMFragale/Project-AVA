@@ -3,6 +3,9 @@ using AVA.Combat;
 using AVA.Movement;
 using AVA.State;
 using System;
+using AVA.Core;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace AVA.Control
 {
@@ -10,7 +13,7 @@ namespace AVA.Control
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerAnimator))]
     [RequireComponent(typeof(CharacterState))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoWaiter
     {
         [Header("Input")]
         PlayerInput playerInput;
@@ -20,8 +23,6 @@ namespace AVA.Control
         [SerializeField]
         private float rotationSpeed = 10f;
 
-        [SerializeField]
-        private float speed = 1f;
         [SerializeField]
         private float dashSpeed = 100f;
         [SerializeField]
@@ -35,20 +36,37 @@ namespace AVA.Control
         [Header("Combat")]
         [SerializeField]
         public Weapon weapon;
+        protected bool isAttacking = true;
 
-        private void Start()
+        private CharacterState characterState { get => GetComponent<CharacterState>(); }
+
+        private void Awake()
         {
-            StartCoroutine(weapon.StartAttacking());
+            dependencies = new List<IReadyCheck> { characterState };
+        }
+
+        protected override void OnDependenciesReady()
+        {
+            StartCoroutine(StartAttacking());
             playerInput = GetComponent<PlayerInput>();
             playerInput.SubscribeToDashEvent(DashTowardsMoveDirection);
-            GetComponent<NavMeshMover>().SetNavSpeed(speed);
             animator = GetComponent<PlayerAnimator>();
         }
 
-        private void Update()
+        public IEnumerator StartAttacking()
         {
-            var lookDelta = playerInput.ReadLookInput();
-            AddLookDelta(lookDelta);
+            isAttacking = true;
+            while (isAttacking)
+            {
+                weapon.Attack(transform.forward.normalized, characterState);
+                yield return new WaitForSeconds(weapon.BaseAttackRate / characterState.GetCurrentStats()[Stats.StatType.AttackSpeed]);
+            }
+        }
+
+        protected override void OnUpdate()
+        {
+            GetComponent<NavMeshMover>().SetNavSpeed(characterState.GetStateInstance().stats[Stats.StatType.Speed]);
+            RotateView(playerInput.ReadLookInput());
 
             var moveInput = playerInput.ReadMoveInput();
 
@@ -91,9 +109,9 @@ namespace AVA.Control
             GetComponent<NavMeshMover>().DashTowards(relativeDirection, dashDistance, dashSpeed);
         }
 
-        internal void AddLookDelta(Vector2 deltaPosition)
+        internal void RotateView(Vector2 distance)
         {
-            transform.Rotate(Vector3.up, deltaPosition.x);
+            transform.Rotate(Vector3.up, distance.x * rotationSpeed);
         }
     }
 }

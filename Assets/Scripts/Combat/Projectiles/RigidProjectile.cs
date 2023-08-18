@@ -10,6 +10,7 @@ namespace AVA.Combat
         protected override void OnDestroyProjectile()
         {
 
+
         }
 
         protected override void OnProjectilePierce(Collider other)

@@ -11,8 +11,6 @@ namespace AVA.Combat
 
         [SerializeField]
         GameObject projectilePrefab;
-        [SerializeField]
-        GameObject parent;
 
         [SerializeField]
         AudioClip defaultShootSound;
@@ -21,7 +19,7 @@ namespace AVA.Combat
 
         public void Awake()
         {
-            projectilePool = new ObjectPool<PoolObject>(projectilePrefab, parent);
+            projectilePool = new ObjectPool<PoolObject>(projectilePrefab);
         }
 
         public override void Attack(Vector3 direction, CharacterState characterState)

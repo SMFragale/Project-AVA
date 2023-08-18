@@ -1,5 +1,6 @@
 using UnityEngine;
 using AVA.Core;
+using System.Collections;
 
 namespace AVA.Combat
 {
@@ -31,10 +32,14 @@ namespace AVA.Combat
 
         public AttackInstance attackInstance;
 
+        private Coroutine timeoutCoroutine;
+
 
         public void ShootProjectile(Vector3 direction)
         {
             OnShootProjectile(direction);
+            //TODO: Mejorar esto, maybe usar las clases de timing creadas recientemente
+            timeoutCoroutine = StartCoroutine(ProjectileTimeout());
         }
 
         private void OnTriggerEnter(Collider other)
@@ -58,14 +63,22 @@ namespace AVA.Combat
                 {
                     Debug.Log("Projectile ran out of pierce ");
                     ReturnToPool();
+                    StopCoroutine(timeoutCoroutine);
                 }
             }
         }
 
         private void ReturnToPool()
         {
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
             OnDestroyProjectile();
+        }
+
+        private IEnumerator ProjectileTimeout()
+        {
+            yield return new WaitForSeconds(destroyTimer);
+            Debug.Log("Projectile timeout");
+            ReturnToPool();
         }
 
 

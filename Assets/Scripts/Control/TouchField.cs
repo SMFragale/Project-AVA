@@ -8,6 +8,10 @@ using UnityEditor;
 #endif
 namespace AVA.Control
 {
+    /// <summary>
+    /// Class that handles the touch input of the player inside the gameObject's rect transform as a Vector2
+    /// Binds the input as a Vector2 to the control path specified in the inspector
+    /// </summary>
     public class TouchField : OnScreenControl, IPointerDownHandler, IPointerUpHandler
     {
         [HideInInspector]
@@ -58,6 +62,9 @@ namespace AVA.Control
             SendValueToControl(TouchDist);
         }
 
+        /// <summary>
+        /// Handles the event when the pointer is down
+        /// </summary>
         public void OnPointerDown(PointerEventData eventData)
         {
             Pressed = true;
@@ -65,7 +72,9 @@ namespace AVA.Control
             PointerOld = eventData.position;
         }
 
-
+        /// <summary>
+        /// Handles the event when the pointer is up
+        /// </summary>
         public void OnPointerUp(PointerEventData eventData)
         {
             Pressed = false;

@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace AVA.Combat
 {
+    /// <summary>
+    /// Projectile that moves in a straight line
+    /// </summary>
     public class LinearProjectile : Projectile
     {
         private Vector3 direction = Vector3.zero;

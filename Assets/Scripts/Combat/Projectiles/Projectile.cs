@@ -4,6 +4,9 @@ using System.Collections;
 
 namespace AVA.Combat
 {
+    /// <summary>
+    /// Base class for projectiles
+    /// </summary>
     public abstract class Projectile : MonoBehaviour
     {
         [SerializeField]
@@ -34,7 +37,10 @@ namespace AVA.Combat
 
         private Coroutine timeoutCoroutine;
 
-
+        /// <summary>
+        /// Shoots the projectile in the given direction
+        /// </summary>
+        /// <param name="direction">The Vector3 representing the direction to shoot the projectile</param>
         public void ShootProjectile(Vector3 direction)
         {
             OnShootProjectile(direction);

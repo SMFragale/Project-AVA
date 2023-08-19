@@ -15,7 +15,7 @@ namespace AVA.AI
         /// <summary>
         /// Constructor for the chase state
         /// </summary>
-        /// <param name="agent">The nav mesh agent of the character</param>
+        /// <param name="agent">The <see cref="AVA.Movement.NavMeshMover">NavMeshMover</see> agent of the character</param>
         /// <param name="playerPostion">The transform of the player</param>
         public ChaseState(NavMeshMover agent, Transform playerPostion)
         {
@@ -40,7 +40,7 @@ namespace AVA.AI
         }
         
         /// <summary>
-        /// Called every frame while the state is active
+        /// Called every frame while the state is active. Moves the character towards the player using the <see cref="AVA.Movement.NavMeshMover.MoveTo"> NavMeshMover </see>
         /// </summary>
         public void OnUpdate()
         {

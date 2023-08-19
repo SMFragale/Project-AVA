@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 namespace AVA.Combat
 {
+    /// <summary>
+    /// Component that makes a GameObject a target for combat
+    /// </summary>
     [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(CharacterStats))]
     [RequireComponent(typeof(HPService))]
@@ -13,6 +16,10 @@ namespace AVA.Combat
     {
         public UnityEvent<float> OnTakeDamage;
 
+        /// <summary>
+        /// Takes damage from an attack instance
+        /// </summary>
+        /// <param name="attackInstance">The attack instance</param>
         public void TakeDamage(AttackInstance attackInstance)
         {
             var damage = CalculateDamage(attackInstance);
@@ -30,12 +37,17 @@ namespace AVA.Combat
             }
         }
 
+        /// <summary>
+        /// Calculates the damage of an attack instance
+        /// </summary>
+        /// <param name="attackInstance">The attack instance</param>
+        /// <returns>The damage of the attack instance</returns>
         private float CalculateDamage(AttackInstance attackInstance)
         {
             var defenderState = GetComponent<CharacterState>().GetStateInstance();
             float damage =
             attackInstance.sourceDamage
-            * (attackInstance.attackerState.stats[StatType.Attack] / defenderState.stats[StatType.Defense])
+            * (attackInstance.attackerState.stats[StatType.Attack] / defenderState.stats[StatType.Defense]) //TODO check this formula -> Esta linea deberia parte del multiplier.calculate
             * attackInstance.multiplier.Calculate(attackInstance.attackerState, defenderState);
             return damage;
         }

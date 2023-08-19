@@ -19,7 +19,7 @@ namespace AVA.AI
         /// <summary>
         /// Constructor for the patrol state
         /// </summary>
-        /// <param name="agent">The nav mesh agent of the character</param>
+        /// <param name="agent">The <see cref="AVA.Movement.NavMeshMover">NavMeshMover</see> agent of the character</param>
         /// <param name="walkPointRange">The range of the walk point</param>
         /// <param name="transform">The transform of the character</param>
         /// <param name="whatIsGround">The layer mask of the ground</param>
@@ -50,7 +50,7 @@ namespace AVA.AI
 
         /// <summary>
         /// Called every frame while the state is active
-        /// Updates the walk point if needed and moves towards it
+        /// Updates the walk point if needed and moves towards it using the <see cref="AVA.Movement.NavMeshMover.MoveTo"> NavMeshMover </see>
         /// </summary>
         public void OnUpdate()
         {

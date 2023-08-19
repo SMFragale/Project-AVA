@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace AVA.AI
 {
+    /// <summary>
+    /// Patrol state for the state machine
+    /// </summary>
     public class PatrolState : State
     {
         private NavMeshMover agent;
@@ -13,6 +16,13 @@ namespace AVA.AI
         private Transform transform;
         private LayerMask whatIsGround;
 
+        /// <summary>
+        /// Constructor for the patrol state
+        /// </summary>
+        /// <param name="agent">The nav mesh agent of the character</param>
+        /// <param name="walkPointRange">The range of the walk point</param>
+        /// <param name="transform">The transform of the character</param>
+        /// <param name="whatIsGround">The layer mask of the ground</param>
         public PatrolState(NavMeshMover agent, float walkPointRange, Transform transform, LayerMask whatIsGround)
         {
             this.agent = agent;
@@ -22,16 +32,26 @@ namespace AVA.AI
             this.whatIsGround = whatIsGround;
         }
 
+        /// <summary>
+        /// Called when the state is exited. Does nothing currently
+        /// </summary>
         public void OnExit()
         {
             Debug.Log("Exiting Patrol State");
         }
 
+        /// <summary>
+        /// Called when the state is entered. Does nothing currently
+        /// </summary>
         public void OnStart()
         {
             Debug.Log("Entering Patrol State");
         }
 
+        /// <summary>
+        /// Called every frame while the state is active
+        /// Updates the walk point if needed and moves towards it
+        /// </summary>
         public void OnUpdate()
         {
             if (!walkPointSet) SearchWalkPoint();
@@ -45,7 +65,10 @@ namespace AVA.AI
             if (distanceToWalkPoint.magnitude < 1f)
                 walkPointSet = false;
         }
-
+        
+        /// <summary>
+        /// Searches for a new walk point in range
+        /// </summary>
         private void SearchWalkPoint()
         {
             //Calculate random point in range

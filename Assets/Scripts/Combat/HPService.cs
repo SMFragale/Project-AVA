@@ -126,6 +126,7 @@ namespace AVA.Combat
         /// <param name="attackInstance">The attack instance</param>
         public void TakeDamage(float value)
         {
+            if (value <= 0) return;
             float remaining = value;
 
             if (shield.Value > 0)
@@ -155,6 +156,7 @@ namespace AVA.Combat
         /// <param name="value">The value to heal</param>
         public void HealDamage(float value)
         {
+            if (value <= 0) return;
             if (characterStats.GetStat(StatType.MaxHealth) < health.Value + value)
                 health.Value = characterStats.GetStat(StatType.MaxHealth);
             else
@@ -167,6 +169,7 @@ namespace AVA.Combat
         /// <param name="value">The value to heal</param>
         public void AddShield(float value)
         {
+            if (value <= 0) return;
             if (characterStats.GetStat(StatType.Defense) < shield.Value + value)
                 shield.Value = characterStats.GetStat(StatType.Defense);
             else

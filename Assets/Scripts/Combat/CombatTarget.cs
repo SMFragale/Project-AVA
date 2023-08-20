@@ -28,6 +28,12 @@ namespace AVA.Combat
             OnTakeDamage.Invoke(damage);
         }
 
+        public void HealDamage(float amount)
+        {
+            var hPService = GetComponent<HPService>();
+            hPService.HealDamage(amount);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             AttackInstance instance = other.gameObject.GetComponent<Projectile>()?.attackInstance;

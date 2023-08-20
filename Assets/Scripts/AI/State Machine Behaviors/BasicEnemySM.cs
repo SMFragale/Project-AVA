@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace AVA.AI
 {
+    /// <summary>
+    /// State machine for the behaviour of the basic enemy
+    /// </summary>
     [RequireComponent(typeof(NavMeshMover))]
     [RequireComponent(typeof(HPService))]
     [RequireComponent(typeof(CharacterState))]
@@ -54,7 +57,9 @@ namespace AVA.AI
 
         private GameObject player;
 
-
+        /// <summary>
+        /// Called when the object is created. Sets up its dependency to <see cref"AVA.Combat.HPService">HPService</see> and the state machine
+        /// </summary>
         private void Awake()
         {
             dependencies = new List<IReadyCheck>() { HPServiceInstance };
@@ -65,6 +70,9 @@ namespace AVA.AI
             chaseState = new ChaseState(agent, player.transform);
         }
 
+        /// <summary>
+        /// Called when the dependencies are ready. Sets up the state machine and adds a listener to the <see cref="AVA.Combat.HPService">HPService</see> to <see cref="DestroyOnDeath"> destroy the object</see> when it dies
+        /// </summary>
         protected override void OnDependenciesReady()
         {
             Debug.Log("Dependencies ready");
@@ -72,6 +80,9 @@ namespace AVA.AI
             stateMachine = new StateMachine(patrolState);
         }
 
+        /// <summary>
+        /// Called when the <see cref="AVA.Combat.HPService"> attached updates its health points. Destroys object on health points <= 0
+        /// </summary>
         private void DestroyOnDeath()
         {
             Debug.Log("Health listened :" + HPServiceInstance.GetHealth());
@@ -81,6 +92,15 @@ namespace AVA.AI
             }
         }
 
+        /// <summary>
+        /// Called every frame. Updates the state machine as follows:
+        /// <list type="bullet">
+        ///   <item> If the opening or closing animation is playing, updates the <see cref"AVA.AI.IdleState"> IdleState</see></item>
+        ///   <item> If the player is not in sight range and not in attack range, updates the <see cref"AVA.AI.PatrolState"> PatrolState</see></item>
+        ///   <item> If the player is in sight range and not in attack range, updates the <see cref"AVA.AI.ChaseState"> ChaseState</see></item>
+        ///   <item> If the player is in attack range and in sight range, updates the <see cref"AVA.AI.AttackState"> AttackState</see></item>
+        /// </list>
+        /// </summary>
         protected override void OnUpdate()
         {
             if (player == null)
@@ -117,7 +137,10 @@ namespace AVA.AI
 
             stateMachine.OnUpdate();
         }
-
+        
+        /// <summary>
+        /// Called every frame. Draws the sight range and attack range of the enemy.
+        /// </summary>
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;

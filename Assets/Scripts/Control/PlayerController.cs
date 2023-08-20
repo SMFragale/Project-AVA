@@ -9,6 +9,23 @@ using System.Collections;
 
 namespace AVA.Control
 {
+    /// <summary>
+    /// Controller for the player. Comunicates with the <see cref="PlayerInput"/> and the corresponding components to make the player do an action.
+    /// Responsible for: 
+    /// <list type="bullet">
+    /// <item>Moving the player</item>
+    /// <item>Rotating the player</item>
+    /// <item>Attacking</item>
+    /// <item>Dashing</item>
+    /// </list>
+    /// Requires the following components:
+    /// <list type="bullet">
+    /// <item><see cref="NavMeshMover"/></item>
+    /// <item><see cref="PlayerInput"/></item>
+    /// <item><see cref="PlayerAnimator"/></item>
+    /// <item><see cref="CharacterState"/></item>
+    /// </list>
+    /// </summary>
     [RequireComponent(typeof(NavMeshMover))]
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerAnimator))]

@@ -10,19 +10,16 @@ namespace AVA.Core
         private System.Action<T> onPullAction;
         private Stack<T> pooledObjects = new Stack<T>();
         private GameObject prefab;
-        private GameObject parent;
         public int pooledCount { get => pooledObjects.Count;}
 
-        public ObjectPool(GameObject prefab, GameObject parent = null, int initialSpawn = 0)
+        public ObjectPool(GameObject prefab, int initialSpawn = 0)
         {
             this.prefab = prefab;
-            this.parent = parent;
             Spawn(initialSpawn);
         }
-        public ObjectPool(GameObject prefab,  Action<T> onPullAction, Action<T> onReleaseAction, GameObject parent = null, int initialSpawn = 0)
+        public ObjectPool(GameObject prefab,  Action<T> onPullAction, Action<T> onReleaseAction, int initialSpawn = 0)
         {
             this.prefab = prefab;
-            this.parent = parent;
             this.onPullAction = onPullAction;
             this.onReleaseAction = onReleaseAction;
             Spawn(initialSpawn);
@@ -36,8 +33,8 @@ namespace AVA.Core
                 poolable = pooledObjects.Pop();
             else {
                 poolable = GameObject.Instantiate(prefab).GetComponent<T>();
-                if (parent != null)
-                    poolable.transform.SetParent(parent.transform);
+                Transform poolParent = PoolContainer.Instance.GetPoolParent(poolable.PoolType);
+                poolable.transform.parent = poolParent;
             }
             poolable.gameObject.SetActive(true);
             poolable.InitializePoolable(Push);

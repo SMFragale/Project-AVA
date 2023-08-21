@@ -54,16 +54,20 @@ namespace AVA.Test.Core
         private void HealBaseEffectTest()
         {
             hPService.TakeDamage(60);
-            var effect = new HealBaseEffect(2, combatTarget);
-            effectService.AddEffect(effect);
+            var effect = new HealOverTimeEffect(combatTarget, 10, 0.5f, 5); //Total 50
 
-            var effect2 = new HealBaseEffect(10, combatTarget);
+            var effect2 = new DamageBaseEffect(15, combatTarget);
 
-            //TODO The timers for the effect are ticking even when the effect is removed from the effects list. Add a way to remove the timers when the object is destroyed
+            var damageEvents = new TimingEvents()
+            .AddOnReset((int r) => effectService.AddEffect(effect2))
+            .AddOnReset((int r) => Debug.Log($"DamageOverTime reset-> Remaining Resets: {r}") );
+            
             var events = new TimingEvents()
-            .AddOnEnd(() => effectService.AddEffect(effect2))
+            .AddOnStart(() => effectService.AddEffect(effect))
+            .AddOnStart(() => Debug.Log("Added heal effect"))
+            .AddOnEnd(() => TimingManager.StartOverTimeTimer(2, damageEvents, 5))
             .AddOnEnd(() => Debug.Log("Added damage effect"));
-            TimingManager.StartDelayTimer(5, events);
+            TimingManager.StartDelayTimer(3f, events);
         }
     }
 }

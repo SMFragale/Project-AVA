@@ -32,6 +32,23 @@ namespace AVA.Core
             timers.Add(timer);
         }
 
+        public static void CancelTimer(GUID timerGUID)
+        {
+            if(timerGUID == null) return;
+            
+            for (int i = timers.Count - 1; i >= 0; i--)
+            {
+                var timer = timers[i];
+                if (timer.ID == timerGUID)
+                {
+                    timer.Cancel();
+                    timers.RemoveAt(i);
+                    return;
+                }
+            }
+            Debug.LogWarning($"Trying to stop a timer with GUID {timerGUID} but no timer with that GUID was found.");
+        }
+
         private void Tick(float deltaTime)
         {
             timer = 0f;

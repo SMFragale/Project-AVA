@@ -10,26 +10,28 @@ public class EffectService : MonoBehaviour
 
     private void RemoveEffect(IBaseEffect effect)
     {
+        if(effect == null)
+        {
+            Debug.LogError("Trying to remove a null effect");
+            return;
+        }
         _effects.Remove(effect);
-        //TODO toca asegurarse que el efecto desaparezca por completo
+        effect.DisposeSelf();
     }
 
     public void AddEffect(IBaseEffect effect)
     {
-        IBaseEffect existing;
-        _effects.TryGetValue(effect, out existing);
-        var comparison = existing?.CompareTo(effect);
-        if (comparison.HasValue && comparison.Value == 1) // 1 -> existing is > than new effect
-            return;
-        else
-            RemoveEffect(existing);
+        _effects.TryGetValue(effect, out IBaseEffect existing);
 
+        if (existing != null) //No encontre una forma de simplificar este if nested sin matar la logica o repetir pedazos de codigo
+        {
+            if(existing.CompareTo(effect) == 1)
+                return;
+            else
+                RemoveEffect(existing);
+        }
         _effects.Add(effect);
         effect.Start(_target);
     }
 
-    private void FixedUpdate()
-    {
-        Debug.Log($"Effects count: {_effects.Count}");
-    }
 }

@@ -44,6 +44,11 @@ namespace AVA.Core
         {
             _elapsedTime = 0;
         }
+
+        public virtual void Cancel()
+        {
+            _timingEvents.OnCancel?.Invoke();
+        }
     }
 
 }

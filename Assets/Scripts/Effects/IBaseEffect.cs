@@ -1,7 +1,6 @@
 using System;
 using AVA.Combat;
 using UnityEngine.Events;
-using UnityEngine;
 
 public abstract class IBaseEffect : IComparable<IBaseEffect>
 {
@@ -22,7 +21,7 @@ public abstract class IBaseEffect : IComparable<IBaseEffect>
 
     public virtual void Start(CombatTarget target)
     {
-        Debug.Log($"Starting {Key} on {target.name}");
+        //Debug.Log($"Starting {Key} on {target.name}");
         _target = target;
     }
 
@@ -44,7 +43,7 @@ public abstract class IBaseEffect : IComparable<IBaseEffect>
 
     protected abstract int Compare(IBaseEffect other);
 
-    protected abstract void DisposeSelf();
+    public abstract void DisposeSelf();
 
     public int CompareTo(IBaseEffect other)
     {

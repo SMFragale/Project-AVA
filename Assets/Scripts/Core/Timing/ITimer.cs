@@ -12,5 +12,6 @@ namespace AVA.Core
         void Tick(float deltaTime);
         void End();
         void Reset();
+        void Cancel();
     }
 }

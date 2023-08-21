@@ -83,7 +83,6 @@ namespace AVA.Combat
         private IEnumerator ProjectileTimeout()
         {
             yield return new WaitForSeconds(destroyTimer);
-            Debug.Log("Projectile timeout");
             ReturnToPool();
         }
 

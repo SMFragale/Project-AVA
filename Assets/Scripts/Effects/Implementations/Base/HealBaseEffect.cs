@@ -1,35 +1,41 @@
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.Events;
 using AVA.Combat;
 using AVA.Core;
-using UnityEngine;
 
 public class HealBaseEffect : IBaseEffect
 {
     public override string Key => "HealBaseEffect";
 
     private float _healAmount;
-    public HealBaseEffect(float healAmount, CombatTarget source) : base(source)
+    private GUID _timerGUID;
+
+    private UnityAction<float> _onHealAction;
+
+    public HealBaseEffect(float healAmount, CombatTarget source, UnityAction<float> onHealAction = null) : base(source)
     {
         _healAmount = healAmount;
+        _onHealAction = onHealAction;
     }
 
     public override void Proc()
     {
         _target.HealDamage(_healAmount);
+        _onHealAction?.Invoke(_healAmount);
     }
 
     public override void Start(CombatTarget target)
     {
-        Debug.Log($"Starting HealBaseEffect");
         base.Start(target);
         TimingEvents timingEvents = new TimingEvents()
-        .AddOnReset((int i) => Proc());
-        TimingManager.StartOverTimeTimer(3f, timingEvents, 10);
+        .AddOnEnd(Proc);
+        _timerGUID = TimingManager.StartDelayTimer(0.1f, timingEvents);
     }
 
     protected override int Compare(IBaseEffect other)
     {
-        var otherEffect = other as HealBaseEffect;
-        if (otherEffect != null)
+        if (other is HealBaseEffect otherEffect)
         {
             return _healAmount.CompareTo(otherEffect._healAmount);
         }
@@ -37,8 +43,8 @@ public class HealBaseEffect : IBaseEffect
         return -1;
     }
 
-    protected override void DisposeSelf()
+    public override void DisposeSelf()
     {
-        throw new System.NotImplementedException(); //TODO DOTHIS
+        TimingManager.CancelTimer(_timerGUID);
     }
 }

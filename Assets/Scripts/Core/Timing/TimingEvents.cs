@@ -8,6 +8,7 @@ namespace AVA.Core
         public UnityEvent<TickInfo> OnTick { get; } = new UnityEvent<TickInfo>();
         public UnityEvent OnEnd { get; } = new UnityEvent();
         public UnityEvent<int> OnReset { get; } = new UnityEvent<int>();
+        public UnityEvent OnCancel { get; } = new UnityEvent(); //Stop as in removed from the timing manager (destroyed, canceled, etc)
 
         public TimingEvents AddOnStart(UnityAction action)
         {
@@ -30,6 +31,12 @@ namespace AVA.Core
         public TimingEvents AddOnReset(UnityAction<int> action)
         {
             OnReset.AddListener(action);
+            return this;
+        }
+
+        public TimingEvents AddOnCancel(UnityAction action)
+        {
+            OnCancel.AddListener(action);
             return this;
         }
     }

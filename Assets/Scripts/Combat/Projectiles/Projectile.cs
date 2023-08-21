@@ -46,6 +46,7 @@ namespace AVA.Combat
             OnShootProjectile(direction);
             //TODO: Mejorar esto, maybe usar las clases de timing creadas recientemente
             timeoutCoroutine = StartCoroutine(ProjectileTimeout());
+            ResetTrailRenderer();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -78,6 +79,14 @@ namespace AVA.Combat
         {
             gameObject.SetActive(false);
             OnDestroyProjectile();
+        }
+
+        public void ResetTrailRenderer()
+        {
+            var particleSystem = GetComponentInChildren<TrailRenderer>();
+            if(particleSystem == null) Debug.LogWarning("No particle system found in projectile");
+            
+            particleSystem?.Clear();
         }
 
         private IEnumerator ProjectileTimeout()

@@ -36,6 +36,12 @@ namespace AVA.Combat
             hPService.HealDamage(amount);
         }
 
+        public void AddShield(float amount)
+        {
+            var hPService = GetComponent<HPService>();
+            hPService.AddShield(amount);
+        }
+
         private void OnTriggerEnter(Collider other) //TODO this collision handling should be handled by the projectile, not the target. What if the projectile is a raycast? What if the damage intended is not coming from a projectile?
         {
             AttackInstance instance = other.gameObject.GetComponent<Projectile>()?.attackInstance;

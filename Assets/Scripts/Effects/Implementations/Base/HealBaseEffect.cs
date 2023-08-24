@@ -28,9 +28,7 @@ public class HealBaseEffect : IBaseEffect
     public override void Start(CombatTarget target)
     {
         base.Start(target);
-        TimingEvents timingEvents = new TimingEvents()
-        .AddOnEnd(Proc);
-        _timerGUID = TimingManager.StartDelayTimer(0.1f, timingEvents);
+        Proc();
     }
 
     protected override int Compare(IBaseEffect other)

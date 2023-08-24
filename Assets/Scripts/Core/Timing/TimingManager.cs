@@ -7,10 +7,11 @@ namespace AVA.Core
 {
     public class TimingManager : MonoBehaviour
     {
+        [SerializeField]
+        private int numberOfTimers = 0;
+
         [SerializeField] private static readonly List<ITimer> timers = new List<ITimer>();
         public static UnityEvent OnTick { get; private set; } = new UnityEvent();
-
-        private float timer = 0f;
 
         public static GUID StartDelayTimer(float delay, TimingEvents timingEvents)
         {
@@ -34,8 +35,8 @@ namespace AVA.Core
 
         public static void CancelTimer(GUID timerGUID)
         {
-            if(timerGUID == null) return;
-            
+            if (timerGUID == null) return;
+
             for (int i = timers.Count - 1; i >= 0; i--)
             {
                 var timer = timers[i];
@@ -51,7 +52,6 @@ namespace AVA.Core
 
         private void Tick(float deltaTime)
         {
-            timer = 0f;
             for (int i = timers.Count - 1; i >= 0; i--)
             {
                 var timer = timers[i];
@@ -68,7 +68,7 @@ namespace AVA.Core
 
         private void FixedUpdate()
         {
-            timer += Time.fixedDeltaTime;
+            numberOfTimers = timers.Count;
             Tick(Time.fixedDeltaTime);
         }
     }

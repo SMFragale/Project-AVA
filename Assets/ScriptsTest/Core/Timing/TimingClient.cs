@@ -24,7 +24,10 @@ namespace AVA.Test.Core
 
         protected override void OnDependenciesReady()
         {
+            TestChainTimers();
+            DamageOverTimeTest();
             HealBaseEffectTest();
+            AddShieldBaseEffectTest();
         }
 
         private void TestChainTimers()
@@ -60,14 +63,25 @@ namespace AVA.Test.Core
 
             var damageEvents = new TimingEvents()
             .AddOnReset((int r) => effectService.AddEffect(effect2))
-            .AddOnReset((int r) => Debug.Log($"DamageOverTime reset-> Remaining Resets: {r}") );
-            
+            .AddOnReset((int r) => Debug.Log($"DamageOverTime reset-> Remaining Resets: {r}"));
+
             var events = new TimingEvents()
             .AddOnStart(() => effectService.AddEffect(effect))
             .AddOnStart(() => Debug.Log("Added heal effect"))
             .AddOnEnd(() => TimingManager.StartOverTimeTimer(2, damageEvents, 5))
             .AddOnEnd(() => Debug.Log("Added damage effect"));
             TimingManager.StartDelayTimer(3f, events);
+        }
+
+        private void AddShieldBaseEffectTest()
+        {
+            var effect = new AddShieldBaseEffect(10, combatTarget);
+            var events = new TimingEvents()
+            .AddOnStart(() => Debug.Log("Start"))
+            .AddOnReset((int resets) => effectService.AddEffect(effect))
+            .AddOnReset((int r) => Debug.Log($"Reset-> Remaining Resets: {r}"))
+            .AddOnEnd(() => Debug.Log("End"));
+            TimingManager.StartOverTimeTimer(2, events, 5);
         }
     }
 }

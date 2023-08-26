@@ -48,6 +48,7 @@ namespace AVA.Core
         Enemy,
         //Sugested by copilot...
         Effect,
-        UI
+        UI,
+        Collectable
     }
 }

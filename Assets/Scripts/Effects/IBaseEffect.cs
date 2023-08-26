@@ -2,51 +2,54 @@ using System;
 using AVA.Combat;
 using UnityEngine.Events;
 
-public abstract class IBaseEffect : IComparable<IBaseEffect>
-{
-    public abstract string Key { get; }
-    protected CombatTarget _target;
-    protected CombatTarget _source;
-    public UnityEvent OnEnd { get; private set; } = new UnityEvent();
-
-    public void End()
+namespace AVA.Effects {
+    
+    public abstract class IBaseEffect : IComparable<IBaseEffect>
     {
-        OnEnd?.Invoke();
-    }
+        public abstract string Key { get; }
+        protected CharacterEffectServiceReferences _target;
+        public UnityEvent OnEnd { get; private set; } = new UnityEvent();
 
-    public IBaseEffect(CombatTarget source)
-    {
-        _source = source;
-    }
-
-    public virtual void Start(CombatTarget target)
-    {
-        //Debug.Log($"Starting {Key} on {target.name}");
-        _target = target;
-    }
-
-    public abstract void Proc();
-
-    public override int GetHashCode()
-    {
-        return Key.GetHashCode();
-    }
-
-    public override bool Equals(object obj)
-    {
-        if (obj is IBaseEffect effect)
+        public void End()
         {
-            return effect.Key == Key;
+            OnEnd?.Invoke();
         }
-        return false;
+
+        public virtual void Start(CharacterEffectServiceReferences target)
+        {
+            //Debug.Log($"Starting {Key} on {target.name}");
+            _target = target;
+        }
+
+        public abstract void Proc();
+
+        public override int GetHashCode()
+        {
+            return Key.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is IBaseEffect effect)
+            {
+                return effect.Key == Key;
+            }
+            return false;
+        }
+
+        protected abstract int Compare(IBaseEffect other);
+
+        public abstract void CancelEffect();
+
+        public int CompareTo(IBaseEffect other)
+        {
+            return Compare(other);
+        }
     }
 
-    protected abstract int Compare(IBaseEffect other);
-
-    public abstract void DisposeSelf();
-
-    public int CompareTo(IBaseEffect other)
+    public abstract class IBaseEffectFactory
     {
-        return Compare(other);
+        public abstract IBaseEffect CreateEffect();
     }
+
 }

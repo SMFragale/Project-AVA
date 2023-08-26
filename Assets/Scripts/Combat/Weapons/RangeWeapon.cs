@@ -1,6 +1,8 @@
 using AVA.State;
 using AVA.Core;
 using UnityEngine;
+using System.Collections.Generic;
+using AVA.Effects;
 
 namespace AVA.Combat
 {
@@ -36,8 +38,10 @@ namespace AVA.Combat
             GameObject projectileInstance = projectilePool.PullGameObject(origin.position, Quaternion.identity);
             projectileInstance.layer = gameObject.layer;
             var projectile = projectileInstance.GetComponent<Projectile>();
-            projectile.attackInstance = new AttackInstance(characterState.GetStateInstance(), 20f, new DefaultMultiplier());
-            projectile.ShootProjectile(direction);
+            projectile.attackInstance = new AttackInstance(characterState.GetStateInstance(), baseAttackDamage, new DefaultMultiplier());
+            List<IBaseEffectFactory> onHitEffects = new(){ new DamageOverTimeEffectFactory(5f, 1f, 5) };
+            projectile.ShootProjectile(direction, onHitEffects);
         }
+        
     }
 }

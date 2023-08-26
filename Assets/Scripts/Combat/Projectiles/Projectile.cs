@@ -1,6 +1,8 @@
 using UnityEngine;
 using AVA.Core;
 using System.Collections;
+using AVA.Effects;
+using System.Collections.Generic;
 
 namespace AVA.Combat
 {
@@ -23,6 +25,8 @@ namespace AVA.Combat
         protected int initialPierce = 0;
         protected int pierceCount = 0;
 
+        protected List<IBaseEffectFactory> _onHitEffects;
+
         private void OnEnable()
         {
             pierceCount = initialPierce;
@@ -41,8 +45,9 @@ namespace AVA.Combat
         /// Shoots the projectile in the given direction
         /// </summary>
         /// <param name="direction">The Vector3 representing the direction to shoot the projectile</param>
-        public void ShootProjectile(Vector3 direction)
+        public void ShootProjectile(Vector3 direction, List<IBaseEffectFactory> onHitEffects = null)
         {
+            _onHitEffects = onHitEffects;
             OnShootProjectile(direction);
             //TODO: Mejorar esto, maybe usar las clases de timing creadas recientemente
             timeoutCoroutine = StartCoroutine(ProjectileTimeout());
@@ -51,27 +56,32 @@ namespace AVA.Combat
 
         private void OnTriggerEnter(Collider other)
         {
-
             if (LayerManager.IsInLayerMask(LayerManager.environmentLayer, other.gameObject.layer))
             {
                 ReturnToPool();
-                Debug.Log("Projectile collided with environment");
+                //Debug.Log("Projectile collided with environment");
                 return;
             }
             if (LayerManager.IsInLayerMask(LayerManager.pierceLayer, other.gameObject.layer))
             {
                 if (pierceCount > 0)
                 {
-                    Debug.Log("Projectile pierced through object: " + other.gameObject.name + " Pierce left: " + pierceCount);
+                    //Debug.Log("Projectile pierced through object: " + other.gameObject.name + " Pierce left: " + pierceCount);
                     pierceCount--;
                     OnProjectilePierce(other);
                 }
                 else
                 {
-                    Debug.Log("Projectile ran out of pierce ");
+                    //Debug.Log("Projectile ran out of pierce ");
                     ReturnToPool();
                     StopCoroutine(timeoutCoroutine);
                 }
+            }
+            
+
+            if (_onHitEffects != null && other.gameObject.GetComponent<EffectService>() != null) {
+                foreach(var effect in _onHitEffects)
+                    other.gameObject.GetComponent<EffectService>().AddEffect(effect);
             }
         }
 

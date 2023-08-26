@@ -618,6 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed62013410bbcd74bb69736b5b07707b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfTimers: 0
 --- !u!4 &1874219993
 Transform:
   m_ObjectHideFlags: 0
@@ -645,9 +646,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d4e2033f7c7b941953b969048150c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hPService: {fileID: 1900101270}
-  combatTarget: {fileID: 1887994336}
-  effectService: {fileID: 1900101272}
+  _hPService: {fileID: 1900101270}
+  _characterModifiers: {fileID: 1887994337}
+  _characterState: {fileID: 1887994336}
+  _effectService: {fileID: 1900101272}
 --- !u!1001 &1887994334
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -727,13 +729,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1887994336 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6213798745233329748, guid: d5733a63bf1b1634fac577f69be48272, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1536833754884549441, guid: d5733a63bf1b1634fac577f69be48272, type: 3}
   m_PrefabInstance: {fileID: 1887994334}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887994335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b3d652bd02eb294cba33068d11a82a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 99309c97ca1233a408e59a60b9dc93ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1887994337 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2533023934232564595, guid: d5733a63bf1b1634fac577f69be48272, type: 3}
+  m_PrefabInstance: {fileID: 1887994334}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887994335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a983d6252d67384e80cfac7de6c6716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1900101270 stripped

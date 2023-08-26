@@ -12,9 +12,13 @@ namespace AVA.Combat
         [SerializeField]
         [Range(0, 10)]
         protected float baseAttackRate = 0.5f;
+        
+        [SerializeField]
+        [Range(0, 10000)]
+        protected float baseAttackDamage = 1f;
 
         public float BaseAttackRate { get => baseAttackRate; }
-
+        public float BaseAttackDamage { get => baseAttackDamage; }
         /// <summary>
         /// The attack method of the weapon
         /// </summary>

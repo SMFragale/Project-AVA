@@ -3907,10 +3907,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375664c7883263441b41d1708a054bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterTransform: {fileID: 8912220751655590896}
   baseAttackRate: 0.5
   origin: {fileID: 6810620749657671390}
   projectilePrefab: {fileID: 7653591653300589521, guid: a36c3cbdba1927a4b8d3f88e1317c259, type: 3}
+  defaultShootSound: {fileID: 0}
 --- !u!1 &7848212910303960519
 GameObject:
   m_ObjectHideFlags: 0
@@ -3993,6 +3993,8 @@ GameObject:
   - component: {fileID: 2098096902013083398}
   - component: {fileID: 8319842682659189825}
   - component: {fileID: 6863916685656472761}
+  - component: {fileID: 54688980456099680}
+  - component: {fileID: 9208299481120059233}
   m_Layer: 8
   m_Name: robotSphereParent
   m_TagString: Enemy
@@ -4163,6 +4165,30 @@ MonoBehaviour:
   walkPointRange: 0
   timeBetweenAttacks: 2
   weapon: {fileID: 2070684466724891311}
+--- !u!114 &54688980456099680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7968477202597228821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a983d6252d67384e80cfac7de6c6716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9208299481120059233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7968477202597228821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a8384e171044e94183d6a362bc0b2c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8244098711138453660
 GameObject:
   m_ObjectHideFlags: 0

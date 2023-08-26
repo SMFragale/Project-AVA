@@ -2,6 +2,9 @@ using UnityEngine;
 using AVA.Core;
 using UnityEditor;
 using AVA.Combat;
+using AVA.Effects;
+using AVA.Stats;
+using AVA.State;
 
 namespace AVA.Test.Core
 {
@@ -9,21 +12,27 @@ namespace AVA.Test.Core
     public class TimingClient : MonoWaiter
     {
         [SerializeField]
-        private HPService hPService;
+        private HPService _hPService;
 
         [SerializeField]
-        private CombatTarget combatTarget;
+        private CharacterModifiers _characterModifiers;
 
         [SerializeField]
-        private EffectService effectService;
+        private CharacterState _characterState;
+
+        [SerializeField]
+        private EffectService _effectService;
+
+        private CharacterEffectServiceReferences _cesr;
 
         void Awake()
         {
-            dependencies = new() { hPService };
+            dependencies = new() { _hPService, _characterModifiers, _characterState, _effectService };
         }
 
         protected override void OnDependenciesReady()
         {
+            _cesr = new(_hPService, _characterModifiers, _characterState);
             TestChainTimers();
             DamageOverTimeTest();
             HealBaseEffectTest();
@@ -50,23 +59,22 @@ namespace AVA.Test.Core
         private void DamageOverTimeTest()
         {
             var events = new TimingEvents()
-            .AddOnReset((int r) => hPService.TakeDamage(5 * r));
+            .AddOnReset((int r) => _hPService.TakeDamage(5 * r));
             TimingManager.StartOverTimeTimer(2, events, 5);
         }
 
         private void HealBaseEffectTest()
         {
-            hPService.TakeDamage(60);
-            var effect = new HealOverTimeEffect(combatTarget, 10, 0.5f, 5); //Total 50
+            _cesr.HPService.TakeDamage(60);
+            var effect = new HealOverTimeEffectFactory( 10, 0.5f, 5); //Total 50
 
-            var effect2 = new DamageBaseEffect(15, combatTarget);
+            var effect2 = new DamageBaseEffectFactory(15);
 
             var damageEvents = new TimingEvents()
-            .AddOnReset((int r) => effectService.AddEffect(effect2))
+            .AddOnReset((int r) => _effectService.AddEffect(effect2))
             .AddOnReset((int r) => Debug.Log($"DamageOverTime reset-> Remaining Resets: {r}"));
-
             var events = new TimingEvents()
-            .AddOnStart(() => effectService.AddEffect(effect))
+            .AddOnStart(() => _effectService.AddEffect(effect))
             .AddOnStart(() => Debug.Log("Added heal effect"))
             .AddOnEnd(() => TimingManager.StartOverTimeTimer(2, damageEvents, 5))
             .AddOnEnd(() => Debug.Log("Added damage effect"));
@@ -75,10 +83,10 @@ namespace AVA.Test.Core
 
         private void AddShieldBaseEffectTest()
         {
-            var effect = new AddShieldBaseEffect(10, combatTarget);
+            var effect = new AddShieldBaseEffectFactory(10);
             var events = new TimingEvents()
             .AddOnStart(() => Debug.Log("Start"))
-            .AddOnReset((int resets) => effectService.AddEffect(effect))
+            .AddOnReset((int resets) => _effectService.AddEffect(effect))
             .AddOnReset((int r) => Debug.Log($"Reset-> Remaining Resets: {r}"))
             .AddOnEnd(() => Debug.Log("End"));
             TimingManager.StartOverTimeTimer(2, events, 5);

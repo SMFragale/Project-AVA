@@ -53,6 +53,8 @@ namespace AVA.Control
         [Header("Combat")]
         [SerializeField]
         public Weapon weapon;
+        [SerializeField]
+        public GameObject ultiPrefab;
         protected bool isAttacking = true;
 
         private CharacterState characterState { get => GetComponent<CharacterState>(); }
@@ -67,6 +69,7 @@ namespace AVA.Control
             StartCoroutine(StartAttacking());
             playerInput = GetComponent<PlayerInput>();
             playerInput.SubscribeToDashEvent(DashTowardsMoveDirection);
+            playerInput.SubscribeToUltimateEvent(CastUlti);
             animator = GetComponent<PlayerAnimator>();
         }
 
@@ -129,6 +132,11 @@ namespace AVA.Control
         internal void RotateView(Vector2 distance)
         {
             transform.Rotate(Vector3.up, distance.x * rotationSpeed);
+        }
+
+        private void CastUlti()
+        {
+            Instantiate(ultiPrefab, transform.position+(transform.forward*5), transform.rotation);
         }
     }
 }

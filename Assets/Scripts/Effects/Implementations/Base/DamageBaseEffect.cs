@@ -55,7 +55,7 @@ namespace AVA.Effects {
 
         public override IBaseEffect CreateEffect()
         {
-            throw new System.NotImplementedException();
+            return new DamageBaseEffect(damageAmount, onDamageAction);
         }
     }
 }

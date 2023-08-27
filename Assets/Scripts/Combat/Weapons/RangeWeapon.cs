@@ -39,8 +39,8 @@ namespace AVA.Combat
             projectileInstance.layer = gameObject.layer;
             var projectile = projectileInstance.GetComponent<Projectile>();
             projectile.attackInstance = new AttackInstance(characterState.GetStateInstance(), baseAttackDamage, new DefaultMultiplier());
-            List<IBaseEffectFactory> onHitEffects = new(){ new DamageOverTimeEffectFactory(5f, 1f, 5) };
-            projectile.ShootProjectile(direction, onHitEffects);
+            //List<IBaseEffectFactory> onHitEffects = new(){ new DamageOverTimeEffectFactory(5f, 1f, 5) };
+            projectile.ShootProjectile(direction);
         }
         
     }

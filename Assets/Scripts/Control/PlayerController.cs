@@ -136,7 +136,8 @@ namespace AVA.Control
 
         private void CastUlti()
         {
-            Instantiate(ultiPrefab, transform.position+(transform.forward*5), transform.rotation);
+            var instance = Instantiate(ultiPrefab, transform.position+(transform.forward*5), transform.rotation);
+            instance.layer = gameObject.layer;
         }
     }
 }

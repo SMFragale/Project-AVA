@@ -29,6 +29,10 @@ public class NukeUlti : MonoBehaviour
     DamageBaseEffectFactory damageEffectFactory;
     DamageOverTimeEffectFactory dotEffectFactory;
 
+
+    bool damageAreaActive = false;
+    bool dotAreaActive = false;
+
     void Awake()
     {
 
@@ -40,6 +44,7 @@ public class NukeUlti : MonoBehaviour
     {
         var castEvents = new TimingEvents()
         .AddOnStart(() => Debug.Log("Start to cast Ulti"))
+        .AddOnStart(() => damageAreaActive = true)
         .AddOnEnd(() => Debug.Log("End Cast Ulti"))
         .AddOnEnd(() =>
             {
@@ -55,8 +60,11 @@ public class NukeUlti : MonoBehaviour
         
         foreach (var enemy in Physics.OverlapSphere(transform.position, dotRange))
         {
+            //If enemy is in my same layer, skip
+            if (enemy.gameObject.layer == this.gameObject.layer)
+                continue;
             var enemyEffectService = enemy.GetComponent<EffectService>();
-            if (enemyEffectService != null && enemyEffectService.gameObject != this.gameObject)
+            if (enemyEffectService != null)
             {
                 enemyEffectService.AddEffect(dotEffectFactory);
             }
@@ -68,6 +76,9 @@ public class NukeUlti : MonoBehaviour
         //Get all enemies in range of the damageCollider
         foreach (var enemy in Physics.OverlapSphere(transform.position, damageRange))
         {
+            //If enemy is in my same layer, skip
+            if (enemy.gameObject.layer == this.gameObject.layer)
+                continue;
             var enemyEffectService = enemy.GetComponent<EffectService>();
             if (enemyEffectService != null && enemyEffectService.gameObject != this.gameObject )
             {
@@ -77,12 +88,15 @@ public class NukeUlti : MonoBehaviour
     }
 
     private void Cast()
-    {  
+    {   
         ApplyDamageEffect();
 
         var dotEvents = new TimingEvents()
         .AddOnStart(() => ApplyDoTEffect())
+        .AddOnStart(() => dotAreaActive = true)
+        .AddOnStart(() => damageAreaActive = false)
         .AddOnReset((int r) => ApplyDoTEffect())
+        .AddOnEnd(() => dotAreaActive = false)
         .AddOnEnd(() => Destroy(gameObject));
 
 
@@ -94,8 +108,10 @@ public class NukeUlti : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, damageRange);
+        if(damageAreaActive)
+            Gizmos.DrawWireSphere(transform.position, damageRange);
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, dotRange);
+        if(dotAreaActive)
+            Gizmos.DrawWireSphere(transform.position, dotRange);
     }
 }

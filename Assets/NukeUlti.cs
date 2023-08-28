@@ -13,6 +13,7 @@ public class NukeUlti : MonoBehaviour
     [Header("Instant damage settings")]
     [SerializeField] float damageRange = 10;
     [SerializeField] float intantDamage = 30;
+    [SerializeField] Color damageColor = Color.red;
 
     [Header("DoT settings")]
     [SerializeField] float dotRange = 5;
@@ -21,6 +22,7 @@ public class NukeUlti : MonoBehaviour
     [SerializeField] float burnDamage = 0.25f;
     [SerializeField] float burnTimeInterval = 0.2f;
     [SerializeField] int burnCount = 100;
+    [SerializeField] Color burnColor = Color.magenta;
 
     [SerializeField] CharacterVFXController vfxController;
 
@@ -47,13 +49,9 @@ public class NukeUlti : MonoBehaviour
         var castEvents = new TimingEvents()
         .AddOnStart(() => Debug.Log("Start to cast Ulti"))
         .AddOnStart(() => damageAreaActive = true)
-        .AddOnStart(() => vfxController.SpawnCircleArea(damageRange, timeToCast))
-        .AddOnEnd(() => Debug.Log("End Cast Ulti"))
-        .AddOnEnd(() =>
-            {
-                Cast();
-            }
-        );
+        .AddOnStart(() => vfxController.SpawnCircleArea(damageRange, timeToCast, damageColor))
+        .AddOnEnd(() => Debug.Log("Damage casted"))
+        .AddOnEnd(() => Cast());
         castTimer = TimingManager.StartDelayTimer(timeToCast, castEvents);
     }
 
@@ -67,10 +65,7 @@ public class NukeUlti : MonoBehaviour
             if (enemy.gameObject.layer == this.gameObject.layer)
                 continue;
             var enemyEffectService = enemy.GetComponent<EffectService>();
-            if (enemyEffectService != null)
-            {
-                enemyEffectService.AddEffect(dotEffectFactory);
-            }
+            enemyEffectService?.AddEffect(dotEffectFactory);
         }
     }
 
@@ -83,10 +78,7 @@ public class NukeUlti : MonoBehaviour
             if (enemy.gameObject.layer == this.gameObject.layer)
                 continue;
             var enemyEffectService = enemy.GetComponent<EffectService>();
-            if (enemyEffectService != null && enemyEffectService.gameObject != this.gameObject )
-            {
-                enemyEffectService.AddEffect(damageEffectFactory);
-            }
+            enemyEffectService?.AddEffect(damageEffectFactory);
         }
     }
 
@@ -98,7 +90,7 @@ public class NukeUlti : MonoBehaviour
         .AddOnStart(() => ApplyDoTEffect())
         .AddOnStart(() => dotAreaActive = true)
         .AddOnStart(() => damageAreaActive = false)
-        .AddOnStart(() => vfxController.SpawnCircleArea(dotRange, dotTimeout))
+        .AddOnStart(() => vfxController.SpawnCircleArea(dotRange, dotTimeout, burnColor))
         .AddOnReset((int r) => ApplyDoTEffect())
         .AddOnEnd(() => dotAreaActive = false)
         .AddOnEnd(() => Destroy(gameObject));

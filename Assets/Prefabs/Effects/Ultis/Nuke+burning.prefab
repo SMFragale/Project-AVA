@@ -46,14 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToCast: 3
-  damageRange: 15
-  intantDamage: 10
+  damageRange: 8
+  intantDamage: 15
+  damageColor: {r: 1, g: 0, b: 0, a: 0.5254902}
   dotRange: 8
   dotTimeout: 15
   applyDoTInterval: 0.5
   burnDamage: 0.1
   burnTimeInterval: 0.2
   burnCount: 50
+  burnColor: {r: 1, g: 0.31209624, b: 0, a: 1}
   vfxController: {fileID: 2677653253289046386}
 --- !u!1001 &5368472677919089766
 PrefabInstance:

@@ -8,6 +8,6 @@ public class CircleAreaRenderer : MonoBehaviour
 
     void Update()
     {
-        circleImage.rectTransform.sizeDelta = new Vector2(radius, radius);
+        circleImage.rectTransform.sizeDelta = new Vector2(radius*2, radius*2);
     }
 }

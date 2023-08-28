@@ -11,7 +11,7 @@ public class NukeUlti : MonoBehaviour
     [SerializeField] float timeToCast = 3;
 
     [Header("Instant damage settings")]
-    [SerializeField] float damageRange = 5;
+    [SerializeField] float damageRange = 10;
     [SerializeField] float intantDamage = 30;
 
     [Header("DoT settings")]
@@ -21,6 +21,8 @@ public class NukeUlti : MonoBehaviour
     [SerializeField] float burnDamage = 0.25f;
     [SerializeField] float burnTimeInterval = 0.2f;
     [SerializeField] int burnCount = 100;
+
+    [SerializeField] CharacterVFXController vfxController;
 
 
     GUID castTimer;
@@ -45,6 +47,7 @@ public class NukeUlti : MonoBehaviour
         var castEvents = new TimingEvents()
         .AddOnStart(() => Debug.Log("Start to cast Ulti"))
         .AddOnStart(() => damageAreaActive = true)
+        .AddOnStart(() => vfxController.SpawnCircleArea(damageRange, timeToCast))
         .AddOnEnd(() => Debug.Log("End Cast Ulti"))
         .AddOnEnd(() =>
             {
@@ -95,6 +98,7 @@ public class NukeUlti : MonoBehaviour
         .AddOnStart(() => ApplyDoTEffect())
         .AddOnStart(() => dotAreaActive = true)
         .AddOnStart(() => damageAreaActive = false)
+        .AddOnStart(() => vfxController.SpawnCircleArea(dotRange, dotTimeout))
         .AddOnReset((int r) => ApplyDoTEffect())
         .AddOnEnd(() => dotAreaActive = false)
         .AddOnEnd(() => Destroy(gameObject));

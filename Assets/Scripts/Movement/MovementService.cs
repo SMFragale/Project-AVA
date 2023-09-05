@@ -5,7 +5,7 @@ using System.Collections;
 namespace AVA.Movement
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class NavMeshMover : MonoBehaviour
+    public class MovementService : MonoBehaviour
     {
         private NavMeshAgent navMeshAgent;
 
@@ -39,8 +39,13 @@ namespace AVA.Movement
             StartCoroutine(Dash(destination, dashSpeed, initialSpeed, initialAcceleration));
         }
 
+        //It should not try to dash through walls
         private IEnumerator Dash(Vector3 destination, float dashSpeed, float initialSpeed, float initialAcceleration)
         {
+            if (NavMesh.Raycast(transform.position, transform.position + destination, out NavMeshHit hit, NavMesh.AllAreas))
+            {
+                yield break;
+            }
             IsDashing = true;
             navMeshAgent.speed = dashSpeed;
             navMeshAgent.acceleration = 1000f;

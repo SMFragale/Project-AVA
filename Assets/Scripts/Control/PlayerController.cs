@@ -2,7 +2,6 @@ using UnityEngine;
 using AVA.Combat;
 using AVA.Movement;
 using AVA.State;
-using System;
 using AVA.Core;
 using System.Collections.Generic;
 using System.Collections;
@@ -20,21 +19,18 @@ namespace AVA.Control
     /// </list>
     /// Requires the following components:
     /// <list type="bullet">
-    /// <item><see cref="NavMeshMover"/></item>
+    /// <item><see cref="MovementService"/></item>
     /// <item><see cref="PlayerInput"/></item>
     /// <item><see cref="PlayerAnimator"/></item>
     /// <item><see cref="CharacterState"/></item>
     /// </list>
     /// </summary>
-    [RequireComponent(typeof(NavMeshMover))]
+    [RequireComponent(typeof(MovementService))]
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerAnimator))]
     [RequireComponent(typeof(CharacterState))]
     public class PlayerController : MonoWaiter
     {
-        [Header("Input")]
-        PlayerInput playerInput;
-
         [Space(10)]
         [Header("Movement modifiers")]
         [SerializeField]
@@ -42,20 +38,28 @@ namespace AVA.Control
 
         [SerializeField]
         private float dashSpeed = 100f;
+
         [SerializeField]
         private float dashDistance = 5f;
 
-        [Space(10)]
-        [Header("Animation")]
         [SerializeField]
-        private PlayerAnimator animator;
+        private float dashCooldown = 5f;
+
+        private Cooldown dashCooldownTimer;
 
         [Header("Combat")]
         [SerializeField]
         public Weapon weapon;
         protected bool isAttacking = true;
 
+        private MovementService movementService { get => GetComponent<MovementService>(); }
+
+        private PlayerAnimator playerAnimator { get => GetComponent<PlayerAnimator>(); }
+
+        private PlayerInput playerInput { get => GetComponent<PlayerInput>(); }
+
         private CharacterState characterState { get => GetComponent<CharacterState>(); }
+
 
         private void Awake()
         {
@@ -65,9 +69,8 @@ namespace AVA.Control
         protected override void OnDependenciesReady()
         {
             StartCoroutine(StartAttacking());
-            playerInput = GetComponent<PlayerInput>();
             playerInput.SubscribeToDashEvent(DashTowardsMoveDirection);
-            animator = GetComponent<PlayerAnimator>();
+            dashCooldownTimer = new Cooldown(dashCooldown);
         }
 
         public IEnumerator StartAttacking()
@@ -82,27 +85,20 @@ namespace AVA.Control
 
         protected override void OnUpdate()
         {
-            GetComponent<NavMeshMover>().SetNavSpeed(characterState.GetStateInstance().stats[Stats.StatType.Speed]);
+            if (!movementService.IsDashing)
+                movementService.SetNavSpeed(characterState.GetStateInstance().stats[Stats.StatType.Speed]);
+            //TODO Update speed for the animation as well so the character's speed doesn't look out of place
             RotateView(playerInput.ReadLookInput());
 
             var moveInput = playerInput.ReadMoveInput();
 
-            animator.UpdateAnimation(moveInput);
-            if (!GetComponent<NavMeshMover>().IsDashing)
+            playerAnimator.UpdateAnimation(moveInput);
+            playerAnimator.CharacterSpeed = movementService.GetNavVelocity().magnitude * 0.6f;
+
+            if (!movementService.IsDashing)
                 MoveTowards(moveInput);
-        }
 
-        private Vector2 CalculateAnimationVector(Vector2 moveInput)
-        {
-
-            return moveInput;
-        }
-
-        private void LookTowards(Vector2 look)
-        {
-            var targetDirection = new Vector3(look.x, 0, look.y);
-            var rotationAngle = Vector3.SignedAngle(transform.forward, targetDirection, Vector3.up);
-            transform.Rotate(Vector3.up, rotationAngle * Time.deltaTime * rotationSpeed);
+            UpdateDash();
         }
 
         private void MoveTowards(Vector2 movement)
@@ -112,18 +108,28 @@ namespace AVA.Control
             Vector3 direction = cameraTransform.forward * movement.y + cameraTransform.right * movement.x;
             direction = Vector3.ProjectOnPlane(direction, Vector3.up);
 
-            GetComponent<NavMeshMover>().MoveTo(transform.position + direction.normalized);
+            movementService.MoveTo(transform.position + direction.normalized);
         }
 
         private void DashTowardsMoveDirection()
         {
+            if (!dashCooldownTimer.IsReady)
+                return;
             var input = playerInput.ReadMoveInput();
             var direction = new Vector3(input.x, 0, input.y).normalized;
 
             //make this direction relative to the camera
             var relativeDirection = Camera.main.transform.TransformDirection(direction);
+            movementService.DashTowards(relativeDirection, dashDistance, dashSpeed * characterState.GetStateInstance().stats[Stats.StatType.Speed]);
+            dashCooldownTimer.ResetCooldown();
+        }
 
-            GetComponent<NavMeshMover>().DashTowards(relativeDirection, dashDistance, dashSpeed);
+        private void UpdateDash()
+        {
+            if (dashCooldownTimer.IsReady)
+                Debug.Log("Dash ready");
+            else
+                Debug.Log($"Dash on cooldown: {dashCooldownTimer.RemainingTime}");
         }
 
         internal void RotateView(Vector2 distance)

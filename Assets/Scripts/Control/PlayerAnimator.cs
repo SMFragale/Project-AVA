@@ -10,6 +10,11 @@ namespace AVA.Control
         [SerializeField]
         private Animator animator;
 
+        [SerializeField]
+        private float animationSpeedMultiplier = 0.7f;
+
+        public float CharacterSpeed { get; set; }
+
         /// <summary>
         /// Updates the animation variables of the player:
         /// <list type="bullet">
@@ -22,6 +27,7 @@ namespace AVA.Control
         {
             animator.SetFloat("InputX", direction.x);
             animator.SetFloat("InputY", direction.y);
+            animator.SetFloat("SpeedMagnitude", (CharacterSpeed + 1) * animationSpeedMultiplier);
         }
     }
 

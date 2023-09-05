@@ -10,14 +10,14 @@ namespace AVA.AI
     /// <summary>
     /// State machine for the behaviour of the basic enemy
     /// </summary>
-    [RequireComponent(typeof(NavMeshMover))]
+    [RequireComponent(typeof(MovementService))]
     [RequireComponent(typeof(HPService))]
     [RequireComponent(typeof(CharacterState))]
     public class BasicEnemySM : MonoWaiter
     {
-        private NavMeshMover agent
+        private MovementService agent
         {
-            get => GetComponent<NavMeshMover>();
+            get => GetComponent<MovementService>();
         }
 
         private HPService HPServiceInstance
@@ -137,7 +137,7 @@ namespace AVA.AI
 
             stateMachine.OnUpdate();
         }
-        
+
         /// <summary>
         /// Called every frame. Draws the sight range and attack range of the enemy.
         /// </summary>

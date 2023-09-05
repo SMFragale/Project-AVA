@@ -8,7 +8,7 @@ namespace AVA.AI
     /// </summary>
     public class PatrolState : State
     {
-        private NavMeshMover agent;
+        private MovementService agent;
         //Patroling
         private Vector3 walkPoint;
         private bool walkPointSet;
@@ -19,11 +19,11 @@ namespace AVA.AI
         /// <summary>
         /// Constructor for the patrol state
         /// </summary>
-        /// <param name="agent">The <see cref="AVA.Movement.NavMeshMover">NavMeshMover</see> agent of the character</param>
+        /// <param name="agent">The <see cref="AVA.Movement.MovementService">NavMeshMover</see> agent of the character</param>
         /// <param name="walkPointRange">The range of the walk point</param>
         /// <param name="transform">The transform of the character</param>
         /// <param name="whatIsGround">The layer mask of the ground</param>
-        public PatrolState(NavMeshMover agent, float walkPointRange, Transform transform, LayerMask whatIsGround)
+        public PatrolState(MovementService agent, float walkPointRange, Transform transform, LayerMask whatIsGround)
         {
             this.agent = agent;
             this.walkPointSet = false;
@@ -50,7 +50,7 @@ namespace AVA.AI
 
         /// <summary>
         /// Called every frame while the state is active
-        /// Updates the walk point if needed and moves towards it using the <see cref="AVA.Movement.NavMeshMover.MoveTo"> NavMeshMover </see>
+        /// Updates the walk point if needed and moves towards it using the <see cref="AVA.Movement.MovementService.MoveTo"> NavMeshMover </see>
         /// </summary>
         public void OnUpdate()
         {
@@ -65,7 +65,7 @@ namespace AVA.AI
             if (distanceToWalkPoint.magnitude < 1f)
                 walkPointSet = false;
         }
-        
+
         /// <summary>
         /// Searches for a new walk point in range
         /// </summary>

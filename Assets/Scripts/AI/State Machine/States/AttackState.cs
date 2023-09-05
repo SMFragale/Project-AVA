@@ -11,7 +11,7 @@ namespace AVA.AI
     public class AttackState : State
     {
         private Transform localTransform;
-        private NavMeshMover agent;
+        private MovementService agent;
         private Transform player;
 
         private float timeBetweenAttacks;
@@ -25,11 +25,11 @@ namespace AVA.AI
         /// </summary>
         /// <param name="transform">The transform of the character</param>
         /// <param name="characterState">The character state of the character</param>
-        /// <param name="agent">The <see cref="AVA.Movement.NavMeshMover">NavMeshMover</see> used to move the character</param>
+        /// <param name="agent">The <see cref="AVA.Movement.MovementService">NavMeshMover</see> used to move the character</param>
         /// <param name="player">The transform of the player</param>
         /// <param name="timeBetweenAttacks">The time between attacks</param>
         /// <param name="weapon">The <see cref="AVA.Combat.Weapon">Weapon</see> used by the character</param>
-        public AttackState(Transform transform, CharacterState characterState, NavMeshMover agent, Transform player, float timeBetweenAttacks, Weapon weapon)
+        public AttackState(Transform transform, CharacterState characterState, MovementService agent, Transform player, float timeBetweenAttacks, Weapon weapon)
         {
             this.localTransform = transform;
             this.characterState = characterState;

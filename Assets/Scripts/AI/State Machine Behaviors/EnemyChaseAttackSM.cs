@@ -11,14 +11,14 @@ namespace AVA.AI
     /// <summary>
     /// State machine for the behaviour of the basic enemy
     /// </summary>
-    [RequireComponent(typeof(NavMeshMover))]
+    [RequireComponent(typeof(MovementService))]
     [RequireComponent(typeof(HPService))]
     [RequireComponent(typeof(CharacterState))]
     public class EnemyChaseAttackSM : MonoWaiter
     {
-        private NavMeshMover agent
+        private MovementService agent
         {
-            get => GetComponent<NavMeshMover>();
+            get => GetComponent<MovementService>();
         }
 
         private HPService HPServiceInstance

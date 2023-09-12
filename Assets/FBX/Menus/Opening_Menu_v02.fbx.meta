@@ -3,12 +3,247 @@ guid: c32090b6938966c48b2e55ff6b1d421d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HologramLight_2_mtl
+    second: {fileID: 2100000, guid: 6c4d037fd64a48d4bb751d5f1358352f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HologramLight_mtl
+    second: {fileID: 2100000, guid: 7d1ec10c462d44247bf3d879a2fb1ab5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: alluminium_mtl
+    second: {fileID: 2100000, guid: 56b0c4670b75ac54e98557e66a278d3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bg_ok
+    second: {fileID: 2100000, guid: 60599a7f5d6e1324d979a37c38d359df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackBody_mtl
+    second: {fileID: 2100000, guid: 21969c3653982f84cbcaef6394811750, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackEye_mtl.001
+    second: {fileID: 2100000, guid: e97f0b6b608334e409b63154b2845371, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackMetal_mtl.001
+    second: {fileID: 2100000, guid: 533614e469e86d04ea2595e87b22f887, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackMetal_mtl.002
+    second: {fileID: 2100000, guid: c30bbb01046125b44813f1881ed7dce3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackMetalic_mtl
+    second: {fileID: 2100000, guid: 2c5d15441ae30d84ca6c8054ec5d4f3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackRubber_mtl
+    second: {fileID: 2100000, guid: a3b71d81593689c43b05b1de2746d6b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blackRubber_mtl.001
+    second: {fileID: 2100000, guid: 8dfdb16eb4dd43f43bd95a776559e8a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: body_mtl
+    second: {fileID: 2100000, guid: 66f92ac604c4219479ce15da7ce4a7dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: body_mtl.001
+    second: {fileID: 2100000, guid: 0023a6e9364865b4fa55ccacc21ce156, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bowTie_mtl
+    second: {fileID: 2100000, guid: 89f51dc03667b0e4c94e2540690bfdef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: checks_mtl
+    second: {fileID: 2100000, guid: 9966e370f12a52f4cb7c058fbd015dca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: doorwedge_mtl
+    second: {fileID: 2100000, guid: 973c9babaff63d54bac906efea3a6861, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eyeRim_mtl
+    second: {fileID: 2100000, guid: 2e55379831813d64abc8acee3ca85931, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye_mtl
+    second: {fileID: 2100000, guid: 0c0d33e911b82224f94db83d57482162, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye_mtl.001
+    second: {fileID: 2100000, guid: 5ef08b48c5cc842489d973f002cb8625, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye_mtl.002
+    second: {fileID: 2100000, guid: 570637d5edcde84479e21fcb6e54b5bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: green_metal_rust
+    second: {fileID: 2100000, guid: 2c22de77a36d4a241af857b47698ed08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: green_mtl
+    second: {fileID: 2100000, guid: e5fb8df6a9db6a54693dd09180fe3821, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hair.001
+    second: {fileID: 2100000, guid: f156d3bf6b1b4c240bdcf529e1126826, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hoerse_nose_mtl
+    second: {fileID: 2100000, guid: 795f796828f0f24489f14a1a797ed870, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: horse_hair_mtl
+    second: {fileID: 2100000, guid: a32f270526a9a1e4eb243877fb09e954, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: horse_shell_mtl
+    second: {fileID: 2100000, guid: bf3f924ce307ef8459f567fbdc65f0ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: infraRed_glass_mtl
+    second: {fileID: 2100000, guid: 87319cfca4733094cb68add6724e7adb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lightColor
+    second: {fileID: 2100000, guid: 1e8e9aa7b3407124f8b7161c82b2c1d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lightColor.001
+    second: {fileID: 2100000, guid: 1cfb38afc60cc494e82cf927c7ea83dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lips_mtl
+    second: {fileID: 2100000, guid: a159e670fbbaaf24abf6b2f56079202c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mainBody_darkColor_mtl
+    second: {fileID: 2100000, guid: c5b525941923e5741a6506674d93c7a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mainBody_lightColor_mtl
+    second: {fileID: 2100000, guid: 0c8f84d22f842f14b80705183652d413, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: missileArrows_mtl
+    second: {fileID: 2100000, guid: 33928874f53c4904eb25e5083b3b3b8a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: missileBody_darkColor_mtl
+    second: {fileID: 2100000, guid: 8360c60e1cd57434ea3b6b52f5c0d785, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: missileBody_redColor_mtl
+    second: {fileID: 2100000, guid: 11bd24686a5a6fd4badd202caf167169, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: missileBody_yelowColor_mtl
+    second: {fileID: 2100000, guid: 09f4a2eeb4af3b447a125c7128475b26, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: nose_mtl
+    second: {fileID: 2100000, guid: 1e2dff796ff27484faa741e6d24c93f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: paw_mtl
+    second: {fileID: 2100000, guid: 9a942f13ef4b0fb41b9e000be10196f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: purple_mtl
+    second: {fileID: 2100000, guid: 56a44c5509ace74439c843e7c546fcc3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redArms_mtl
+    second: {fileID: 2100000, guid: a81d597fe4da5184e87d60b755f5e42c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redEmission_mtl
+    second: {fileID: 2100000, guid: 7a96b79272913e54a885dfe6db4e30ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redEye_mtl.001
+    second: {fileID: 2100000, guid: 2dba73d891c3bad4597bf860b29ec35c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tie_mtl
+    second: {fileID: 2100000, guid: b57a1fe13a9ea9e4e9e7e36272563822, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: whiteEmission_mtl
+    second: {fileID: 2100000, guid: 1bbb6875f3c476643be54eea0ab3cf5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: whiteMetal_mtl.001
+    second: {fileID: 2100000, guid: 04862620e811e2c4dba631a8a1a5900c, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: bg_ok
+    second: {fileID: 2800000, guid: 789aaa8364c699b4d910bfd3b01900f1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: green_metal_rust_rough_2k
+    second: {fileID: 2800000, guid: 84da6a3731821ec489e1e833e6cfb194, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

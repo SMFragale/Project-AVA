@@ -1,9 +1,15 @@
-namespace AVA.Stats {
+namespace AVA.Stats
+{
+
+    /// <summary>
+    /// Represents a single stat modifier. The modifier can be either percentual or additive.
+    /// </summary>
+    /// <remarks> If a modifier is percentual, the  </remarks>
     public class Modifier
     {
-        public StatType type;
-        public float modifier;
-        public bool isPercentual;
+        public StatType type { get; private set; }
+        public float modifier { get; private set; }
+        public bool isPercentual { get; private set; }
 
         public Modifier(StatType type, float modifier, bool isPercentual)
         {

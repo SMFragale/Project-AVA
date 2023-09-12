@@ -5,17 +5,30 @@ using UnityEngine;
 
 namespace AVA.AI
 {
+    /// <summary>
+    /// Attack state for the state machine
+    /// </summary>
     public class AttackState : State
     {
         private Transform localTransform;
         private NavMeshMover agent;
         private Transform player;
+
         private float timeBetweenAttacks;
+        private float timeSinceLastAttack;
         private Weapon weapon;
 
-        private float timeSinceLastAttack;
         private CharacterState characterState;
 
+        /// <summary>
+        /// Constructor for the attack state
+        /// </summary>
+        /// <param name="transform">The transform of the character</param>
+        /// <param name="characterState">The character state of the character</param>
+        /// <param name="agent">The <see cref="AVA.Movement.NavMeshMover">NavMeshMover</see> used to move the character</param>
+        /// <param name="player">The transform of the player</param>
+        /// <param name="timeBetweenAttacks">The time between attacks</param>
+        /// <param name="weapon">The <see cref="AVA.Combat.Weapon">Weapon</see> used by the character</param>
         public AttackState(Transform transform, CharacterState characterState, NavMeshMover agent, Transform player, float timeBetweenAttacks, Weapon weapon)
         {
             this.localTransform = transform;
@@ -26,11 +39,17 @@ namespace AVA.AI
             this.weapon = weapon;
         }
 
+        /// <summary>
+        /// Called when the state is exited. Does nothing currently
+        /// </summary>
         public void OnExit()
         {
             Debug.Log("Exiting Attack State");
         }
 
+        /// <summary>
+        /// Called when the state is entered. Sets the movement destination to the current position
+        /// </summary>
         public void OnStart()
         {
             Debug.Log("Entering Attack State");
@@ -38,6 +57,10 @@ namespace AVA.AI
             timeSinceLastAttack = 0;
         }
 
+        /// <summary>
+        /// Called every frame while the state is active.
+        /// Makes the character look at the player and attack if the time since the last attack is greater than the time between attacks.
+        /// </summary>
         public void OnUpdate()
         {
             localTransform.LookAt(player);

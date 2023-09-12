@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace AVA.Combat
 {
+    /// <summary>
+    /// Rigidbody based projectile that moves in a straight line
+    /// </summary>
     [RequireComponent(typeof(Rigidbody))]
     public class RigidProjectile : Projectile
     {
@@ -9,6 +12,7 @@ namespace AVA.Combat
 
         protected override void OnDestroyProjectile()
         {
+
 
         }
 

@@ -22,7 +22,7 @@ MonoBehaviour:
   - type: 2
     baseValue: 100
   - type: 4
-    baseValue: 3
+    baseValue: 1
   - type: 5
     baseValue: 100
   - type: 6

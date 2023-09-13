@@ -14,7 +14,15 @@ namespace AVA.Combat
     [RequireComponent(typeof(CharacterState))]
     public class CombatTarget : MonoBehaviour
     {
-        public UnityEvent<float> OnTakeDamage;
+        [field: SerializeField]
+        public UnityEvent<float> OnTakeDamage { get; private set; } = new();
+
+        [field: SerializeField]
+        public UnityEvent<float> OnHealDamage { get; private set; } = new();
+
+        [field: SerializeField]
+        public UnityEvent<float> OnAddShield { get; private set; } = new();
+
         public CharacterStateInstance StateInstance => GetComponent<CharacterState>().GetStateInstance();
 
         /// <summary>
@@ -30,26 +38,32 @@ namespace AVA.Combat
             return damage;
         }
 
+
+        //TODO Create a heal instance to calculate healing done based on stats and any other necessary means
         public void HealDamage(float amount)
         {
             var hPService = GetComponent<HPService>();
             hPService.HealDamage(amount);
+            OnHealDamage.Invoke(amount);
         }
 
+        //TODO Create a shield instance to calculate shield added based on stats and any other necessary means
         public void AddShield(float amount)
         {
             var hPService = GetComponent<HPService>();
             hPService.AddShield(amount);
+            OnAddShield.Invoke(amount);
         }
 
-        private void OnTriggerEnter(Collider other) //TODO this collision handling should be handled by the projectile, not the target. What if the projectile is a raycast? What if the damage intended is not coming from a projectile?
-        {
-            AttackInstance instance = other.gameObject.GetComponent<Projectile>()?.attackInstance;
-            if (instance != null)
-            {
-                TakeDamage(instance);
-            }
-        }
+        //private void OnTriggerEnter(Collider other) //TODO this collision handling should be handled by the projectile, not the target. What if the projectile is a raycast? What if the damage intended is not coming from a projectile?
+        //{
+        //    Projectile projectile = other.gameObject.GetComponent<Projectile>();
+        //    if (projectile != null)
+        //    {
+        //        var instance = projectile.AttackInstance;
+        //        TakeDamage(instance);
+        //    }
+        //}
 
         /// <summary>
         /// Calculates the damage of an attack instance

@@ -12,6 +12,6 @@ namespace AVA.Combat
         /// </summary>
         /// <param name="attacker">The attacker's <see cref="AVA.State.CharacterStateInstance">CharacterStateInstance</see></param>
         /// <param name="defender">The defender's <see cref="AVA.State.CharacterStateInstance">CharacterStateInstance</see></param>
-        public float Calculate(CharacterStateInstance attacker, CharacterStateInstance defender);
+        float Calculate(CharacterStateInstance attacker, CharacterStateInstance defender);
     }
 }

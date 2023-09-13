@@ -155,6 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6477179017158723598}
   - component: {fileID: 9194198709324526886}
+  - component: {fileID: 1878541107812904627}
   - component: {fileID: -4944156148685763549}
   - component: {fileID: -1303160714614845850}
   - component: {fileID: 2929117683328689975}
@@ -203,6 +204,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1878541107812904627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7653591653300589521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7a6d454f6e1ed4dab4cf4b55638aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onCollisionParticles: {fileID: 9007361795521229991, guid: 32bea81b1a4fa614b8532d2a20a16359, type: 3}
 --- !u!114 &-4944156148685763549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,9 +230,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootSound: {fileID: 8300000, guid: 1e7a587164fcbef45b40536469e6c432, type: 3}
+  initialPierce: 2
+  <OnProjectileShoot>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <OnProjectileDestroy>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <OnProjectileHit>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
   projectileSpeed: 10
   destroyTimer: 5
-  initialPierce: 2
 --- !u!114 &-1303160714614845850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e3f8faaa21b784e9cfa590aea27983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _poolType: 0
 --- !u!54 &2929117683328689975
 Rigidbody:
   m_ObjectHideFlags: 0

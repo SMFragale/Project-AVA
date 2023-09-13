@@ -4,20 +4,20 @@ using UnityEngine;
 
 namespace AVA.Core
 {
-    public class ObjectPool <T> : IPool<T> where T : MonoBehaviour, IPoolable<T>
+    public class ObjectPool<T> : IPool<T> where T : MonoBehaviour, IPoolable<T>
     {
         private System.Action<T> onReleaseAction;
         private System.Action<T> onPullAction;
         private Stack<T> pooledObjects = new Stack<T>();
         private GameObject prefab;
-        public int pooledCount { get => pooledObjects.Count;}
+        public int pooledCount { get => pooledObjects.Count; }
 
         public ObjectPool(GameObject prefab, int initialSpawn = 0)
         {
             this.prefab = prefab;
             Spawn(initialSpawn);
         }
-        public ObjectPool(GameObject prefab,  Action<T> onPullAction, Action<T> onReleaseAction, int initialSpawn = 0)
+        public ObjectPool(GameObject prefab, Action<T> onPullAction, Action<T> onReleaseAction, int initialSpawn = 0)
         {
             this.prefab = prefab;
             this.onPullAction = onPullAction;
@@ -29,9 +29,10 @@ namespace AVA.Core
         public T Pull()
         {
             T poolable;
-            if(pooledCount > 0)
+            if (pooledCount > 0)
                 poolable = pooledObjects.Pop();
-            else {
+            else
+            {
                 poolable = GameObject.Instantiate(prefab).GetComponent<T>();
                 Transform poolParent = PoolContainer.Instance.GetPoolParent(poolable.PoolType);
                 poolable.transform.parent = poolParent;
@@ -62,7 +63,7 @@ namespace AVA.Core
             onReleaseAction?.Invoke(poolable);
             poolable.gameObject.SetActive(false);
         }
-        
+
         public GameObject PullGameObject(Vector3 position)
         {
             GameObject gameObj = Pull().gameObject;
@@ -91,7 +92,7 @@ namespace AVA.Core
                 pooledObjects.Push(poolable);
                 poolable.gameObject.SetActive(false);
             }
-                
+
         }
 
     }

@@ -87,8 +87,7 @@ namespace AVA.Control
         {
             if (!movementService.IsDashing)
                 movementService.SetNavSpeed(characterState.GetStateInstance().stats[Stats.StatType.Speed]);
-            //TODO Update speed for the animation as well so the character's speed doesn't look out of place
-            RotateView(playerInput.ReadLookInput());
+
 
             var moveInput = playerInput.ReadMoveInput();
 
@@ -97,8 +96,11 @@ namespace AVA.Control
 
             if (!movementService.IsDashing)
                 MoveTowards(moveInput);
+        }
 
-            UpdateDash();
+        private void LateUpdate()
+        {
+            RotateView(playerInput.ReadLookInput());
         }
 
         private void MoveTowards(Vector2 movement)
@@ -122,14 +124,6 @@ namespace AVA.Control
             var relativeDirection = Camera.main.transform.TransformDirection(direction);
             movementService.DashTowards(relativeDirection, dashDistance, dashSpeed * characterState.GetStateInstance().stats[Stats.StatType.Speed]);
             dashCooldownTimer.ResetCooldown();
-        }
-
-        private void UpdateDash()
-        {
-            if (dashCooldownTimer.IsReady)
-                Debug.Log("Dash ready");
-            else
-                Debug.Log($"Dash on cooldown: {dashCooldownTimer.RemainingTime}");
         }
 
         internal void RotateView(Vector2 distance)

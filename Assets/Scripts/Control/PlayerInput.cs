@@ -53,7 +53,7 @@ namespace AVA.Control
         {
             ultimateAction.performed += ctx => action();
         }
-        
+
         /// <summary>
         /// Removes a listener to the ultimate input
         /// </summary>

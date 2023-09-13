@@ -6,25 +6,38 @@ namespace AVA.Combat
     /// Rigidbody based projectile that moves in a straight line
     /// </summary>
     [RequireComponent(typeof(Rigidbody))]
-    public class RigidProjectile : Projectile
+    public class RigidProjectile : ObjectProjectile
     {
-        Rigidbody rb;
+        [SerializeField]
+        private Vector3 _fireAngle = Vector3.zero;
 
-        protected override void OnDestroyProjectile()
-        {
+        private Rigidbody rb;
 
-
-        }
-
-        protected override void OnProjectilePierce(Collider other)
-        {
-        }
-
-        protected override void OnShootProjectile(Vector3 direction)
+        private void Awake()
         {
             rb = GetComponent<Rigidbody>();
-            rb.velocity = projectileSpeed * direction;
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            rb = GetComponent<Rigidbody>();
+        }
+
+        protected override void OnShoot()
+        {
+            base.OnShoot();
+            Launch();
+        }
+
+        private void Launch()
+        {
+            rb.velocity = (Direction + _fireAngle) * projectileSpeed;
+        }
+
+        private void OnDisable()
+        {
+            rb.velocity = Vector3.zero;
         }
     }
-
 }

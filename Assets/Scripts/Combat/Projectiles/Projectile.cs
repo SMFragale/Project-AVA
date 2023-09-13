@@ -1,116 +1,154 @@
 using UnityEngine;
-using AVA.Core;
-using System.Collections;
 using AVA.Effects;
 using System.Collections.Generic;
+using UnityEngine.Events;
+using AVA.Core;
 
 namespace AVA.Combat
 {
     /// <summary>
     /// Base class for projectiles
     /// </summary>
-    public abstract class Projectile : MonoBehaviour
+    /// 
+    public abstract class Projectile : MonoBehaviour, Attack
     {
+        #region Fields
+
         [SerializeField]
         protected AudioClip shootSound;
 
         [SerializeField]
-        protected float projectileSpeed = 10f;
-
-        [SerializeField]
-        protected float destroyTimer = 5f;
-
-        [SerializeField]
         [Range(0, 100)]
-        protected int initialPierce = 0;
-        protected int pierceCount = 0;
+        private int initialPierce = 0;
+        private int pierceCount = 0;
 
-        protected List<IBaseEffectFactory> _onHitEffects;
+        protected List<IBaseEffectFactory> _onHitEffects = new();
+
+        [field: SerializeField]
+        public UnityEvent<Vector3> OnProjectileShoot { get; private set; } = new();
+
+        [field: SerializeField]
+        public UnityEvent OnProjectileDestroy { get; private set; } = new();
+        [field: SerializeField]
+        public UnityEvent<ProjectileHitInfo> OnProjectileHit { get; private set; } = new();
+
+        protected Vector3 Direction { get; private set; }
+
+        public AttackInstance AttackInstance { get; private set; }
+
+        #endregion
+
+
+        #region API
+        /// <summary>
+        /// Shoots the projectile in the given direction
+        /// </summary>
+        /// <param name="direction">The Vector3 representing the direction to shoot the projectile</param>
+        /// <param name="onHitEffects">The list of effects to apply on hit</param>
+        public virtual void LaunchProjectile(Vector3 direction, AttackInstance attackInstance, List<IBaseEffectFactory> onHitEffects = null)
+        {
+            AttackInstance = attackInstance;
+            _onHitEffects = onHitEffects;
+            OnProjectileShoot?.Invoke(direction);
+            Direction = direction.normalized;
+            OnShoot();
+        }
+
+        #endregion
+
+        #region Inherited API
+
+        /// <summary>
+        /// Must be called when the projectile collides with something. This class is responsible for what happens after the collision, the sub classes are responsible for defining the collision method.
+        /// <param name="other"/> is the collider that the projectile collided with.
+        /// </summary>
+        protected void OnCollision(ProjectileHitInfo projectileHitInfo)
+        {
+            if (LayerManager.IsInLayerMask(LayerManager.EnvironmentLayer | LayerManager.GroundLayer, projectileHitInfo.GameObject.layer))
+            {
+                OnProjectileHit?.Invoke(projectileHitInfo);
+                ReturnToPool();
+            }
+            else if (LayerManager.IsInLayerMask(LayerManager.PierceLayer, projectileHitInfo.GameObject.layer))
+            {
+                OnProjectileHit?.Invoke(projectileHitInfo);
+                CollideTarget(projectileHitInfo.GameObject);
+
+                if (_onHitEffects != null)
+                {
+                    ApplyEffects(projectileHitInfo.GameObject);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Returns the projectile to the pool (if it exists)
+        /// </summary>
+        protected void ReturnToPool()
+        {
+            gameObject.SetActive(false);
+            OnProjectileDestroy?.Invoke();
+        }
+
+        protected virtual void OnStart() { }
+        protected virtual void OnUpdate() { }
+        protected virtual void OnShoot() { }
+
+        #endregion
+
+        #region Control
+        private void ApplyEffects(GameObject other)
+        {
+            if (other.TryGetComponent<EffectService>(out var effectService))
+            {
+                foreach (var effect in _onHitEffects)
+                    effectService.AddEffect(effect);
+            }
+        }
+
+        private void CollideTarget(GameObject other)
+        {
+            if (other.TryGetComponent<CombatTarget>(out var combatTarget))
+                combatTarget.TakeDamage(AttackInstance);
+
+            if (pierceCount > 0)
+            {
+                pierceCount--;
+            }
+            else
+            {
+                ReturnToPool();
+            }
+        }
+
+        private void Start()
+        {
+            OnStart();
+        }
+        private void Update()
+        {
+            OnUpdate();
+        }
 
         private void OnEnable()
         {
             pierceCount = initialPierce;
         }
-
-        private void Start()
-        {
-            pierceCount = initialPierce;
-        }
-
-        public AttackInstance attackInstance;
-
-        private Coroutine timeoutCoroutine;
-
-        /// <summary>
-        /// Shoots the projectile in the given direction
-        /// </summary>
-        /// <param name="direction">The Vector3 representing the direction to shoot the projectile</param>
-        public void ShootProjectile(Vector3 direction, List<IBaseEffectFactory> onHitEffects = null)
-        {
-            _onHitEffects = onHitEffects;
-            OnShootProjectile(direction);
-            //TODO: Mejorar esto, maybe usar las clases de timing creadas recientemente
-            timeoutCoroutine = StartCoroutine(ProjectileTimeout());
-            ResetTrailRenderer();
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (LayerManager.IsInLayerMask(LayerManager.environmentLayer, other.gameObject.layer))
-            {
-                ReturnToPool();
-                //Debug.Log("Projectile collided with environment");
-                return;
-            }
-            if (LayerManager.IsInLayerMask(LayerManager.pierceLayer, other.gameObject.layer))
-            {
-                if (pierceCount > 0)
-                {
-                    //Debug.Log("Projectile pierced through object: " + other.gameObject.name + " Pierce left: " + pierceCount);
-                    pierceCount--;
-                    OnProjectilePierce(other);
-                }
-                else
-                {
-                    //Debug.Log("Projectile ran out of pierce ");
-                    ReturnToPool();
-                    StopCoroutine(timeoutCoroutine);
-                }
-            }
-            
-
-            if (_onHitEffects != null && other.gameObject.GetComponent<EffectService>() != null) {
-                foreach(var effect in _onHitEffects)
-                    other.gameObject.GetComponent<EffectService>().AddEffect(effect);
-            }
-        }
-
-        private void ReturnToPool()
-        {
-            gameObject.SetActive(false);
-            OnDestroyProjectile();
-        }
-
-        public void ResetTrailRenderer()
-        {
-            var particleSystem = GetComponentInChildren<TrailRenderer>();
-            if(particleSystem == null) Debug.LogWarning("No particle system found in projectile");
-            
-            particleSystem?.Clear();
-        }
-
-        private IEnumerator ProjectileTimeout()
-        {
-            yield return new WaitForSeconds(destroyTimer);
-            ReturnToPool();
-        }
-
-
-        protected abstract void OnProjectilePierce(Collider other);
-
-        protected abstract void OnDestroyProjectile();
-
-        protected abstract void OnShootProjectile(Vector3 direction);
+        #endregion
     }
 
+    public class ProjectileHitInfo
+    {
+        public GameObject GameObject { get; private set; }
+        public Vector3 ContactPoint { get; private set; }
+        public Vector3 ContactNormal { get; private set; }
+
+        public ProjectileHitInfo(GameObject gameObject, Vector3 contactPoint, Vector3 contactNormal)
+        {
+            GameObject = gameObject;
+            ContactPoint = contactPoint;
+            ContactNormal = contactNormal;
+        }
+    }
 }

@@ -22,7 +22,6 @@ public class CharacterColorChange : MonoBehaviour
         characterRenderer = GetComponent<Renderer>();
         originalColor = characterRenderer.material.color;
         combatTarget.OnTakeDamage.AddListener(TakeDamage);
-        Debug.Log("Listener set");
     }
 
     // Method to trigger the color change externally.

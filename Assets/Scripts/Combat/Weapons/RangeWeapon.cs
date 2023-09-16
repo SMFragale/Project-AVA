@@ -18,5 +18,4 @@ namespace AVA.Combat
 
         public abstract void Shoot(Vector3 direction, CharacterState characterState);
     }
-
 }

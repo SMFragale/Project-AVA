@@ -133,20 +133,5 @@ namespace AVA.Control
             float rotationAngle = normalizedX * rotationSpeed*10;
             transform.Rotate(Vector3.up, rotationAngle);
         }
-
-        IEnumerator LerpTurn(float distance, float time)
-        {
-            float elapsedTime = 0;
-            float startRotation = transform.rotation.eulerAngles.y;
-            //Convert screen distance to an angle in degrees
-            float endRotation = startRotation + distance * 360 / Screen.width;
-            while (elapsedTime < time)
-            {
-                transform.rotation = Quaternion.Euler(0, Mathf.Lerp(startRotation, endRotation, elapsedTime / time), 0);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-
-        }
     }
 }

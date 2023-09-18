@@ -1,6 +1,7 @@
 using AVA.State;
 using AVA.Core;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace AVA.Combat
 {
@@ -17,9 +18,13 @@ namespace AVA.Combat
 
         ObjectPool<PoolObject> projectilePool;
 
-        public void Awake()
+        public UnityEvent<ProjectileHitInfo> OnProjectileHit { get; private set; } = new();
+
+
+        public void Start()
         {
             projectilePool = new ObjectPool<PoolObject>(projectilePrefab);
+
         }
 
         /// <summary>
@@ -29,11 +34,11 @@ namespace AVA.Combat
         /// <param name="characterState">The reference to get the state of the character in the moment of the attack</param>
         public override void Shoot(Vector3 direction, CharacterState characterState)
         {
-            Debug.Log("Shooting projectile");
             GameObject projectileInstance = projectilePool.PullGameObject(origin.position, transform.rotation);
             projectileInstance.layer = gameObject.layer;
             var projectile = projectileInstance.GetComponent<Projectile>();
             projectile.LaunchProjectile(direction, new AttackInstance(characterState.GetStateInstance(), baseAttackDamage, new DefaultMultiplier()));
+            projectile.OnProjectileHit.AddListener(OnProjectileHit.Invoke);
         }
     }
 }

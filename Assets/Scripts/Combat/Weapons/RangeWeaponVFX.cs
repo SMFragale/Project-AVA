@@ -1,6 +1,6 @@
 using AVA.Combat;
+using AVA.Core;
 using UnityEngine;
-
 
 [RequireComponent(typeof(RangeWeapon))]
 public class RangeWeaponVFX : MonoBehaviour

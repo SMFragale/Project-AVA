@@ -8,6 +8,8 @@ public class RangeWeaponVFX : MonoBehaviour
     [SerializeField]
     private ParticleSystem[] _onShootParticles;
 
+    public ObjectPool<PoolObject> EffectPool { get; private set; }
+
     private void Start()
     {
         GetComponent<RangeWeapon>().OnShoot.AddListener(MuzzleFlashEffect);

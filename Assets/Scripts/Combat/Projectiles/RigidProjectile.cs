@@ -38,6 +38,8 @@ namespace AVA.Combat
         private void OnDisable()
         {
             rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+
         }
     }
 }

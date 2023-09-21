@@ -64,10 +64,8 @@ namespace AVA.Combat
         /// </summary>
         protected void OnCollision(ProjectileHitInfo projectileHitInfo)
         {
-            Debug.Log("Projectile hit somethin");
             if (LayerManager.IsInLayerMask(LayerManager.EnvironmentLayer | LayerManager.GroundLayer, projectileHitInfo.GameObject.layer))
             {
-                Debug.Log("Projectile hit environment");
                 OnProjectileHit?.Invoke(projectileHitInfo);
                 ReturnToPool();
             }

@@ -26,6 +26,11 @@ namespace AVA.Combat
             OnCollision(new ProjectileHitInfo(other.gameObject, transform.position, other.transform.up));
         }
 
+        private void OnCollisionEnter(Collision other)
+        {
+            OnCollision(new ProjectileHitInfo(other.gameObject, transform.position, other.transform.up));
+        }
+
 
         /// <summary>
         /// Clears the projectile trail

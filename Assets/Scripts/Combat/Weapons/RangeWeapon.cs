@@ -8,6 +8,9 @@ namespace AVA.Combat
     {
         [SerializeField]
         protected Transform origin;
+
+        public Vector3 Origin => origin.position;
+
         public UnityEvent OnShoot = new();
 
         public override void Attack(Vector3 direction, CharacterState characterState)

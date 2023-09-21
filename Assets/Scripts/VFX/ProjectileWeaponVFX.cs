@@ -35,10 +35,9 @@ namespace AVA.Combat
         public void HitEffect(ProjectileHitInfo hitInfo)
         {
             var effect = EffectPool.PullGameObject(hitInfo.ContactPoint, Quaternion.LookRotation(hitInfo.ContactNormal));
-            if (effect.TryGetComponent<HitEffect>(out var hitEffect))
+            if (effect.TryGetComponent<PoolableVisualEffects>(out var hitEffect))
             {
-                Debug.Log("Hit effect");
-                hitEffect.PlayHitEffect(hitInfo.ContactPoint, hitInfo.ContactNormal);
+                hitEffect.PlayEffect(hitInfo.ContactPoint, hitInfo.ContactNormal);
             }
             else
             {

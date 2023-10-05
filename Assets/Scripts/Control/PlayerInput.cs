@@ -19,6 +19,7 @@ namespace AVA.Control
         [SerializeField]
         private InputAction ultimateAction;
 
+
         private void OnEnable()
         {
             moveAction.Enable();

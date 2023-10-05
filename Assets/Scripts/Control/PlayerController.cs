@@ -44,6 +44,8 @@ namespace AVA.Control
 
         [SerializeField]
         private float dashCooldown = 5f;
+        [SerializeField] 
+        private CooldownButton dashButton;
 
         private Cooldown dashCooldownTimer;
 
@@ -71,6 +73,12 @@ namespace AVA.Control
             StartCoroutine(StartAttacking());
             playerInput.SubscribeToDashEvent(DashTowardsMoveDirection);
             dashCooldownTimer = new Cooldown(dashCooldown);
+            if (dashButton != null)
+            {
+                dashButton.SetCooldown(dashCooldownTimer.CooldownTime);
+                dashCooldownTimer.SubscribeOnTick(dashButton.UpdateCooldown);
+
+            }
         }
 
         public IEnumerator StartAttacking()
@@ -124,6 +132,8 @@ namespace AVA.Control
             var relativeDirection = Camera.main.transform.TransformDirection(direction);
             movementService.DashTowards(relativeDirection, dashDistance, dashSpeed * characterState.GetStateInstance().stats[Stats.StatType.Speed]);
             dashCooldownTimer.ResetCooldown();
+            dashButton.SetCooldown(dashCooldownTimer.CooldownTime);
+
         }
 
         internal void RotateView(Vector2 distance)

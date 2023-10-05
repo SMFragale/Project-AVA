@@ -10153,6 +10153,7 @@ MonoBehaviour:
   dashSpeed: 100
   dashDistance: 2
   dashCooldown: 1
+  dashButton: {fileID: 0}
   weapon: {fileID: 5664437727485675806}
 --- !u!195 &8520259223207048670
 NavMeshAgent:
@@ -10273,6 +10274,62 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Look
       m_Flags: 0
+    - m_Name: One Modifier
+      m_Id: dfe82e95-0228-4757-b922-7de3e495d97b
+      m_Path: OneModifier
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Look
+      m_Flags: 4
+    - m_Name: modifier
+      m_Id: f727ac47-4f9e-43e8-8ede-d17de3abc960
+      m_Path: <Mouse>/rightButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Look
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: d2cb3b99-d8aa-41a4-8204-314ea5df8d10
+      m_Path: <Mouse>/delta
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Look
+      m_Flags: 8
+    - m_Name: Delta [Mouse] + RightClick
+      m_Id: 216617c6-f819-494e-a0ea-6f4058cffd74
+      m_Path: OneModifier
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Look
+      m_Flags: 4
+    - m_Name: modifier
+      m_Id: 01c68d0f-bba1-4f40-a0bd-33f2557a3e3f
+      m_Path: <Mouse>/rightButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Look
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: a1aace60-5199-44be-b9ea-74b0aaee34db
+      m_Path: <Mouse>/delta
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Look
+      m_Flags: 8
+    - m_Name: binding
+      m_Id: a793acd0-31e6-49a2-81cf-ad0ad755608e
+      m_Path: <Pen>/delta
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Look
+      m_Flags: 8
     m_Flags: 0
   dashAction:
     m_Name: Dash
@@ -10291,8 +10348,8 @@ MonoBehaviour:
       m_Action: Dash
       m_Flags: 0
     - m_Name: 
-      m_Id: 2103a652-8cf6-4718-b115-8102588292e8
-      m_Path: <Gamepad>/leftShoulder
+      m_Id: 92949b6e-82fa-4942-b47c-94da2fddbfe3
+      m_Path: <Gamepad>/buttonSouth
       m_Interactions: 
       m_Processors: 
       m_Groups: 

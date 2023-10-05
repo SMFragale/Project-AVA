@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2137822516527280083}
   - component: {fileID: 9106727443413712861}
   - component: {fileID: 1535800828414937713}
-  - component: {fileID: 9077592621570539164}
+  - component: {fileID: 200198142837574550}
   m_Layer: 5
   m_Name: TouchFieldInput
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9077592621570539164
+--- !u!114 &200198142837574550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TouchDist: {x: 0, y: 0}
-  PointerOld: {x: 0, y: 0}
   Pressed: 0
   m_ControlPath: <Pen>/delta
-  m_FieldScreenCoverPtg: 0.75
+  m_LeftBoundaryPtg: 0.3
+  m_RightBoundaryPtg: 1

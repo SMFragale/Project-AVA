@@ -3,6 +3,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Layouts;
 using UnityEngine.InputSystem.OnScreen;
 using System;
+using System.Net;
+using System.ComponentModel;
+using System.Collections.Generic;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -19,7 +22,7 @@ namespace AVA.UI
         [HideInInspector]
         public Vector2 TouchDist;
         [HideInInspector]
-        public Vector2 PointerOld;
+        public Dictionary<int,Vector2> PointersOld;
         [HideInInspector]
         protected int PointerId;
         [HideInInspector]
@@ -36,16 +39,27 @@ namespace AVA.UI
             set => m_ControlPath = value;
         }
 
+        [Space, Header("TouchField Size"), Tooltip("Left border has to be < Right Border")]
         [Range(0.25f, 1.0f)]
         [SerializeField]
-        private float m_FieldScreenCoverPtg = 0.75f;
+        private float m_LeftBoundaryPtg = 0.25f;
+
+        [Range(0.25f, 1.0f)]
+        [SerializeField, Tooltip("Right Border has to be > Left Border")]
+        private float m_RightBoundaryPtg = 1.0f;
 
         // Use this for initialization
         void Awake()
         {
-            Rect rect = GetComponent<RectTransform>().rect;
-            rect.xMin = Screen.width*(1-m_FieldScreenCoverPtg);
-            GetComponent<RectTransform>().rect.Set(rect.xMin, rect.yMin, rect.width, rect.height);
+            RectTransform rectTransform = GetComponent<RectTransform>();
+
+            // Set the size of the RectTransform to cover 75% of the screen horizontally and 100% vertically
+            rectTransform.anchorMin = new Vector2(m_LeftBoundaryPtg, 0f);
+            rectTransform.anchorMax = new Vector2(m_RightBoundaryPtg, 1);
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
+            PointersOld = new Dictionary<int,Vector2>();
+            PointerId = -1;
         }
 
         // Update is called once per frame
@@ -54,18 +68,18 @@ namespace AVA.UI
             if (Input.touchCount > 0 && PointerId >= 0 && PointerId < Input.touches.Length)
             {
                 Touch touch = Input.GetTouch(PointerId);
-                
-                
-                switch(touch.phase)
+
+
+                switch (touch.phase)
                 {
                     case TouchPhase.Began:
-                        PointerOld = touch.position;
+                        PointersOld[PointerId] = touch.position;
                         TouchDist = new Vector2();
                         break;
                     case TouchPhase.Moved:
                     case TouchPhase.Stationary:
-                        TouchDist = touch.position - PointerOld;
-                        PointerOld = touch.position;
+                        TouchDist = touch.position - PointersOld[PointerId];
+                        PointersOld[PointerId] = touch.position;
                         break;
                     case TouchPhase.Ended:
                     case TouchPhase.Canceled:
@@ -73,25 +87,8 @@ namespace AVA.UI
                         break;
                 }
                 SendValueToControl(TouchDist);
+                //Debug.LogFormat("PointerId: {0}, position: {1}, positionOld: {2}, length: {3}, touchCount:{4}", PointerId, touch.position, PointersOld[PointerId], Input.touches.Length, Input.touchCount);
             }
-            // if (Pressed)
-            // {
-                
-            //     if (PointerId >= 0 && PointerId < Input.touches.Length)
-            //     {
-            //         TouchDist = Input.touches[PointerId].position - PointerOld;
-            //         PointerOld = Input.touches[PointerId].position;
-            //     }
-            //     else
-            //     {
-            //         TouchDist = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - PointerOld;
-            //         PointerOld = Input.mousePosition;
-            //     }
-            // }
-            // else
-            // {
-            //     TouchDist = new Vector2();
-            // }
         }
 
         /// <summary>
@@ -99,8 +96,9 @@ namespace AVA.UI
         /// </summary>
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (PointerId != -1) return;
             PointerId = eventData.pointerId;
-            PointerOld = eventData.position;
+            PointersOld[PointerId] = eventData.position;
         }
 
         /// <summary>
@@ -108,7 +106,9 @@ namespace AVA.UI
         /// </summary>
         public void OnPointerUp(PointerEventData eventData)
         {
+            if(eventData.pointerId != PointerId) return;
             Pressed = false;
+            PointersOld[PointerId] = eventData.position;
             PointerId = -1;
         }
 
@@ -118,12 +118,14 @@ namespace AVA.UI
             {
 
                 private SerializedProperty m_ControlPathInternal;
-                private SerializedProperty m_FieldScreenCoverPtg;
+                private SerializedProperty m_LeftBoundaryPtg;
+                private SerializedProperty m_RightBoundaryPtg;
 
                 public void OnEnable()
                 {
                     m_ControlPathInternal = serializedObject.FindProperty(nameof(TouchField.m_ControlPath));
-                    m_FieldScreenCoverPtg = serializedObject.FindProperty(nameof(TouchField.m_FieldScreenCoverPtg));
+                    m_LeftBoundaryPtg = serializedObject.FindProperty(nameof(TouchField.m_LeftBoundaryPtg));
+                    m_RightBoundaryPtg = serializedObject.FindProperty(nameof(TouchField.m_RightBoundaryPtg));
                 }
 
                 public override void OnInspectorGUI()
@@ -132,7 +134,8 @@ namespace AVA.UI
                     float minValue = 0.25f;
                     float maxValue = 1.0f;
 
-                    EditorGUILayout.Slider(m_FieldScreenCoverPtg, minValue, maxValue, new GUIContent("Screen Cover Ptg"));
+                    EditorGUILayout.Slider(m_LeftBoundaryPtg, minValue, maxValue, new GUIContent("Left Screen Border"));
+                    EditorGUILayout.Slider(m_RightBoundaryPtg, minValue, maxValue, new GUIContent("Right Screen Border"));
                     EditorGUILayout.PropertyField(m_ControlPathInternal);
 
                     serializedObject.ApplyModifiedProperties();

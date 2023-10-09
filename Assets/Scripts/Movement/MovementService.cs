@@ -42,14 +42,19 @@ namespace AVA.Movement
         //It should not try to dash through walls
         private IEnumerator Dash(Vector3 destination, float dashSpeed, float initialSpeed, float initialAcceleration)
         {
-            if (NavMesh.Raycast(transform.position, transform.position + destination, out NavMeshHit hit, NavMesh.AllAreas))
-            {
-                yield break;
-            }
             IsDashing = true;
             navMeshAgent.speed = dashSpeed;
             navMeshAgent.acceleration = 1000f;
-            navMeshAgent.destination = transform.position + destination;
+
+            if (NavMesh.Raycast(transform.position, transform.position + destination, out NavMeshHit hit, NavMesh.AllAreas))
+            {
+                navMeshAgent.destination = hit.position;
+            }
+            else
+            {
+                navMeshAgent.destination = transform.position + destination;
+            }
+
             yield return new WaitUntil(() => navMeshAgent.remainingDistance < 0.1f);
             navMeshAgent.speed = initialSpeed;
             navMeshAgent.acceleration = initialAcceleration;

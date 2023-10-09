@@ -9805,7 +9805,6 @@ GameObject:
   - component: {fileID: 6223888201564594420}
   - component: {fileID: 3465406777840621787}
   - component: {fileID: -8095740652823413079}
-  - component: {fileID: 199736055013761147}
   m_Layer: 0
   m_Name: Sparks Hit Condensed
   m_TagString: Untagged
@@ -14697,19 +14696,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolType: 2
---- !u!114 &199736055013761147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5313985699011259415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69768c7a0c5128341a2a370e97f1b564, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _onCollisionParticles: {fileID: 6223888201564594420}
 --- !u!1 &5570257981814224706
 GameObject:
   m_ObjectHideFlags: 0

@@ -917,8 +917,6 @@ MonoBehaviour:
   OnShoot:
     m_PersistentCalls:
       m_Calls: []
-  _hitLifeTime: 3
-  _hitPrefab: {fileID: 5313985699011259415, guid: 32ef2e7cbaf08264caaaedc315b21555, type: 3}
 --- !u!114 &6668527124305008361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,7 +932,7 @@ MonoBehaviour:
   _onShootParticles:
   - {fileID: 1739776302229863090}
   - {fileID: 5054422815859713506}
-  _hitEffect: {fileID: 3340345299055992502, guid: 32bea81b1a4fa614b8532d2a20a16359, type: 3}
+  _hitEffect: {fileID: 5313985699011259415, guid: 32ef2e7cbaf08264caaaedc315b21555, type: 3}
   effectDisableTimer: 1
 --- !u!1 &2167634242186897052
 GameObject:

@@ -12,6 +12,7 @@ namespace AVA.Combat
         public Vector3 Origin => origin.position;
 
         public UnityEvent OnShoot = new();
+        public UnityEvent<ProjectileHitInfo> OnProjectileHit { get; private set; } = new();
 
         public override void Attack(Vector3 direction, CharacterState characterState)
         {

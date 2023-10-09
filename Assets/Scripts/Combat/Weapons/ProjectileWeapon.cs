@@ -18,9 +18,6 @@ namespace AVA.Combat
 
         ObjectPool<PoolObject> projectilePool;
 
-        public UnityEvent<ProjectileHitInfo> OnProjectileHit { get; private set; } = new();
-
-
         public void Start()
         {
             projectilePool = new ObjectPool<PoolObject>(projectilePrefab);

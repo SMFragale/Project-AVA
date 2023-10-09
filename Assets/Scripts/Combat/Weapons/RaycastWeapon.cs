@@ -27,15 +27,9 @@ namespace AVA.Combat
                 var hitObject = _hitPool.PullGameObject(hit.point);
                 hitObject.transform.forward = hit.normal;
 
-                if (hitObject.TryGetComponent<HitVFX>(out var hitVFX))
-                {
-                    hitVFX.EmitParticle();
-                }
-                StartCoroutine(ReturnToPool(hitObject));
-                if (hit.collider.TryGetComponent<CombatTarget>(out var combatTarget))
-                {
-                    combatTarget.TakeDamage(new AttackInstance(characterState.GetStateInstance(), baseAttackDamage, new DefaultMultiplier()));
-                }
+                OnProjectileHit?.Invoke(new ProjectileHitInfo(hit.collider.gameObject, hit.point, hit.normal));
+
+
             }
         }
 
